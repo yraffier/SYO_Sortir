@@ -36,9 +36,6 @@ class Sortie
     private ?Lieu $lieu = null;
 
 
-
-
-
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $siteOrganisateur = null;
@@ -46,6 +43,13 @@ class Sortie
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
+
+    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'sorties')]
+    private Collection $participants;
+
+    #[ORM\ManyToOne(inversedBy: 'sortiesOrganisees')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $organisateurs = null;
 
     public function __construct()
     {
@@ -129,12 +133,6 @@ class Sortie
         return $this;
     }
 
-
-
-
-
-
-
     public function getSiteOrganisateur(): ?Campus
     {
         return $this->siteOrganisateur;
@@ -155,6 +153,45 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Utilisateur $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants->add($participant);
+            $participant->addSorty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Utilisateur $participant): self
+    {
+        if ($this->participants->removeElement($participant)) {
+            $participant->removeSorty($this);
+        }
+
+        return $this;
+    }
+
+    public function getOrganisateurs(): ?Utilisateur
+    {
+        return $this->organisateurs;
+    }
+
+    public function setOrganisateurs(?Utilisateur $organisateurs): self
+    {
+        $this->organisateurs = $organisateurs;
 
         return $this;
     }

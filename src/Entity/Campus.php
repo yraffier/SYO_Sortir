@@ -21,12 +21,13 @@ class Campus
     #[ORM\OneToMany(mappedBy: 'siteOrganisateur', targetEntity: Sortie::class, orphanRemoval: true)]
     private Collection $sorties;
 
-
+    #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Utilisateur::class, orphanRemoval: true)]
+    private Collection $stagiaires;
 
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
-
+        $this->stagiaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +71,36 @@ class Campus
             // set the owning side to null (unless already changed)
             if ($sorty->getSiteOrganisateur() === $this) {
                 $sorty->setSiteOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getStagiaires(): Collection
+    {
+        return $this->stagiaires;
+    }
+
+    public function addStagiaire(Utilisateur $stagiaire): self
+    {
+        if (!$this->stagiaires->contains($stagiaire)) {
+            $this->stagiaires->add($stagiaire);
+            $stagiaire->setCampus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStagiaire(Utilisateur $stagiaire): self
+    {
+        if ($this->stagiaires->removeElement($stagiaire)) {
+            // set the owning side to null (unless already changed)
+            if ($stagiaire->getCampus() === $this) {
+                $stagiaire->setCampus(null);
             }
         }
 

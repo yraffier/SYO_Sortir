@@ -35,12 +35,9 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
 
-    #[ORM\ManyToMany(targetEntity: utilisateur::class, inversedBy: 'sorties')]
-    private Collection $participants;
 
-    #[ORM\ManyToOne(inversedBy: 'sortiesOrganisées')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateur $organisateur = null;
+
+
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -132,41 +129,11 @@ class Sortie
         return $this;
     }
 
-    /**
-     * @return Collection<int, utilisateur>
-     */
-    public function getParticipants(): Collection
-    {
-        return $this->participants;
-    }
 
-    public function addParticipant(utilisateur $participant): self
-    {
-        if (!$this->participants->contains($participant)) {
-            $this->participants->add($participant);
-        }
 
-        return $this;
-    }
 
-    public function removeParticipant(utilisateur $participant): self
-    {
-        $this->participants->removeElement($participant);
 
-        return $this;
-    }
 
-    public function getOrganisateur(): ?Utilisateur
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(?Utilisateur $organisateur): self
-    {
-        $this->organisateur = $organisateur;
-
-        return $this;
-    }
 
     public function getSiteOrganisateur(): ?Campus
     {

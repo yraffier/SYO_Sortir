@@ -22,12 +22,12 @@ class Campus
     private Collection $sorties;
 
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: Utilisateur::class, orphanRemoval: true)]
-    private Collection $utilisateurs;
+    private Collection $stagiaires;
 
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
-        $this->utilisateurs = new ArrayCollection();
+        $this->stagiaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,30 +80,31 @@ class Campus
     /**
      * @return Collection<int, Utilisateur>
      */
-    public function getUtilisateurs(): Collection
+    public function getStagiaires(): Collection
     {
-        return $this->utilisateurs;
+        return $this->stagiaires;
     }
 
-    public function addUtilisateur(Utilisateur $utilisateur): self
+    public function addStagiaire(Utilisateur $stagiaire): self
     {
-        if (!$this->utilisateurs->contains($utilisateur)) {
-            $this->utilisateurs->add($utilisateur);
-            $utilisateur->setCampus($this);
+        if (!$this->stagiaires->contains($stagiaire)) {
+            $this->stagiaires->add($stagiaire);
+            $stagiaire->setCampus($this);
         }
 
         return $this;
     }
 
-    public function removeUtilisateur(Utilisateur $utilisateur): self
+    public function removeStagiaire(Utilisateur $stagiaire): self
     {
-        if ($this->utilisateurs->removeElement($utilisateur)) {
+        if ($this->stagiaires->removeElement($stagiaire)) {
             // set the owning side to null (unless already changed)
-            if ($utilisateur->getCampus() === $this) {
-                $utilisateur->setCampus(null);
+            if ($stagiaire->getCampus() === $this) {
+                $stagiaire->setCampus(null);
             }
         }
 
         return $this;
     }
+
 }

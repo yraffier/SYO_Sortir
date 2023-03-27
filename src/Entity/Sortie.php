@@ -35,12 +35,6 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
 
-    #[ORM\ManyToMany(targetEntity: utilisateur::class, inversedBy: 'sorties')]
-    private Collection $participants;
-
-    #[ORM\ManyToOne(inversedBy: 'sortiesOrganisées')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Utilisateur $organisateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -49,6 +43,13 @@ class Sortie
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
+
+    #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'sorties')]
+    private Collection $participants;
+
+    #[ORM\ManyToOne(inversedBy: 'sortiesOrganisees')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Utilisateur $organisateurs = null;
 
     public function __construct()
     {
@@ -132,42 +133,6 @@ class Sortie
         return $this;
     }
 
-    /**
-     * @return Collection<int, utilisateur>
-     */
-    public function getParticipants(): Collection
-    {
-        return $this->participants;
-    }
-
-    public function addParticipant(utilisateur $participant): self
-    {
-        if (!$this->participants->contains($participant)) {
-            $this->participants->add($participant);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipant(utilisateur $participant): self
-    {
-        $this->participants->removeElement($participant);
-
-        return $this;
-    }
-
-    public function getOrganisateur(): ?Utilisateur
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(?Utilisateur $organisateur): self
-    {
-        $this->organisateur = $organisateur;
-
-        return $this;
-    }
-
     public function getSiteOrganisateur(): ?Campus
     {
         return $this->siteOrganisateur;
@@ -188,6 +153,45 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Utilisateur>
+     */
+    public function getParticipants(): Collection
+    {
+        return $this->participants;
+    }
+
+    public function addParticipant(Utilisateur $participant): self
+    {
+        if (!$this->participants->contains($participant)) {
+            $this->participants->add($participant);
+            $participant->addSorty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipant(Utilisateur $participant): self
+    {
+        if ($this->participants->removeElement($participant)) {
+            $participant->removeSorty($this);
+        }
+
+        return $this;
+    }
+
+    public function getOrganisateurs(): ?Utilisateur
+    {
+        return $this->organisateurs;
+    }
+
+    public function setOrganisateurs(?Utilisateur $organisateurs): self
+    {
+        $this->organisateurs = $organisateurs;
 
         return $this;
     }

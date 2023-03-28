@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div id="inscription">
-        <a href=""><button>Inscription</button></a>
-    </div>
-    <div id="connection">
-        <a href=""><button>Connection</button></a>
-    </div>
+    <header>
+        <h1>Sortir.com</h1>
+    </header>
+
+    <main>
+        <div id="inscription">
+            <a href="{{ path('inscription_sortir') }}"><button class='glowing-btn'><span class='glowing-txt'>I<span class='faulty-letter'>ns</span>cription</span></button></a>
+        </div>
+        <div id="connection">
+            <a href="{{ path('login_sortie') }}"><button class='glowing-btn'><span class='glowing-txt'>C<span class='faulty-letter'>on</span>nection</span></button></a>
+        </div>
+    </main>
+
 {% endblock %}
 
 {% block title %}
 
 {% endblock %}
+
 

@@ -22,8 +22,8 @@ class SortieController extends AbstractController
     // Méthodes pour récupérer l'ensemble des sorties
     {
         $sorties= $sortieRepository->findAll();
-        return $this->render('sortie/lister.html.twig', [compact('sorties')
-       ]);
+        return $this->render('sortie/lister.html.twig', compact('sorties')
+       );
 
 
     }

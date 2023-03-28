@@ -63,7 +63,14 @@ class SortieController extends AbstractController
                }
         return $this->render('sortie/detail.html.twig', compact('sortie'));
        }
-
-
-
+/*
+ * Méthode pour ajouter une nouvelle sortie
+ */
+//    #[Route('/ajouter',
+//        name: '_ajouter',
+//    )]
+//    public function ajouter()
+//
+//
+//
 }

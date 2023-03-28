@@ -16,13 +16,4 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'CompteUtilisateur_sortir')]
-    public function compteUtilisateur(): Response
-    {
-
-        return $this->render('sortie/accueilUtilisateur.html.twig', [
-            'controller_name' => 'UtilisateurController',
-        ]);
-    }
-
 }

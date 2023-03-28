@@ -43,9 +43,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 200)]
     private ?string $mail = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $motDePasse = null;
-
     #[ORM\Column]
     private ?bool $administrateur = null;
 
@@ -69,6 +66,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->sorties = new ArrayCollection();
         $this->sortiesOrganisees = new ArrayCollection();
+        $this->administrateur = false;
+        $this->actif = true;
     }
 
     public function getId(): ?int
@@ -185,18 +184,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMail(string $mail): self
     {
         $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
-
-    public function setMotDePasse(string $motDePasse): self
-    {
-        $this->motDePasse = $motDePasse;
 
         return $this;
     }

@@ -9,11 +9,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'login_sortie')]
+    #[Route(path: '/login', name: 'login_sortir')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('CompteUtilisateur_sortie');
+            return $this->redirectToRoute('sortie_lister');
          }
 
         // get the login error if there is one

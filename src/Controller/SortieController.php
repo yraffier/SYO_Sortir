@@ -15,7 +15,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SortieController extends AbstractController
 {
-    #[Route('/', name: 'sortie_lister')]
+    #[Route('/', name: '_lister')]
     public function lister(
         SortieRepository $sortieRepository
     ): Response

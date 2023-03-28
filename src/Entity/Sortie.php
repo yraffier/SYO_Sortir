@@ -51,9 +51,16 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Utilisateur $organisateurs = null;
 
+    #[ORM\Column]
+    private ?int $nbInscriptionMax = null;
+
     public function __construct()
     {
+//        $nbInscriptionMax=0;
+        //TODO   [$nbInscriptionMax] dans les paramètres de ArrayCollection
+
         $this->participants = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -192,6 +199,18 @@ class Sortie
     public function setOrganisateurs(?Utilisateur $organisateurs): self
     {
         $this->organisateurs = $organisateurs;
+
+        return $this;
+    }
+
+    public function getNbInscriptionMax(): ?int
+    {
+        return $this->nbInscriptionMax;
+    }
+
+    public function setNbInscriptionMax(int $nbInscriptionMax): self
+    {
+        $this->nbInscriptionMax = $nbInscriptionMax;
 
         return $this;
     }

@@ -15,6 +15,26 @@
         {% endblock %}
     </head>
     <body>
+        <header>
+            <div id="titre">
+                <h1>Sortir.com</h1>
+            </div>
+            {% if app.user %}
+            <nav>
+                <ul>
+                    {% block nav %}
+                    {% endblock %}
+                    <a href="{{ path('sortir_profil') }}"><li>Mon profil</li></a>
+                    {% if app.user.administrateur is same as(true) %}
+                        <a href=""><li>Gestion des Villes</li></a>
+                        <a href=""><li>Gestion des Campus</li></a>
+                    {% endif %}
+                    <a href="{{ path('logout_sortir') }}"><li>Déconnection</li></a>
+                </ul>
+            </nav>
+            {% endif %}
+
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>

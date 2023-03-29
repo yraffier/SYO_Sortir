@@ -20,6 +20,7 @@ class Authenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'login_sortir';
+    public const LOGOUT_ROUTE = 'logout_sortir';
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
@@ -52,6 +53,11 @@ class Authenticator extends AbstractLoginFormAuthenticator
     }
 
     protected function getLoginUrl(Request $request): string
+    {
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+    }
+
+    protected function getLogoutUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
@@ -17,16 +18,30 @@ class Sortie
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\DateTime]
+    #[Assert\Expression(
+        "this.getdateHeureDebut() < new \DateTime() ",
+        message:'La date de début de la sortie ne peut être antérieur à l a date du jour '
+    )]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?int $duree = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateLimiteInscription = null;
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+
+     private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column(length: 500)]
     private ?string $infosSortie = null;
@@ -45,6 +60,7 @@ class Sortie
     private ?Etat $etat = null;
 
     #[ORM\ManyToMany(targetEntity: Utilisateur::class, mappedBy: 'sorties')]
+
     private Collection $participants;
 
     #[ORM\ManyToOne(inversedBy: 'sortiesOrganisees')]
@@ -60,6 +76,7 @@ class Sortie
         //TODO   [$nbInscriptionMax] dans les paramètres de ArrayCollection
 
         $this->participants = new ArrayCollection();
+
 
     }
 

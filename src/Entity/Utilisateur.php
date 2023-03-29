@@ -59,6 +59,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
@@ -275,4 +276,4 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-   }
+}

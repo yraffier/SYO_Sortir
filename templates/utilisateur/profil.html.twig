@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="profil">
+        {{ form_start(userForm) }}
+        {{ form_row(userForm.username) }}
+        {{ form_row(userForm.nom) }}
+        {{ form_row(userForm.prenom) }}
+        {{ form_row(userForm.telephone) }}
+        {{ form_row(userForm.mail) }}
+        {{ form_row(userForm.password, {
+                label: 'Password'
+        }) }}
+        <button type="submit" class="btn-modifier">Modifier</button>
+
+        {{ form_end(userForm) }}
+    </div>
+    <a href="{{ path('sortie_lister') }}"><button>Annuler</button></a>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

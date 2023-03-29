@@ -24,7 +24,7 @@
                 <ul>
                     {% block nav %}
                     {% endblock %}
-                    <a href="{{ path('sortir_profil') }}"><li>Mon profil</li></a>
+                    <a href="{{ path('sortir_profil', 'utilisateur' : utilisateur) }}"><li>Mon profil</li></a>
                     {% if app.user.administrateur is same as(true) %}
                         <a href=""><li>Gestion des Villes</li></a>
                         <a href=""><li>Gestion des Campus</li></a>

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
@@ -20,6 +21,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Regex(
+        "#^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$#",
+        message: 'Des minuscule, des majuscules, des chiffres, et \'.\' \'-\' \'_\', C\'est tout ce dont tu as besoin !',
+    )]
     private ?string $username = null;
 
     #[ORM\Column]
@@ -29,18 +34,38 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        "#^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-._]).{6,100}$#",
+        message: 'Plus c\'est long plus c\'est bon ! Mais avec une minuscule, une majuscule, un caractère spéciale et un chiffre c\'est encore meilleur ! ',
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Regex(
+        "#^[a-zA-Z\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        message: 'Tu ne sais plus écrire ton nom, évite les caractères spéciales et les chiffres !',
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Regex(
+        "#^[a-zA-Z\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        message: 'Reste simple ! N\'utilise que des lettres pour ton prénom, éventuellement un \'-\'',
+    )]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Regex(
+        "#^[\+]?([0-9]{2}[.\-\ \_]?){4,6}$#",
+        message: 'Des chiffres, des chiffres, des chiffres, des chiffres !!',
+    )]
     private ?string $telephone = null;
 
     #[ORM\Column(length: 200)]
+    #[Assert\Regex(
+        "#^[a-zA-Z0-9]{3,30}([-._])?[a-zA-Z0-9]{3,20}?@[a-zA-Z]{3,15}.[a-zA-Z]{2,6}$#",
+        message: 'Pas besoin de caractères spéciales, tu l\'es déjà ! <3'
+    )]
     private ?string $mail = null;
 
     #[ORM\Column]

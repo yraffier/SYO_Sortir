@@ -24,20 +24,19 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route(
-        'sortie/monprofil/',
+        'sortie/monprofil/{utilisateur}',
         name: '_profil'
     )]
     public function afficherprofil(
         Request                 $request,
         EntityManagerInterface  $entityManager,
-        UtilisateurRepository   $utilisateurRepository
+        Utilisateur             $utilisateur
     ): Response
     {
-//        $utilisateur = $utilisateurRepository->findOneBy();
-        $utilisateur = $this->getUser();
-//        if(!$utilisateur){
-//            throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
-//        }
+
+        if(!$utilisateur){
+            throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
+        }
         $userForm = $this->createForm(ProfilUtilisateurType::class, $utilisateur);
         $userForm->handleRequest($request);
 

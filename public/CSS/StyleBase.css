@@ -40,7 +40,6 @@ main{
     align-content: space-evenly;
 }
 
-
 /* Bouton clignotant */
 :root {
     --glow-color: HSL(34, 100%, 63%);

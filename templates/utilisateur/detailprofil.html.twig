@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>{{ utilisateur.username }}</h3>
+    <div class="informations"></div>
+        <p>{{ utilisateur.nom }} - {{ utilisateur.prenom }}</p>
+        <p>{{ utilisateur.campus.nom }}</p>
+        <p>{{ utilisateur.mail }}</p>
+        <p>{{ utilisateur.telephone }}</p>
+        <div id="sorties">
+            <div id="sortiesparticipant">
+                {% for sortie in utilisateurs.sorties %}
+                    <h6>{{ utilisateur.username }} participe à :</h6>
+                    <ul>
+                        <li>{{ sortie.nom }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+            <div id="sortiesorganise">
+                {% for sortieorganisee in utilisateurs.sortiesorganisees %}
+                    <h6>{{ utilisateur.username }} participe à :</h6>
+                    <ul>
+                        <li>{{ sortieorganisee.nom }}</li>
+                    </ul>
+                {% endfor %}
+            </div>
+        </div>
+
+
+{% endblock %}

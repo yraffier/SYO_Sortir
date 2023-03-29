@@ -20,6 +20,10 @@ class Sortie
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
+    #[Assert\Regex(
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        message: 'Des chiffres et des lettres ! Et puis c\'est tout !'  ,
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -40,7 +44,6 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-
      private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column(length: 500)]

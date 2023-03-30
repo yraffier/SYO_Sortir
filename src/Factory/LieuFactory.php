@@ -47,8 +47,8 @@ final class LieuFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'nom' => self::faker()->text(200),
-            'rue' => self::faker()->text(255),
+            'nom' => self::faker()->streetName(),
+            'rue' => self::faker()->streetAddress(),
             'ville' => VilleFactory::new(),
         ];
     }
@@ -67,4 +67,5 @@ final class LieuFactory extends ModelFactory
     {
         return Lieu::class;
     }
+
 }

@@ -46,8 +46,9 @@ final class CampusFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $villeCampus = ['NANTES','NIORT','RENNES','QUIMPER'];
         return [
-            'nom' => self::faker()->text(255),
+            'nom' => self::faker()->randomElement($villeCampus),
         ];
     }
 

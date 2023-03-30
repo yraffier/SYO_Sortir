@@ -49,13 +49,14 @@ final class SortieFactory extends ModelFactory
         return [
             'dateHeureDebut' => self::faker()->dateTime(),
             'dateLimiteInscription' => self::faker()->dateTime(),
-            'duree' => self::faker()->randomNumber(),
+            'duree' => self::faker()->randomNumber(3),
             'etat' => EtatFactory::new(),
-            'infosSortie' => self::faker()->text(500),
+            'infosSortie' => self::faker()->text(200),
             'lieu' => LieuFactory::new(),
-            'nom' => self::faker()->text(255),
+            'nom' => self::faker()->text(20),
             'organisateurs' => UtilisateurFactory::new(),
             'siteOrganisateur' => CampusFactory::new(),
+            'nb_inscription_max' => self::faker()->numerify('##')
         ];
     }
 

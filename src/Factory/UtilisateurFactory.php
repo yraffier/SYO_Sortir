@@ -50,14 +50,13 @@ final class UtilisateurFactory extends ModelFactory
             'actif' => self::faker()->boolean(),
             'administrateur' => self::faker()->boolean(),
             'campus' => CampusFactory::new(),
-            'mail' => self::faker()->text(200),
-            'motDePasse' => self::faker()->text(255),
-            'nom' => self::faker()->text(100),
-            'password' => self::faker()->text(),
-            'prenom' => self::faker()->text(100),
+            'mail' => self::faker()->email(),
+            'nom' => self::faker()->lastName(),
+            'password' => self::faker()->password(),
+            'prenom' => self::faker()->firstName(),
             'roles' => [],
-            'telephone' => self::faker()->text(20),
-            'username' => self::faker()->text(180),
+            'telephone' => self::faker()->phoneNumber(),
+            'username' => self::faker()->userName(),
         ];
     }
 

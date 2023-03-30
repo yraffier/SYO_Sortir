@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Form\AjouterSortieType;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +29,12 @@ class SortieController extends AbstractController
     // Méthodes pour récupérer l'ensemble des sorties
     {
         $sorties= $sortieRepository->findAll();
-        return $this->render('sortie/accueilUtilisateur.html.twig', compact('sorties')
-       );
+
+        return $this->render('sortie/accueilUtilisateur.html.twig', compact('sorties'));
     }
+
+
+
     /*
      * Méthode pour se descinscrir d'une sortie
      */
@@ -37,7 +42,7 @@ class SortieController extends AbstractController
     public function sedesinscrire(
         Sortie $sortie,
         EntityManagerInterface $entityManager,
-        SortieRepository $sortieRepository
+
     ): Response
     {
        try{
@@ -65,82 +70,85 @@ class SortieController extends AbstractController
                }
         return $this->render('sortie/detail.html.twig', compact('sortie'));
        }
-/*
- * Méthode pour ajouter une nouvelle sortie
- */
 
-    #[Route('/ajouter',
-        name: '_ajouter',
-    )]
-    public function ajouter(
+    #[Route('/ajouter', name: '_ajouter')]
+        public function ajouter(
         Request $request,
-        SortieRepository $sortieRepository,
+        EtatRepository    $etatRepository,
         EntityManagerInterface $entityManager,
-
-
-        // WishRepository $wishRepository
-    ): Response
+    )
+    :Response
     {
-        // créer une instance de sortie
-        $sortie = new Sortie();
-        // Creation d'un formulaire pour l'ajout d'une nouvelle sortie
-        $sortieForm = $this->createForm(AjouterSortieType::class, $sortie);
+        $sortie= new Sortie();
+        $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
-        // Si le formulaire et valide et qu'on valide le formulaire
 
-//        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-//            try {
-//                $sortieForm->setNom();
-//                $sortieForm->setDateHeureDebut();
-//                $sortieForm->setduree();
-//                $sortieForm->setDateHeureDebut();
-//
-//
-//            } catch (\Exception $exception) {
-//
-//            }
-//
-//        }
+        try {
+
+                if ($sortieForm->isSubmitted()&& $sortieForm-> isValid()) {
+
+                    if($request->request->has('Enregistrer')) {
+                        $etat = $etatRepository->find(292);
+                        $sortie->setEtat($etat);
+                        $this->addFlash('succes', 'CA va marcher');
+
+                    }
+                    elseif ($request->request->has('Ajouter')){
+                        $etat = $etatRepository->find(288);
+                        $sortie->setEtat($etat);
+                        $this->addFlash('succes', 'Youpiiii');
+                    }
+                $sortie->setOrganisateurs($this->getUser());
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+                $this->addFlash('succes','Youhou vous avez crée une nouvelle sortie');
+                return $this->redirectToRoute('sortie_lister');
+            }
+
+        }catch (\Exception $exception){
+            $this->addFlash('echec', 'La sortie n\'a  pas été insérée');
+             return $this->redirectToRoute('inscription_sortir');
+        }
         return $this->render('sortie/ajouter.html.twig', compact('sortieForm'));
+
+
+
     }
-
 //
-//        // $utilisateurCo= $userRepository->findOneBy(['username'=>$this->getUser()->getUsername()]);
-//        // $wish->setAuthor($utilisateurCo->getUsername());
-//        // $wish->setAuthor( $this->getUser()->getUserIdentifier());
-//        // creation d'un nouveau formulaire
-//        $wishForm = $this->createForm(WishType::class, $wish);
-//        // prend la valeur des input et il complète $wish
-//        $wishForm->handleRequest($request);
+//    #[Route('/enregistrer', name: '_enregistrer')]
+//    public function enregistrer(
+//        EtatRepository    $etatRepository,
+//        Request $request,
+//        EntityManagerInterface $entityManager
+//    )
+//    :Response
+//    {
+//        $sortie= new Sortie();
+//        $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
+//        $sortieForm->handleRequest($request);
 //
-//        if ($wishForm->isSubmitted() && $wishForm->isValid()) {
-//            try {
-//                $wish->setDateCreated(new \DateTime());
-//                $wish->setIsPublished(true);
-//                $wish->setUser($this->getUser());
-//                $description = $wish->getDescription();
-//                $descriptionpur = $censurator->purify($description);
-//                $wish->setDescription($descriptionpur);
-//                $titre = $wish->getTitle();
-//                $titrepur = $censurator->purify($titre);
-//                $wish->setTitle($titrepur);
-//                $entityManager->persist($wish);
-//                $entityManager->flush();
-//                $this->addFlash('succes', 'Le souhait a bien été inséré');
+//        try {
+//            if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+////                $data=$sortieForm->getData();
+////                $date =$data['dateHeureDebut'];
+//               // $sortie->setDateHeureDebut($sortie->getDateHeureDebut()->format('Y-m-d H:i:s'));
+//                $etat = $etatRepository->find(2);
+//                $sortie->setEtat($etat);
 //
-//                return $this->redirectToRoute('wish_lister');
-//                // return $this->redirectToRoute('wish_detailler', ["id" => $wish->getId()]);
-//            } catch (\Exception $exception) {
-//                $this->addFlash('echec', 'le souhait n\'a pas été inséré');
-//
-//                return $this->redirectToRoute('wish_ajouter');
+//                $entityManager->persist($sortie);
+//                $entityManager->flush($sortie);
+//                $this->addFlash('succes','Youhou vous avez crée une nouvelle sortie qui a été enregistré');
+//                return $this->redirectToRoute('sortie_lister');
 //            }
-//            // return $this->redirectToRoute('wish_lister',[],Response::HTTP_SEE_OTHER);
+//        }catch (\Exception $exception){
+//            $this->addFlash('echec', 'La sortie n\'a  pas été enregistré');
+//            return $this->redirectToRoute('sortie_ajouter');
 //        }
+//        return $this->render('sortie/ajouter.html.twig', compact('sortieForm'));
 //
-//        return $this->render('wish/ajouter.html.twig', compact('wishForm'));
-
-
+//
+//
+//    }
 
 }

@@ -25,11 +25,12 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-    #[Assert\DateTime]
-    #[Assert\Expression(
-        "this.getdateHeureDebut() < new \DateTime() ",
-        message:'La date de début de la sortie ne peut être antérieur à l a date du jour '
-    )]
+    #[Assert\GreaterThan(new \DateTime('now'))]
+
+//    #[Assert\Expression(
+//        "this.getdateHeureDebut() <new \DateTime() ",
+////        message:'La date de début de la sortie ne peut être antérieur à la date du jour '
+//    )]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]

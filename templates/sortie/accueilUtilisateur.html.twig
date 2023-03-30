@@ -13,10 +13,11 @@
     <div class="listesorties">
     <h3>  Les sorties </h3>
 
+
         {% for chaquesortie in sorties %}
         <div>
             <ul>
-                <li><a href="{{path('sortie_detail',{'sortie':chaquesortie.id}) }}">{{ chaquesortie.nom}}</a></li>
+                <li><a href="{{path('sortie_detail',{'sortie': chaquesortie.id}) }}">{{ chaquesortie.nom}}</a></li>
                 <li> {{ chaquesortie.lieu.nom}} </li>
                 <li>{{ chaquesortie.infosSortie}}</li>
                 <li>{{ chaquesortie.dateHeureDebut|date ('Y-m-d H:i:s') }}  </li>
@@ -24,7 +25,7 @@
                 <li> {{ chaquesortie.participants.count()}} / {{ chaquesortie.nbInscriptionMax }}</li>
                 <li>  {{chaquesortie.etat.libelle }} </li>
                 <li>{{ chaquesortie.organisateurs.nom }}</li>
-{#                {{app.user.nom }}#}
+                {{app.user.nom }}
                     {% for chaqueparticpant in chaquesortie.participants %}
                         {% if app.user.id == chaqueparticpant.id %}
                             <li><a href="{{path('sortie_sedesinscrire',{'sortie':chaquesortie.id})}}" onclick="return confirm('Etes-vous sûre de vouloir vous désinscrire?')"> Se désincrire...</a></li>
@@ -35,9 +36,8 @@
         {% endfor %}
     </div>
 
-    <button type="submit"><a href="/{{ path('sortie_ajouter') }}">Créer une sortie  </a> </button>
+    <button type="submit"><a href="{{ path('sortie_ajouter') }}">Créer une sortie  </a> </button>
 
-{% block title %}
 
 {% endblock %}
 

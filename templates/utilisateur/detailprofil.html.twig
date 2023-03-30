@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block nav %}
+    <li><a href="{{ path('sortie_lister') }}">Accueil</a></li>
+{% endblock %}
+
 {% block body %}
     <h3>{{ utilisateur.username }}</h3>
     <div class="informations"></div>
@@ -9,7 +13,7 @@
         <p>{{ utilisateur.telephone }}</p>
         <div id="sorties">
             <div id="sortiesparticipant">
-                {% for sortie in utilisateurs.sorties %}
+                {% for sortie in utilisateur.sorties %}
                     <h6>{{ utilisateur.username }} participe à :</h6>
                     <ul>
                         <li>{{ sortie.nom }}</li>
@@ -17,7 +21,7 @@
                 {% endfor %}
             </div>
             <div id="sortiesorganise">
-                {% for sortieorganisee in utilisateurs.sortiesorganisees %}
+                {% for sortieorganisee in utilisateur.sortiesorganisees %}
                     <h6>{{ utilisateur.username }} participe à :</h6>
                     <ul>
                         <li>{{ sortieorganisee.nom }}</li>

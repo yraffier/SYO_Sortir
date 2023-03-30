@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block nav %}
+    <li><a href="{{ path('sortie_lister') }}">Accueil</a></li>
+{% endblock %}
+
 {% block body %}
 <h2> Créer une Sortie</h2>
 {{ form_start(sortieForm)}}

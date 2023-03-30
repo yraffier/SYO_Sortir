@@ -8,6 +8,7 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Handler\Curl\Util;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,14 +62,15 @@ class UtilisateurController extends AbstractController
         'sortie/profil/{utilisateur}',
         name: '_detailProfil'
     )]
+//    #[Entity('utilisateur', options: ['id' => 'utilisateur_id'])]
     public function afficherprofil(
-        Utilisateur             $utilisateur,
-        UtilisateurRepository   $utilisateurRepository
+        Utilisateur $utilisateur
     ): Response
     {
         if (!$utilisateur) {
             throw $this->createNotFoundException('Ce wish n\'existe pas');
         }
+
         return $this->render('utilisateur/detailprofil.html.twig', compact("utilisateur"));
     }
 

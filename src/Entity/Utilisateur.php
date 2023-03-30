@@ -12,7 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[UniqueEntity(fields: ['username'], message: 'Usurpation d\'identité mais si tu changes ton pseudo je ne dirais rien')]
+#[UniqueEntity(fields: ['mail'], message: 'Je te reconnais, tu es déjà inscris non ?')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -64,7 +65,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 200)]
     #[Assert\Regex(
         "#^[a-zA-Z0-9]{3,30}([-._])?[a-zA-Z0-9]{3,20}?@[a-zA-Z]{3,15}.[a-zA-Z]{2,6}$#",
-        message: 'Pas besoin de caractères spéciales, tu l\'es déjà ! <3'
+        message: 'Pas besoin de caractères spéciales ! <3'
     )]
     private ?string $mail = null;
 

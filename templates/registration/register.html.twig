@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="./public/CSS/Formualire1.scss">
+{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
@@ -24,4 +26,150 @@
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
         <a href="{{ path('sortir_accueil') }}"><button>Annuler</button></a>
+
+
+{#<input class="c-checkbox" type="checkbox" id="start">#}
+{#<input class="c-checkbox" type="checkbox" id="progress2">#}
+{#<input class="c-checkbox" type="checkbox" id="progress3">#}
+{#<input class="c-checkbox" type="checkbox" id="finish">#}
+{#<div class="c-form__progress"></div>#}
+
+{#<div class="c-formContainer">#}
+{#    <div class="c-welcome">{{ form_start(registrationForm) }}</div>#}
+{#    <form class="c-form" action="">#}
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.username) }}">#}
+{#                <input#}
+{#                        type="text"#}
+{#                        id="{{ field_name(registrationForm.username) }}"#}
+{#                        class="c-form__input"#}
+{#                        placeholder="{{ field_label(registrationForm.username) }} "#}
+{#                        pattern="[^\s]+"#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="progress2">#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Pseudo</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.nom) }}">#}
+{#                <input#}
+{#                        type="text"#}
+{#                        id="{{ field_name(registrationForm.nom) }}"#}
+{#                        class="c-form__input"#}
+{#                        placeholder="{{ field_label(registrationForm.nom) }}"#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="progress3" >#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Nom</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.prenom) }}">#}
+{#                <input#}
+{#                        type="text"#}
+{#                        id="{{ field_name(registrationForm.prenom) }}"#}
+{#                        class="c-form__input"#}
+{#                        placeholder="{{ field_label(registrationForm.prenom) }}"#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="progress3" >#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Prénom</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.mail) }}">#}
+{#                <input#}
+{#                        type="email"#}
+{#                        id="{{ field_name(registrationForm.mail) }}"#}
+{#                        class="c-form__input"#}
+{#                        placeholder="{{ field_label(registrationForm.mail) }}"#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="progress3" >#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Mail</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.telephone) }}">#}
+{#                <input#}
+{#                        type="text"#}
+{#                        id="{{ field_name(registrationForm.telephone) }}"#}
+{#                        class="c-form__input"#}
+{#                        placeholder="{{ field_label(registrationForm.telephone) }}"#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="progress3" >#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Téléphone</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+
+
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.campus) }}">#}
+{#                <input#}
+{#                        type=""#}
+{#                        id="{{ field_name(registrationForm.campus) }}"#}
+{#                        class="c-form__input"#}
+{#                        value="{{ field_value(registrationForm.campus) }}"#}
+{#                        placeholder="{{ field_label(registrationForm.campus) }}"#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="finish" >#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Campus</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+
+
+{#        <div class="c-form__group">#}
+{#            <label class="c-form__label" for="{{ field_name(registrationForm.password)}}">#}
+{#                <input#}
+{#                        type="password"#}
+{#                        id="{{ field_name(registrationForm.password)}}"#}
+{#                        class="c-form__input"#}
+{#                        placeholder="{{ field_label(registrationForm.password)}} "#}
+{#                        required>#}
+
+{#                <label class="c-form__next" for="finish" >#}
+{#                    <span class="c-form__nextIcon"></span>#}
+{#                </label>#}
+
+{#                <span class="c-form__groupLabel">Mot de passe</span>#}
+{#                <b class="c-form__border"></b>#}
+{#            </label>#}
+{#        </div>#}
+{#        {{ form_row(registrationForm.agreeTerms) }}#}
+{#        <label class="c-form__toggle" for="start">Register<span class="c-form__toggleIcon"></span></label>#}
+{#        {{ form_end(registrationForm) }}#}
+{#    </form>#}
+{#</div>#}
+
 {% endblock %}

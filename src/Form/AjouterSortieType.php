@@ -49,19 +49,15 @@ class AjouterSortieType extends AbstractType
                    }]
 //                // TODO choicelabel: choice label est un array, et si le choice label est un objet lieu
 //                    'choice_label' => new Lieu()
-            ])
+            )
             ->add('Ville',EntityType::class,
                 [
                     'class' => Ville::class,
                     'label' => function(Ville $ville){
                         return $ville->getNom();
-                        ]
                     }
-            [
-            'class'=> Campus::class,
-            'choice_label'=> 'nom',
-            ]
-    )
+                ])
+
 //            ->add('etat')
            // ->add('participants')
             //->add('organisateurs')

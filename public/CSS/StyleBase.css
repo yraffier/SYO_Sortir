@@ -25,6 +25,16 @@
     background-color: #0070A0;
 }
 
+.Accueil{
+    color: white;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+    outline: none;
+}
+
 body{
     display: flex;
     flex-direction: column;
@@ -39,7 +49,6 @@ main{
     justify-content: center;
     align-content: space-evenly;
 }
-
 
 /* Bouton clignotant */
 :root {

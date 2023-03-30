@@ -1,10 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block nav %}
+    <li><a href="{{ path('sortie_lister') }}">Accueil</a></li>
+{% endblock %}
+
 {% block body %}
 <h2> Créer une Sortie</h2>
 {{ form_start(sortieForm)}}
-    {{ form_row(sortieForm.lieu) }}
+{{ form_widget(sortieForm) }}
+    <button type="submit" name="Enregistrer" value="Enregistrer"> Enregistrer </button>
+    <button type="submit" name="Ajouter" value="Ajouter"> Ajouter </button>
+    <button onclick="history.back();"> Annuler </button>
 {{ form_end(sortieForm) }}
+
 {% endblock %}
 {% block title %}
 

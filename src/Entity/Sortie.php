@@ -20,16 +20,21 @@ class Sortie
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
+    #[Assert\Regex(
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        message: 'Des chiffres et des lettres ! Et puis c\'est tout !'  ,
+    )]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-    #[Assert\DateTime]
-    #[Assert\Expression(
-        "this.getdateHeureDebut() < new \DateTime() ",
-        message:'La date de début de la sortie ne peut être antérieur à l a date du jour '
-    )]
+    #[Assert\GreaterThan(new \DateTime('now'))]
+
+//    #[Assert\Expression(
+//        "this.getdateHeureDebut() <new \DateTime() ",
+////        message:'La date de début de la sortie ne peut être antérieur à la date du jour '
+//    )]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
@@ -40,7 +45,6 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-
      private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column(length: 500)]

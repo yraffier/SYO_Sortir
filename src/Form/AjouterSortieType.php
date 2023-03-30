@@ -41,19 +41,26 @@ class AjouterSortieType extends AbstractType
             ])
             ->add('lieu',EntityType::class,
                 [
+                    'label' => "Lieu : ",
                     'class' => Lieu::class,
+                    'required' => true,
                    'choice_label' => function(Lieu $lieu){
                     return $lieu->getNom().'-'.$lieu->getRue().'-'.$lieu->getVille()->getCodePostal();
                    }]
 //                // TODO choicelabel: choice label est un array, et si le choice label est un objet lieu
 //                    'choice_label' => new Lieu()
-            )
+            ])
             ->add('Ville',EntityType::class,
                 [
                     'class' => Ville::class,
                     'label' => function(Ville $ville){
                         return $ville->getNom();
-                    }]
+                        ]
+                    }
+            [
+            'class'=> Campus::class,
+            'choice_label'=> 'nom',
+            ]
     )
 //            ->add('etat')
            // ->add('participants')

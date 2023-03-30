@@ -63,4 +63,30 @@ class LieuRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+//    public  function findLieuxByIdVille(Lieu $lieu){
+//        $entityManager = $this->getEntityManager();
+//
+//        $query = $entityManager->createQuery(
+//            'SELECT rue, code_postal
+//                FROM App\Entity\Lieu l
+//                JOIN ville v on v.id = l.v_id
+//                WHERE  v.id = v_id'
+//        )->setParameter('lieu',  );
+//
+//        return $query->getOneOrNullResult();
+//    }
+
+    public  function findLieuxByIdVille(int $lieu_ville_id){
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT rue, code_postal
+                FROM App\Entity\Lieu l
+                JOIN ville v on v.id = l.v_id 
+                WHERE  v.id = v_id'
+        )->setParameter('lieu', $lieu_ville_id);
+
+        return $query->getOneOrNullResult();
+    }
 }

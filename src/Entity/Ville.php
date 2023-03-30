@@ -6,6 +6,7 @@ use App\Repository\VilleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VilleRepository::class)]
 class Ville
@@ -16,10 +17,18 @@ class Ville
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\Regex(
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        message: 'Pas de caractère spéciale Merci !'  ,
+    )]
     private ?string $nom = null;
 
     #[ORM\Column]
-    private ?int $codePostal = null;
+    #[Assert\Regex(
+        "#^[0-9-]{5,10}$#",
+        message: 'On veut du chiffres, au pire un \'-\' mais c\'est tout !',
+    )]
+    private ?string $codePostal = null;
 
     #[ORM\OneToMany(mappedBy: 'ville', targetEntity: Lieu::class, orphanRemoval: true)]
     private Collection $Lieux;
@@ -46,12 +55,12 @@ class Ville
         return $this;
     }
 
-    public function getCodePostal(): ?int
+    public function getCodePostal(): ?string
     {
         return $this->codePostal;
     }
 
-    public function setCodePostal(int $codePostal): self
+    public function setCodePostal(string $codePostal): self
     {
         $this->codePostal = $codePostal;
 

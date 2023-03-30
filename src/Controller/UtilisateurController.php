@@ -6,7 +6,9 @@ use App\Entity\Utilisateur;
 use App\Form\ProfilUtilisateurType;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Monolog\Handler\Curl\Util;
 use phpDocumentor\Reflection\DocBlock\Tags\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,20 +26,18 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route(
-        'sortie/monprofil/',
+        'sortie/monprofil',
         name: '_profil'
     )]
-    public function afficherprofil(
+    public function affichermonprofil(
         Request                 $request,
-        EntityManagerInterface  $entityManager,
-        UtilisateurRepository   $utilisateurRepository
+        EntityManagerInterface  $entityManager
     ): Response
     {
-//        $utilisateur = $utilisateurRepository->findOneBy();
         $utilisateur = $this->getUser();
-//        if(!$utilisateur){
-//            throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
-//        }
+        if(!$utilisateur){
+            throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
+        }
         $userForm = $this->createForm(ProfilUtilisateurType::class, $utilisateur);
         $userForm->handleRequest($request);
 
@@ -56,6 +56,22 @@ class UtilisateurController extends AbstractController
             'utilisateur/profil.html.twig',
             compact('utilisateur', 'userForm')
         );
+    }
+
+    #[Route(
+        'sortie/profil/{utilisateur}',
+        name: '_detailProfil'
+    )]
+//    #[Entity('utilisateur', options: ['id' => 'utilisateur_id'])]
+    public function afficherprofil(
+        Utilisateur $utilisateur
+    ): Response
+    {
+        if (!$utilisateur) {
+            throw $this->createNotFoundException('Ce wish n\'existe pas');
+        }
+
+        return $this->render('utilisateur/detailprofil.html.twig', compact("utilisateur"));
     }
 
 

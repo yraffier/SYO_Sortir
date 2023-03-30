@@ -6,7 +6,8 @@ use App\Repository\EtatRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EtatRepository::class)]
-class Etat
+class
+Etat
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

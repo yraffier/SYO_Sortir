@@ -47,8 +47,8 @@ final class VilleFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'codePostal' => self::faker()->randomNumber(),
-            'nom' => self::faker()->text(150),
+            'codePostal' => self::faker()->postcode(),
+            'nom' => self::faker()->city(),
         ];
     }
 

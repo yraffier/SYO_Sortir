@@ -46,8 +46,9 @@ final class EtatFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $Etat = ['En cours','Ouvert','Fermé','En création'];
         return [
-            'libelle' => self::faker()->text(100),
+            'libelle' => self::faker()->randomElement($Etat),
         ];
     }
 

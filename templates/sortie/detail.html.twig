@@ -5,9 +5,26 @@
 {% endblock %}
 
 {% block body %}
-<h3> Détail complet de la sortie </h3>
+<h3> {{ sortie.nom }} </h3>
+    <div class="infosortie">
+        <ul >
+            <li>Débute à {{ sortie.dateHeureDebut | date('d-m-Y H:i') }}</li>
+            <li>Point de rencontre {{ sortie.lieu.nom | upper }} - {{ sortie.lieu.ville.codePostal}} - {{ sortie.lieu.ville.nom | upper}}</li>
+            <li>Durée : {{ sortie.duree | date('H:i') }} minutes</li>
+            <li>{{ sortie.infosSortie }}</li>
+{#            TODO  Ajouter un lien au profil utilisateur#}
+            <li>Organisé par <a href="{{ path('sortir_detailProfil', {'utilisateur': sortie.organisateurs.id}) }}">{{ sortie.organisateurs.username }}</a> - CAMPUS {{ sortie.siteOrganisateur.nom | upper }}</li>
+        </ul>
+    </div>
+    <div class="listeparticpants">
+        <h5>Participants à la sortie ( date limite d'inscription {{ sortie.dateLimiteInscription | date('d-m-Y H:i') }})</h5>
+        {% for participant in sortie.participants %}
+{#            TODO Ajouter un lien #}
+            <li><a href="{{ path('sortir_detailProfil', {'utilisateur': participant.id}) }}">{{ participant.username }}</a></li>
+        {% endfor %}
+    </div>
 {% endblock %}
-{#TODO  faire l'affichage du twig complet#}
+
 
 {% block title %}
 

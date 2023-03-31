@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block nav %}
@@ -12,6 +13,30 @@
     <button type="submit" name="Ajouter" value="Ajouter"> Ajouter </button>
     <button onclick="history.back();"> Annuler </button>
 {{ form_end(sortieForm) }}
+    <script>
+        $('#ajouter_sortie_ville').change(function () {
+
+            let villeId = document.getElementById('ajouter_sortie_ville').value;
+            let adresse = "/sortie/lieurecuperer/"+ villeId;
+            $.ajax({
+                url : adresse,
+                type : "GET",
+                dataType : "json",
+                success: function (lieux){
+                    let lieuSelect = $("#ajouter_sortie_lieu");
+
+                    lieuSelect.html('');
+
+                    for(let i =0; i < lieux.length; i++){
+                        let textelieu = "<option value=" + lieux[i]["id"] + ">" + lieux[i]["nom"] + "</option>";
+
+                        lieuSelect.append(textelieu);
+                    }
+                }
+            });
+        });
+
+    </script>
 
 {% endblock %}
 {% block title %}

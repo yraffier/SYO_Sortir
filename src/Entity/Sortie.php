@@ -74,6 +74,9 @@ class Sortie
     #[ORM\Column]
     private ?int $nbInscriptionMax = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sorties')]
+    private ?Ville $ville = null;
+
     public function __construct()
     {
 //        $nbInscriptionMax=0;
@@ -232,6 +235,18 @@ class Sortie
     public function setNbInscriptionMax(int $nbInscriptionMax): self
     {
         $this->nbInscriptionMax = $nbInscriptionMax;
+
+        return $this;
+    }
+
+    public function getVille(): ?Ville
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?Ville $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

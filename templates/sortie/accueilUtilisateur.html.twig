@@ -4,7 +4,20 @@
 <div class="Accueil">
     <div class=" filtre">
         <h3> Filtrer vos sorties</h3>
+
+        {{ form_start(searchForm)}}
+        {{ form_row(searchForm.nom) }}
         <label>Campus </label>
+        {{ form_row(searchForm.campus) }}
+        {{ form_row(searchForm.dateDebut) }}
+        {{ form_row(searchForm.dateFin) }}
+        {{ form_row(searchForm.organisateur) }}
+        {{ form_row(searchForm.inscrit) }}
+        {{ form_row(searchForm.NonInscrit) }}
+        {{ form_row(searchForm.sortiePassee) }}
+        <input type="submit" value="Rechercher" />
+{#        {{ form_widget(searchForm) }}#}
+        {{ form_end(searchForm) }}
     </div>
     <div class="listesorties">
         <h3>  Les sorties </h3>

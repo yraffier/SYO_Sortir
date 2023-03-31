@@ -25,6 +25,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextareaType::class, [
                 'required' => true,
+                'label' => 'username',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Hep Hep Hep ! Il te faut un nom de scéne ! (Je te vois trichez avec la barre d\'espace)'
@@ -36,6 +37,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('nom', TextType::class,[
                 'required' => true,
+                'label' => 'nom',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -47,6 +49,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('prenom', TextType::class,[
                 'required' => true,
+                'label' => 'prénom',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -58,6 +61,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('telephone', TextType::class,[
                 'required' => true,
+                'label' => 'téléphone',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -69,6 +73,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('mail', EmailType::class, [
                 'required' => true,
+                'label' => 'mail',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -80,6 +85,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('campus', EntityType::class,
                         [
+                            'label' => 'campus',
                             'required' => true,
                             'class' => Campus::class,
                             'choice_label' => 'nom',
@@ -95,6 +101,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'mapped' => false,
+                'label' => 'mot de passe',
                 'required' => true,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [

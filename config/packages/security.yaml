@@ -21,6 +21,9 @@ security:
                 path: logout_sortir
                 # where to redirect after logout
                 target: sortir_accueil
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 86400
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

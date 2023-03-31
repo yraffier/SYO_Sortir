@@ -18,6 +18,7 @@
             <div id="titre">
                 <h1>Sortir.com</h1>
             </div>
+            {% block menu %}
             {% if app.user %}
             <nav>
                 <ul>
@@ -32,6 +33,7 @@
                 </ul>
             </nav>
             {% endif %}
+            {% endblock %}
 
         </header>
         {% block body %}{% endblock %}

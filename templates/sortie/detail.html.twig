@@ -23,6 +23,14 @@
         {% endfor %}
     </div>
 
+    <button> S'inscrire </button>
+    <button> Se desister </button>
+
+    {% if app.user is same as sortie.organisateur %}
+        <button> <a href="path{{ 'sortie_annuler','{sortie.id}' }}"> Annuler la sortie </a> </button>
+    {% endif %}
+
+
 {% endblock %}
 
 

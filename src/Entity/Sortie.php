@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Config\Twig\DateConfig;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
@@ -21,7 +22,7 @@ class Sortie
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[Assert\Regex(
-        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]){2,}$#",
         message: 'Des chiffres et des lettres ! Et puis c\'est tout !'  ,
     )]
     private ?string $nom = null;
@@ -29,12 +30,9 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-    #[Assert\GreaterThan(new \DateTime('now'))]
-
-//    #[Assert\Expression(
-//        "this.getdateHeureDebut() <new \DateTime() ",
-////        message:'La date de début de la sortie ne peut être antérieur à la date du jour '
-//    )]
+    #[Assert\GreaterThanOrEqual('today',
+        message: 'La date de début de la sortie ne peut être antérieur à la date du jour ',
+    )]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
@@ -45,6 +43,10 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
+    #[Assert\GreaterThanOrEqual('today',
+        message: 'La date de début de la sortie ne peut être antérieur à la date du jour ',
+    )]
+    #[Assert\LessThanOrEqual('dateHeureDebut')]
      private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column(length: 500)]

@@ -65,10 +65,10 @@ class SortieController extends AbstractController
         $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
-//    dd($sortie);
         try {
 
                 if ($sortieForm->isSubmitted()&& $sortieForm-> isValid()) {
+
 
                     if($request->request->has('Enregistrer')) {
                         $etat = $etatRepository->find(308);
@@ -101,8 +101,7 @@ class SortieController extends AbstractController
     #[Route('/lieurecuperer/{ville}', name: '_ajouterLieurecuperer')]
     public function lieurecuperer(
         Ville $ville,
-        VilleRepository $villeRepository)
-        : Response
+    ): Response
     {
 
         $lieux = $ville->getLieux();
@@ -164,13 +163,11 @@ class SortieController extends AbstractController
             $sortie->addParticipant($user);
             $entityManager->persist($sortie);
             $entityManager->flush();
-            $this->addFlash('success', 'well done bitches');
         }else {
             if(count($participants) < $inscritMax) {
                 $sortie->addParticipant($user);
                 $entityManager->persist($sortie);
                 $entityManager->flush();
-                $this->addFlash('success', 'well done bitches');
             }else{
                 throw new ('La sortie est complète ! comme une galette ( complète!)');
             }

@@ -44,7 +44,10 @@ class AjouterSortieType extends AbstractType
                 [
                     'label' => "Date limite d'inscription : ",
                     'widget' => 'single_text',
-                    'html5' => true
+                    'html5' => true,
+                    'constraints' => [
+
+                    ]
                 ])
             ->add('duree', TimeType::class,
                 [

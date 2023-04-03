@@ -22,12 +22,13 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Regex(
-        "#^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$#",
-        message: 'Des minuscule, des majuscules, des chiffres, et \'.\' \'-\' \'_\', C\'est tout ce dont tu as besoin !',
+        "#^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){3,18}$#",
+        message: 'Des minuscules, des majuscules, des chiffres, et \'.\' \'-\' \'_\', C\'est tout ce dont tu as besoin !',
     )]
     private ?string $username = null;
 
     #[ORM\Column]
+    #[ASSERT\IsNull]
     private array $roles = [];
 
     /**

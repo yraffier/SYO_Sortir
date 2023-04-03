@@ -53,7 +53,8 @@ class Sortie
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
-
+    #[ORM\Column(length: 500)]
+    private ?string $motifAnnulation = null;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -242,6 +243,22 @@ class Sortie
     public function getVille(): ?Ville
     {
         return $this->ville;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMotifAnnulation(): ?string
+    {
+        return $this->motifAnnulation;
+    }
+
+    /**
+     * @param string|null $motifAnnulation
+     */
+    public function setMotifAnnulation(?string $motifAnnulation): void
+    {
+        $this->motifAnnulation = $motifAnnulation;
     }
 
     public function setVille(?Ville $ville): self

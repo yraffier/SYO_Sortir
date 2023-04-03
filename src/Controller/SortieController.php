@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
+use App\Form\AnnulerMaSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
@@ -35,8 +37,6 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/accueilUtilisateur.html.twig', compact('sorties'));
     }
-
-
 
     /*
      * Méthode pour se descinscrir d'une sortie
@@ -139,6 +139,89 @@ class SortieController extends AbstractController
         // Return array with structure of the neighborhoods of the providen city id
         return new JsonResponse($tableauDeReponses);
     }
+    /* Méthodes pour supprimer une sortie à partir de l'id de la sortie et du fait que l'organisteur est le seul
+    * à pouvoir supprimer la sortie
+    */
+    #[Route('/detail/{sortie}/annuler', name: '_annulerMaSortie')]
+    public function annulerMaSortie(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Sortie $sortie,
+        SortieRepository $sortieRepository,
+
+    ): Response
+    {
+        $etat= $entityManager->getRepository(Etat::class)->find(310);
+//
+        $annulerForm = $this->createForm(AnnulerMaSortieType::class, $sortie);
+        $annulerForm->handleRequest($request);
+        {
+            if($annulerForm->isSubmitted()){
+                try{
+                $sortie->setEtat($etat);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+                $this->addFlash('succes','Votre sortie a bien été supprimée');
+                return $this->redirectToRoute('sortie_lister');
+                } catch(\Exception $exception){
+                    $this->redirectToRoute('sortie_detail');
+                }
+            }
+
+            return $this->render('sortie/annulerMaSortie.html.twig', compact('annulerForm', 'sortie'));
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

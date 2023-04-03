@@ -26,8 +26,9 @@
     <button> S'inscrire </button>
     <button> Se desister </button>
 
-    {% if app.user is same as sortie.organisateur %}
-        <button> <a href="path{{ 'sortie_annuler','{sortie.id}' }}"> Annuler la sortie </a> </button>
+    {% if app.user is same as sortie.organisateurs %}
+         <a href={{ path('sortie_annulerMaSortie', {'sortie': sortie.id}) }}> Annuler la sortie </a>
+
     {% endif %}
 
 

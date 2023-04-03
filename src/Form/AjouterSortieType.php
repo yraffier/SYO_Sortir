@@ -49,7 +49,10 @@ class AjouterSortieType extends AbstractType
             ->add('duree', TimeType::class,
                 [
                     'label' => "Durée : ",
-                    'input' => 'timestamp'
+                    'input' => 'timestamp',
+                    'placeholder' => [
+                     'hour' => 'Heures', 'minute' => 'Minutes',
+                ]
                 ])
             ->add('infosSortie', TextareaType::class,
                 [

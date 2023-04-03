@@ -24,7 +24,7 @@
                 {% for sortieorganisee in utilisateur.sortiesorganisees %}
                     <h6>{{ utilisateur.username }} participe à :</h6>
                     <ul>
-                        <li>{{ sortieorganisee.nom }}</li>
+                        <li><a href="{{ path('sortie_detail', {'sortie' : sortieorganisee.id}) }}">{{ sortieorganisee.nom }}</a></li>
                     </ul>
                 {% endfor %}
             </div>

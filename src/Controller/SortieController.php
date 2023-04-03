@@ -3,20 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
+use App\Entity\Utilisateur;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
@@ -37,28 +36,6 @@ class SortieController extends AbstractController
     }
 
 
-
-    /*
-     * Méthode pour se descinscrir d'une sortie
-     */
-    #[Route('/sedesincrire/{sortie}', name: '_sedesinscrire')]
-    public function sedesinscrire(
-        Sortie $sortie,
-        EntityManagerInterface $entityManager,
-
-    ): Response
-    {
-       try{
-        $entityManager->remove($sortie);
-        $entityManager->flush();
-        $this->addFlash('succes','Vous êtes bien déscincrits de la sortie');
-        return $this->redirectToRoute('sortie_lister');
-       }catch(\Exception $exception) {
-           $this->addFlash('echec', 'Vous n\'êtes pas désincrits de la sortie');
-           return $this->redirectToRoute('sortie_lister');
-           }
-
-    }
     /*
      * Méthode pour afficher le déatails d'un sortie avec l'id de la sortie
      */
@@ -140,6 +117,60 @@ class SortieController extends AbstractController
         return new JsonResponse($tableauDeReponses);
     }
 
+    #[Route('/detail/{sortie}/inscription', name: '_inscription')]
+    public function sortieInscription(
+        Sortie                  $sortie,
+        EntityManagerInterface  $entityManager
+    ): Response
+    {
+        $user = $this->getUser();
+        $participants = $sortie->getParticipants();
+        $inscritMax = $sortie->getNbInscriptionMax();
 
+        if(empty($participants)) {
+            $sortie->addParticipant($user);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+            $this->addFlash('success', 'well done bitches');
+        }else {
+            if(count($participants) < $inscritMax) {
+                $sortie->addParticipant($user);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+                $this->addFlash('success', 'well done bitches');
+            }else{
+                throw new ('La sortie est complète ! comme une galette ( complète!)');
+            }
+        }
 
+        return $this->render('sortie/detail.html.twig', compact('sortie'));
+
+    }
+
+    /*
+     * Méthode pour se descinscrir d'une sortie
+     */
+    #[Route('/detail/{sortie}/déinscription', name: '_sedesinscrire')]
+    public function sedesinscrire(
+        Sortie $sortie,
+        EntityManagerInterface $entityManager,
+    ): Response
+    {
+        $user = $this->getUser();
+        $participants = $sortie->getParticipants();
+
+        if(empty($participants)){
+            throw new \Exception(' Il n\'y a aucun inscrit pour cette sortie');
+        }
+
+        foreach ($participants as $participant){
+            if($user === $participant){
+
+                $sortie->removeParticipant($user);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+            }
+        }
+    return $this->render('sortie/detail.html.twig', compact('sortie'));
+    }
 }

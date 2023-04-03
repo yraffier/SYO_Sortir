@@ -4,11 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\ProfilUtilisateurType;
-use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Monolog\Handler\Curl\Util;
-use phpDocumentor\Reflection\DocBlock\Tags\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

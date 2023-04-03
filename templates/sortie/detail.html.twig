@@ -23,11 +23,22 @@
         {% endfor %}
     </div>
 
-    <button> S'inscrire </button>
-    <button> Se desister </button>
+    {% if app.user is same as sortie.organisateurs %}
+{#        <button> <a href="path{{ 'sortie_annuler',{'sortie': sortie.id} }}"> Annuler la sortie </a> </button>#}
+    {% else %}
+        {% if sortie.participants is empty %}
+            <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>
+        {% else %}
+                {% if app.user in sortie.participants %}
+                    <button><a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}"> Se desister </a></button>
+                {% else %}
+                    <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>
+                {% endif %}
+        {% endif %}
 
-    {% if app.user is same as sortie.organisateur %}
-        <button> <a href="path{{ 'sortie_annuler','{sortie.id}' }}"> Annuler la sortie </a> </button>
+
+
+
     {% endif %}
 
 
@@ -37,4 +48,3 @@
 {% block title %}
 
 {% endblock %}
-

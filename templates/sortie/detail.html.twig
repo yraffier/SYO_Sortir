@@ -35,6 +35,7 @@
                     <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>
                 {% endif %}
         {% endif %}
+    {% endif %}
 
 
     {% if app.user is same as sortie.organisateurs %}

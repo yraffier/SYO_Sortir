@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 class AjouterSortieType extends AbstractType
 {
@@ -44,7 +45,7 @@ class AjouterSortieType extends AbstractType
                 [
                     'label' => "Date limite d'inscription : ",
                     'widget' => 'single_text',
-                    'html5' => true
+                    'html5' => true,
                 ])
             ->add('duree', TimeType::class,
                 [
@@ -81,7 +82,6 @@ class AjouterSortieType extends AbstractType
             'class'=> Ville::class,
             'placeholder'=> 'Veuilliez choisr une ville...',
             'choice_label'=>'nom'
-//            'choices'=> $ville ? $ville->getLieux():[]
         ));
 
         $lieux = array();

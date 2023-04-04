@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Config\Twig\DateConfig;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
 class Sortie
@@ -21,7 +23,7 @@ class Sortie
     #[Assert\NotBlank]
     #[Assert\NotNull]
     #[Assert\Regex(
-        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]){2,}$#",
         message: 'Des chiffres et des lettres ! Et puis c\'est tout !'  ,
     )]
     private ?string $nom = null;
@@ -29,12 +31,10 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
-    #[Assert\GreaterThan(new \DateTime('now'))]
-
-//    #[Assert\Expression(
-//        "this.getdateHeureDebut() <new \DateTime() ",
-////        message:'La date de début de la sortie ne peut être antérieur à la date du jour '
-//    )]
+    #[Assert\GreaterThanOrEqual('today',
+        message: 'La date de début de la sortie ne peut être antérieur à la date du jour ',
+    )]
+//    #[Assert\Callback('validerDateDebut')]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
@@ -45,6 +45,10 @@ class Sortie
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank]
     #[Assert\NotNull]
+    #[Assert\GreaterThanOrEqual('today',
+        message: 'La date de début de la sortie ne peut être antérieur à la date du jour ',
+    )]
+//    #[Assert\Callback("validerDate")]
      private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column(length: 500)]
@@ -53,7 +57,8 @@ class Sortie
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
-
+    #[ORM\Column(length: 500)]
+    private ?string $motifAnnulation = '';
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -244,10 +249,39 @@ class Sortie
         return $this->ville;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getMotifAnnulation(): ?string
+    {
+        return $this->motifAnnulation;
+    }
+
+    /**
+     * @param string|null $motifAnnulation
+     */
+    public function setMotifAnnulation(?string $motifAnnulation): void
+    {
+        $this->motifAnnulation = $motifAnnulation;
+    }
+
     public function setVille(?Ville $ville): self
     {
         $this->ville = $ville;
 
         return $this;
     }
+
+//    /**
+//     * @Assert\Callback
+//     */
+//    public function validerDate(ExecutionContextInterface $context): void
+//    {
+//        if($this->getDateLimiteInscription() > $this->getDateHeureDebut()){
+//            $context->buildViolation('La date d\'inscription doit toujours se terminer avant la date de début de sortir')
+//                ->atpath('dateLimiteInscription')
+//                ->addViolation();
+//        }
+//    }
+
 }

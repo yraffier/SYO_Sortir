@@ -77,6 +77,7 @@ class Sortie
     private ?Utilisateur $organisateurs = null;
 
     #[ORM\Column]
+    #[Assert\Length(min:1,max: 300, minmessage: "le nombre d'inscrit doit être supérieur à zéro",maxmessage: " le nombre d'inscritdoit être inférieur ou égal à 300")]
     private ?int $nbInscriptionMax = null;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]

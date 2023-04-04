@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Campus;
 use App\Entity\SearchData;
-use ContainerJob7dle\getSortieService;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -29,7 +28,7 @@ class SearchType extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Campus::class,
-                'placeholder' => '- Selectionnez votre région -',
+                'placeholder' => '- Touts les campus -',
             ])
             ->add('dateDebut', DateTimeType::class, [
                 'placeholder' => [

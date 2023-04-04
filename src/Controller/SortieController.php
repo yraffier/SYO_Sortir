@@ -4,20 +4,23 @@ namespace App\Controller;
 
 use App\Entity\Etat;
 use App\Entity\Sortie;
+use App\Entity\Utilisateur;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
 use App\Form\AnnulerMaSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
@@ -28,13 +31,27 @@ class SortieController extends AbstractController
 {
     #[Route('/', name: '_lister')]
     public function lister(
-        SortieRepository $sortieRepository
+        SortieRepository $sortieRepository,
+        Request $request
     ): Response
     // Méthodes pour récupérer l'ensemble des sorties
     {
-        $sorties= $sortieRepository->findAll();
+        $utilisateur = $this->getUser();
+//        $sorties= $sortieRepository->findAll();
+        $sorties = $sortieRepository->RechercherToutesLesSorties();
+        $data = new SearchData();
+        $searchForm = $this->createForm(SearchType::class, $data);
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $sorties = $sortieRepository->findSearch($data, $utilisateur);
+        }
 
-        return $this->render('sortie/accueilUtilisateur.html.twig', compact('sorties'));
+
+
+        return $this->render('sortie/accueilUtilisateur.html.twig', compact(
+            'searchForm',
+            'sorties'
+        ));
     }
 
 
@@ -65,6 +82,7 @@ class SortieController extends AbstractController
         $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
+//    dd($sortie);
         try {
 
                 if ($sortieForm->isSubmitted()&& $sortieForm-> isValid()) {
@@ -93,7 +111,6 @@ class SortieController extends AbstractController
 
         }catch (Exception $exception){
             $this->addFlash('echec', 'La sortie n\'a  pas été insérée');
-            dd();
 //             return $this->redirectToRoute('sortie_ajouter');
         }
         return $this->render('sortie/ajouter.html.twig', compact('sortieForm'));
@@ -104,7 +121,8 @@ class SortieController extends AbstractController
     #[Route('/lieurecuperer/{ville}', name: '_ajouterLieurecuperer')]
     public function lieurecuperer(
         Ville $ville,
-    ): Response
+        VilleRepository $villeRepository)
+        : Response
     {
 
         $lieux = $ville->getLieux();

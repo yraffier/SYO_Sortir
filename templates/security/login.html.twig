@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet"  href="{{ asset('build/app.css') }}">
+{% endblock %}
+
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
@@ -14,11 +18,60 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <input class="c-checkbox" type="checkbox" id="start">
+    <input class="c-checkbox" type="checkbox" id="progress2">
+    <input class="c-checkbox" type="checkbox" id="finish">
+    <div class="c-form__progress"></div>
+
+    <div class="c-formContainer">
+        <div class="c-welcome">Welcome aboard!</div>
+        <form class="c-form" action="{{ path('sortie_lister') }}">
+            <div class="c-form__group">
+                <label class="c-form__label" for="inputUsername">
+                    <input
+                            type="text"
+                            id="inputUsername"
+                            class="c-form__input"
+                            placeholder=" "
+                            required>
+
+                    <label class="c-form__next" for="progress2" role="button">
+                        <span class="c-form__nextIcon"></span>
+                    </label>
+
+                    <span class="c-form__groupLabel">Username</span>
+                    <b class="c-form__border"></b>
+                </label>
+            </div>
+
+            <div class="c-form__group">
+                <label class="c-form__label" for="inputPassword">
+                    <input
+                            type="password"
+                            id="inputPassword"
+                            class="c-form__input"
+                            placeholder=" "
+                            required>
+
+                    <label class="c-form__next" for="finish" role="button">
+                        <span class="c-form__nextIcon"></span>
+                    </label>
+
+                    <span class="c-form__groupLabel">Mot de Passe...</span>
+                    <b class="c-form__border"></b>
+                </label>
+            </div>
+
+            <label class="c-form__toggle" for="start">Connection<span class="c-form__toggleIcon"></span></label>
+        </form>
+    </div>
+
+
+{#    <h2 class="h3 mb-3 font-weight-normal">Connection</h2>#}
+{#    <label for="inputUsername">Username</label>#}
+{#    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>#}
+{#    <label for="inputPassword">Password</label>#}
+{#    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>#}
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
@@ -30,9 +83,9 @@
         </div>
 
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+{#    <button class="btn btn-lg btn-primary" type="submit">#}
+{#        Sign in#}
+{#    </button>#}
 </form>
     <a href="{{ path('sortir_accueil') }}"><button>Annuler</button></a>
 {% endblock %}

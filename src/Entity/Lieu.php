@@ -18,7 +18,7 @@ class Lieu
 
     #[ORM\Column(length: 200)]
     #[Assert\Regex(
-        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]){2,}$#",
         message: 'On reste simple pour le nom du lieu, pas de caractères spéciaux ! Merci !',
     )]
     private ?string $nom = null;

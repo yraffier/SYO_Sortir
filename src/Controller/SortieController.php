@@ -93,7 +93,8 @@ class SortieController extends AbstractController
 
         }catch (Exception $exception){
             $this->addFlash('echec', 'La sortie n\'a  pas été insérée');
-             return $this->redirectToRoute('inscription_sortir');
+            dd();
+//             return $this->redirectToRoute('sortie_ajouter');
         }
         return $this->render('sortie/ajouter.html.twig', compact('sortieForm'));
 

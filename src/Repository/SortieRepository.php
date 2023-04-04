@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\SearchData;
 use App\Entity\Sortie;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +39,94 @@ class SortieRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /*******/
+
+    /**
+     * Affiche Toutes les sorties sauf les sorties archivées
+     *
+     */
+    public function RechercherToutesLesSorties()
+    {
+
+        //id 5 doit être état 'archivé'
+        $query = $this
+            ->createQueryBuilder('s')
+            ->where('s.etat != 7');
+
+        return $query->getQuery()->getResult();
+    }
+
+//    /**
+//     * Affiche les sorties selon les filtres
+//     *
+//     * @param SearchData $search
+//     * @param Utilisateur $utilisateur
+//     *
+//     */
+    public function findSearch(SearchData $search, Utilisateur $utilisateur)
+    {
+/*
+ * permet de rechercher les sorties en fonction de la recherche (archives exclus)
+ */
+        //id 7 doit être état 'archivé'
+        $query = $this
+            ->createQueryBuilder('s')
+            -> where('s.etat != 7');
+//            ->select('s.campus')
+//            ->join('s.campus', 'c');
+
+        if (!empty($search->getNom())) {
+            $query = $query
+                ->andWhere('s.nom LIKE :nom')
+                ->setParameter('nom', '%'.($search->getNom()).'%');
+        }
+
+        if (!empty($search->getCampus())) {
+            $query = $query
+                ->andWhere('s.siteOrganisateur = :campus')
+                ->setParameter('campus', $search->getCampus());
+        }
+
+        if (!empty($search->getDateDebut())) {
+            $query = $query
+                ->andWhere('s.debutSortie >= :debutSortie')
+                ->setParameter('debutSortie', $search->getDateDebut());
+        }
+
+        if (!empty($search->getDateFin())) {
+            $query = $query
+                ->andWhere('s.debutSortie <= :finSortie')
+                ->setParameter('finSortie', $search->getDateFin());
+        }
+
+        if (!empty($search->organisateur)) {
+            $query = $query
+                ->andWhere('s.organisateurs = :utilisateur')
+                ->setParameter('utilisateur', $utilisateur);
+        }
+
+        if (!empty($search->inscrit)) {
+            $query = $query
+                ->andWhere(':utilisateur MEMBER OF s.participants')
+                ->setParameter('utilisateur', $utilisateur);
+        }
+
+        if (!empty($search->NonInscrit)) {
+            $query = $query
+                ->andWhere(':utilisateur NOT MEMBER OF s.participants')
+                ->setParameter('utilisateur', $utilisateur);
+        }
+
+        if (!empty($search->sortiePassee)) {
+            $query = $query
+                ->andWhere('s.etat = :etat')
+                ->setParameter('etat', 5);
+        }
+
+        return $query->getQuery()->getResult();
+
     }
 
 //    /**

@@ -11,13 +11,16 @@ use App\Form\AnnulerMaSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
@@ -28,13 +31,27 @@ class SortieController extends AbstractController
 {
     #[Route('/', name: '_lister')]
     public function lister(
-        SortieRepository $sortieRepository
+        SortieRepository $sortieRepository,
+        Request $request
     ): Response
     // Méthodes pour récupérer l'ensemble des sorties
     {
-        $sorties= $sortieRepository->findAll();
+        $utilisateur = $this->getUser();
+//        $sorties= $sortieRepository->findAll();
+        $sorties = $sortieRepository->RechercherToutesLesSorties();
+        $data = new SearchData();
+        $searchForm = $this->createForm(SearchType::class, $data);
+        $searchForm->handleRequest($request);
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $sorties = $sortieRepository->findSearch($data, $utilisateur);
+        }
 
-        return $this->render('sortie/accueilUtilisateur.html.twig', compact('sorties'));
+
+
+        return $this->render('sortie/accueilUtilisateur.html.twig', compact(
+            'searchForm',
+            'sorties'
+        ));
     }
 
 
@@ -44,13 +61,13 @@ class SortieController extends AbstractController
     #[Route('/detail/{sortie}', name: '_detail')]
     public function detail(
         Sortie  $sortie,
-        SortieRepository $sortieRepository
     ): Response
        {
+        $datedujour = new DateTime('today');
         if(!$sortie){
             throw $this->createNotFoundException('Cette sortie n\'existe pas');
                }
-        return $this->render('sortie/detail.html.twig', compact('sortie'));
+        return $this->render('sortie/detail.html.twig', compact('sortie','datedujour'));
        }
 
     #[Route('/ajouter', name: '_ajouter')]
@@ -69,29 +86,32 @@ class SortieController extends AbstractController
         try {
 
                 if ($sortieForm->isSubmitted()&& $sortieForm-> isValid()) {
+                    if ($sortie->getDateLimiteInscription() < $sortie->getDateHeureDebut()) {
+                        if($request->request->has('Enregistrer')) {
+                            $etat = $etatRepository->find(1);
+                            $sortie->setEtat($etat);
+                            $this->addFlash('succes', 'Votre sortie est bien enregistré !');
 
-                    if($request->request->has('Enregistrer')) {
-                        $etat = $etatRepository->find(308);
-                        $sortie->setEtat($etat);
-                        $this->addFlash('succes', 'CA va marcher');
+                        }
+                        elseif ($request->request->has('Ajouter')){
+                            $etat = $etatRepository->find(2);
+                            $sortie->setEtat($etat);
+                            $this->addFlash('succes', 'Votre sortie vient d\'être publié');
+                        }
+                        $sortie->setOrganisateurs($this->getUser());
 
+                        $entityManager->persist($sortie);
+                        $entityManager->flush();
+                        $this->addFlash('succes','Sortie crée avec succés');
+                        return $this->redirectToRoute('sortie_lister');
+                    } else {
+                        $this->addFlash('echec', 'La date limite d\'inscription doit être inférieur a la date de début.');
                     }
-                    elseif ($request->request->has('Ajouter')){
-                        $etat = $etatRepository->find(305);
-                        $sortie->setEtat($etat);
-                        $this->addFlash('succes', 'Youpiiii');
-                    }
-                $sortie->setOrganisateurs($this->getUser());
+                }
 
-                $entityManager->persist($sortie);
-                $entityManager->flush();
-                $this->addFlash('succes','Youhou vous avez crée une nouvelle sortie');
-                return $this->redirectToRoute('sortie_lister');
-            }
-
-        }catch (\Exception $exception){
+        }catch (Exception $exception){
             $this->addFlash('echec', 'La sortie n\'a  pas été insérée');
-             return $this->redirectToRoute('inscription_sortir');
+//             return $this->redirectToRoute('sortie_ajouter');
         }
         return $this->render('sortie/ajouter.html.twig', compact('sortieForm'));
 
@@ -126,7 +146,6 @@ class SortieController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         Sortie $sortie,
-        SortieRepository $sortieRepository,
 
     ): Response
     {
@@ -142,7 +161,7 @@ class SortieController extends AbstractController
                 $entityManager->flush();
                 $this->addFlash('succes','Votre sortie a bien été supprimée');
                 return $this->redirectToRoute('sortie_lister');
-                } catch(\Exception $exception){
+                } catch(Exception $exception){
                     $this->redirectToRoute('sortie_detail');
                 }
             }
@@ -159,24 +178,26 @@ class SortieController extends AbstractController
         $user = $this->getUser();
         $participants = $sortie->getParticipants();
         $inscritMax = $sortie->getNbInscriptionMax();
+        $datedebutsortie = $sortie->getDateHeureDebut();
+        $datefininscription = $sortie->getDateLimiteInscription();
+        $datedujour = new DateTime('now');
 
-        if(empty($participants)) {
-            $sortie->addParticipant($user);
-            $entityManager->persist($sortie);
-            $entityManager->flush();
-            $this->addFlash('success', 'well done bitches');
-        }else {
-            if(count($participants) < $inscritMax) {
+        if($datedebutsortie >= $datedujour || $datefininscription >= $datedujour){
+            if(empty($participants)) {
                 $sortie->addParticipant($user);
                 $entityManager->persist($sortie);
                 $entityManager->flush();
-                $this->addFlash('success', 'well done bitches');
-            }else{
-                throw new ('La sortie est complète ! comme une galette ( complète!)');
+            }else {
+                if(count($participants) < $inscritMax) {
+                    $sortie->addParticipant($user);
+                    $entityManager->persist($sortie);
+                    $entityManager->flush();
+                }else{
+                    throw new ('La sortie est complète ! comme une galette ( complète!)');
+                }
             }
         }
-
-        return $this->render('sortie/detail.html.twig', compact('sortie'));
+        return $this->render('sortie/detail.html.twig', compact('sortie', 'datedujour'));
 
     }
 
@@ -192,8 +213,9 @@ class SortieController extends AbstractController
         $user = $this->getUser();
         $participants = $sortie->getParticipants();
 
+
         if(empty($participants)){
-            throw new \Exception(' Il n\'y a aucun inscrit pour cette sortie');
+            throw new(' Il n\'y a aucun inscrit pour cette sortie');
         }
 
         foreach ($participants as $participant){
@@ -206,6 +228,5 @@ class SortieController extends AbstractController
         }
     return $this->render('sortie/detail.html.twig', compact('sortie'));
     }
-
 
 }

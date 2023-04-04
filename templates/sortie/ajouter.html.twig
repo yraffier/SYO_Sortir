@@ -11,8 +11,8 @@
 {{ form_widget(sortieForm) }}
     <button type="submit" name="Enregistrer" value="Enregistrer"> Enregistrer </button>
     <button type="submit" name="Ajouter" value="Ajouter"> Ajouter </button>
-    <button onclick="history.back();"> Annuler </button>
 {{ form_end(sortieForm) }}
+    <button><a href="{{ path('sortie_lister') }}">Annuler</a></button>
     <script>
         $('#ajouter_sortie_ville').change(function () {
 

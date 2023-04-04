@@ -21,8 +21,8 @@
                     <li>  {{chaquesortie.etat.libelle }} </li>
                     <li><a href="{{ path('sortir_detailProfil', {'utilisateur': chaquesortie.organisateurs.id}) }}">{{ chaquesortie.organisateurs.username }}</a></li>
                     {#                {{app.user.nom }}#}
-                    {% for chaqueparticpant in chaquesortie.participants %}
-                        {% if app.user.id == chaqueparticpant.id %}
+                    {% for chaqueparticipant in chaquesortie.participants %}
+                        {% if app.user == chaqueparticipant %}
                             <li><a href="{{path('sortie_sedesinscrire',{'sortie':chaquesortie.id})}}" onclick="return confirm('Etes-vous sûre de vouloir vous désinscrire?')"> Se désincrire...</a></li>
                         {% endif %}
                     {% endfor %}

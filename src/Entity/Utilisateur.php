@@ -28,7 +28,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $username = null;
 
     #[ORM\Column]
-    #[ASSERT\IsNull]
     private array $roles = [];
 
     /**

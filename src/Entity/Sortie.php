@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Config\Twig\DateConfig;
 
 #[ORM\Entity(repositoryClass: SortieRepository::class)]
@@ -33,6 +34,7 @@ class Sortie
     #[Assert\GreaterThanOrEqual('today',
         message: 'La date de début de la sortie ne peut être antérieur à la date du jour ',
     )]
+//    #[Assert\Callback('validerDateDebut')]
     private ?\DateTimeInterface $dateHeureDebut = null;
 
     #[ORM\Column]
@@ -46,7 +48,7 @@ class Sortie
     #[Assert\GreaterThanOrEqual('today',
         message: 'La date de début de la sortie ne peut être antérieur à la date du jour ',
     )]
-    #[Assert\LessThanOrEqual('dateHeureDebut')]
+//    #[Assert\Callback("validerDate")]
      private ?\DateTimeInterface $dateLimiteInscription = null;
 
     #[ORM\Column(length: 500)]
@@ -56,7 +58,7 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
     #[ORM\Column(length: 500)]
-    private ?string $motifAnnulation = null;
+    private ?string $motifAnnulation = '';
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -269,4 +271,17 @@ class Sortie
 
         return $this;
     }
+
+//    /**
+//     * @Assert\Callback
+//     */
+//    public function validerDate(ExecutionContextInterface $context): void
+//    {
+//        if($this->getDateLimiteInscription() > $this->getDateHeureDebut()){
+//            $context->buildViolation('La date d\'inscription doit toujours se terminer avant la date de début de sortir')
+//                ->atpath('dateLimiteInscription')
+//                ->addViolation();
+//        }
+//    }
+
 }

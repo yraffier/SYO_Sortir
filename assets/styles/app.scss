@@ -2,3 +2,158 @@
 @import "AcceuilUtilisateur.css";
 @import url(Base.css);
 @import url(Login.css);
+@import url(Register.css);
+
+// Creation des bloc lumineux en
+// ---------------------------
+// Card
+// ---------------------------
+
+@for $i from 0 through 8 {
+  div:nth-child(9n + #{$i}) {
+    border-color: adjust-hue(#20c866, $i * 40);
+  }
+}
+
+// ---------------------------
+// Spaces
+// ---------------------------
+// Normalized spaces :
+// 2, 4, 6, 8, 12, 16, 20, 24, 32, 64, 96, 128, ...
+// 10px = 1rem
+
+$normalizedSpaces: 2, 4, 6, 8, 12, 16, 20, 24, 32, 48, 64;
+$pxToRem: 10;
+
+@each $space in $normalizedSpaces {
+
+  // Margin
+  .m-#{$space} {
+    margin: ($space / $pxToRem) + rem;
+  }
+
+  .mt-#{$space} {
+    margin-top: ($space / $pxToRem) + rem;
+  }
+
+  .mb-#{$space} {
+    margin-bottom: ($space / $pxToRem) + rem;
+  }
+
+  .ml-#{$space} {
+    margin-left: ($space / $pxToRem) + rem;
+  }
+
+  .mr-#{$space} {
+    margin-right: ($space / $pxToRem) + rem;
+  }
+
+  // Padding
+  .p-#{$space} {
+    padding: ($space / $pxToRem) + rem;
+  }
+
+  .pt-#{$space} {
+    padding-top: ($space / $pxToRem) + rem;
+  }
+
+  .pb-#{$space} {
+    padding-bottom: ($space / $pxToRem) + rem;
+  }
+
+  .pl-#{$space} {
+    padding-left: ($space / $pxToRem) + rem;
+  }
+
+  .pr-#{$space} {
+    padding-right: ($space / $pxToRem) + rem;
+  }
+}
+
+// ---------------------------
+// Others
+// ---------------------------
+
+.container {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  border: 1px solid;
+  border-radius: 5px;
+  box-shadow: 0 0 20px 5px rgba(100, 100, 100, 0.2), inset 0 0 20px 5px rgba(100, 100, 100, 0.2);
+}
+
+//Input au sein du formulaire de création de compte :
+
+$primary: #FDDE74;
+$secondary: #FDB967;
+$white: #fff;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #FDDE74;
+  outline: 0;
+  color: white;
+  font-size: 1.5rem;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.5rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+@for $i from 0 through 8 {
+  .form__field:nth-child(9n + #{$i}) {
+    color: adjust-hue(#20c866, $i * 40);
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1.2em;
+  color: #FDDE74;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $primary;
+    font-weight:700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary,$secondary) 1;
+  //border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Etat;
 use App\Entity\SearchData;
 use App\Entity\Sortie;
@@ -79,6 +80,7 @@ class SortieController extends AbstractController
         $sortie= new Sortie();
         $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 
 //    dd($sortie);
         try {
@@ -101,7 +103,7 @@ class SortieController extends AbstractController
                         $entityManager->persist($sortie);
                         $entityManager->flush();
                         $this->addFlash('succes','Sortie crée avec succés');
-                        return $this->redirectToRoute('sortie_lister');
+                        return $this->redirectToRoute('sortie_lister', compact('campus'));
                     } else {
                         $this->addFlash('echec', 'La date limite d\'inscription doit être inférieur a la date de début.');
                     }
@@ -147,6 +149,7 @@ class SortieController extends AbstractController
     ): Response
     {
         $etat= $entityManager->getRepository(Etat::class)->find(310);
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 //
         $annulerForm = $this->createForm(AnnulerMaSortieType::class, $sortie);
         $annulerForm->handleRequest($request);
@@ -157,7 +160,7 @@ class SortieController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
                 $this->addFlash('succes','Votre sortie a bien été supprimée');
-                return $this->redirectToRoute('sortie_lister');
+                return $this->redirectToRoute('sortie_lister', compact('campus'));
                 } catch(Exception $exception){
                     $this->redirectToRoute('sortie_detail');
                 }

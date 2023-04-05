@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Utilisateur;
 use App\Form\ProfilUtilisateurType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,13 +37,14 @@ class UtilisateurController extends AbstractController
         }
         $userForm = $this->createForm(ProfilUtilisateurType::class, $utilisateur);
         $userForm->handleRequest($request);
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 
 
         if($userForm->isSubmitted() && $userForm->isValid()){
             try{
                 $entityManager->persist($utilisateur);
                 $entityManager->flush();
-                return $this->redirectToRoute('sortie_lister');
+                return $this->redirectToRoute('sortie_lister', compact('campus'));
             }catch(\Exception $exception){
                 $this->addFlash('danger','Erreur lors de la modification de votre profil !');
                 return $this->redirectToRoute('sortir_profil');

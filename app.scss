@@ -50,7 +50,7 @@ $white: #ffffff;
 }
 
 body {
-  font-family: "TOMMY_MEDIUM", sans-serif;
+  font-family: "Open Sans", sans-serif;
   margin: 0;
   height: 100vh;
   display: grid;
@@ -85,7 +85,7 @@ body {
 // opens second form
 .c-checkbox:nth-of-type(2):checked ~  {
   .c-form__progress {
-    width: calc(100vw / 2);
+    width: calc(100vw / 3);
   }
 
   .c-formContainer .c-form {
@@ -99,114 +99,24 @@ body {
     }
   }
 }
-//
-//// opens third form
-//.c-checkbox:nth-of-type(3):checked ~  {
-//  .c-form__progress {
-//    width: calc((100vw / 8) + 100vw / 8);
-//  }
-//
-//  .c-formContainer .c-form {
-//    .c-form__group:nth-child(2) {
-//      @include form-group-hidden;
-//    }
-//
-//    .c-form__group:nth-child(3) {
-//      @include form-group-visible;
-//      @include input-listener;
-//    }
-//  }
-//}
-//
-//// opens fourth form
-//.c-checkbox:nth-of-type(4):checked ~  {
-//  .c-form__progress {
-//    width: calc((200vw / 8) + 100vw / 8);
-//  }
-//
-//  .c-formContainer .c-form {
-//    .c-form__group:nth-child(3) {
-//      @include form-group-hidden;
-//    }
-//
-//    .c-form__group:nth-child(4) {
-//      @include form-group-visible;
-//      @include input-listener;
-//    }
-//  }
-//}
-//
-//// opens fifth form
-//.c-checkbox:nth-of-type(5):checked ~  {
-//  .c-form__progress {
-//    width: calc((300vw / 8) + 100vw / 8);
-//  }
-//
-//  .c-formContainer .c-form {
-//    .c-form__group:nth-child(4) {
-//      @include form-group-hidden;
-//    }
-//
-//    .c-form__group:nth-child(5) {
-//      @include form-group-visible;
-//      @include input-listener;
-//    }
-//  }
-//}
-//
-//// opens sixth form
-//.c-checkbox:nth-of-type(6):checked ~  {
-//  .c-form__progress {
-//    width: calc((400vw / 8) + 100vw / 8);
-//  }
-//
-//  .c-formContainer .c-form {
-//    .c-form__group:nth-child(5) {
-//      @include form-group-hidden;
-//    }
-//
-//    .c-form__group:nth-child(6) {
-//      @include form-group-visible;
-//      @include input-listener;
-//    }
-//  }
-//}
-//
-//// opens seventh form
-//.c-checkbox:nth-of-type(7):checked ~  {
-//  .c-form__progress {
-//    width: calc((500vw / 8) + 100vw / 8);
-//  }
-//
-//  .c-formContainer .c-form {
-//    .c-form__group:nth-child(6) {
-//      @include form-group-hidden;
-//    }
-//
-//    .c-form__group:nth-child(7) {
-//      @include form-group-visible;
-//      @include input-listener;
-//    }
-//  }
-//}
-//
-//// opens eigth form
-//.c-checkbox:nth-of-type(8):checked ~  {
-//  .c-form__progress {
-//    width: calc((600vw / 8) + 100vw / 8);
-//  }
-//
-//  .c-formContainer .c-form {
-//    .c-form__group:nth-child(7) {
-//      @include form-group-hidden;
-//    }
-//
-//    .c-form__group:nth-child(8) {
-//      @include form-group-visible;
-//      @include input-listener;
-//    }
-//  }
-//}
+
+// opens third form
+.c-checkbox:nth-of-type(3):checked ~  {
+  .c-form__progress {
+    width: calc((100vw / 3) + 100vw / 3);
+  }
+
+  .c-formContainer .c-form {
+    .c-form__group:nth-child(2) {
+      @include form-group-hidden;
+    }
+
+    .c-form__group:nth-child(3) {
+      @include form-group-visible;
+      @include input-listener;
+    }
+  }
+}
 
 #finish:checked ~  {
   .c-form__progress {
@@ -219,7 +129,7 @@ body {
       opacity: 0;
       transform: translateX(50%) scaleX(0);
 
-      .c-form__group:nth-child(8) {
+      .c-form__group:nth-child(3) {
         transition: 0s;
         @include form-group-hidden;
       }

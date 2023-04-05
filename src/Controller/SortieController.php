@@ -3,24 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\SearchData;
 use App\Entity\Sortie;
-use App\Entity\Utilisateur;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
 use App\Form\AnnulerMaSortieType;
+use App\Form\SearchType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
-use App\Repository\VilleRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
@@ -64,9 +62,7 @@ class SortieController extends AbstractController
     ): Response
        {
         $datedujour = new DateTime('today');
-        if(!$sortie){
-            throw $this->createNotFoundException('Cette sortie n\'existe pas');
-               }
+
         return $this->render('sortie/detail.html.twig', compact('sortie','datedujour'));
        }
 
@@ -120,9 +116,8 @@ class SortieController extends AbstractController
     }
     #[Route('/lieurecuperer/{ville}', name: '_ajouterLieurecuperer')]
     public function lieurecuperer(
-        Ville $ville,
-        VilleRepository $villeRepository)
-        : Response
+        Ville $ville
+    ): Response
     {
 
         $lieux = $ville->getLieux();

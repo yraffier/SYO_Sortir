@@ -1,58 +1,6 @@
-@font-face {
-    font-family: 'TOMMY_BOLD';
-    src: url('../Font/made_tommy/MADE TOMMY Bold_PERSONAL USE.otf');
-    font-style: normal;
-}
-@font-face {
-    font-family: 'TOMMY_BOLD_OUTLINE';
-    src: url('../Font/made_tommy/MADE TOMMY Bold Outline_PERSONAL USE.otf');
-    font-style: normal;
-}
-@font-face {
-    font-family: 'TOMMY_MEDIUM';
-    src: url('../Font/made_tommy/MADE TOMMY Medium_PERSONAL USE.otf');
-    font-style: normal;
-}
-@font-face {
-    font-family: 'TOMMY';
-    src: url('../Font/made_tommy/MADE TOMMY Regular_PERSONAL USE.otf');
-    font-style: normal;
-}
-
-
-*{
-    font-family: TOMMY, "Roboto Thin", sans-serif;
-    background-color: #0070A0;
-}
-
-.Accueil{
-    color: white;
-    text-decoration: none;
-}
-
-a{
-    text-decoration: none;
-    outline: none;
-}
-
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-main{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    align-content: space-evenly;
-}
-
 /* Bouton clignotant */
 :root {
-    --glow-color: HSL(34, 100%, 63%);
+    --glow-color: HSL(33, 97%, 70%);
 }
 
 *,
@@ -128,7 +76,7 @@ main{
 }
 
 .glowing-btn:hover {
-    color: #FFAB40;
+    color: #FDDE74;
     text-shadow: none;
     animation: none;
 }
@@ -258,44 +206,68 @@ main{
 
 /* TITRE */
 
+/*@use postcss-preset-env {*/
+/*    stage: 0;*/
+/*}*/
+
+:root {
+    --color-background: #1e2128;
+    --stroke-width: calc(1em / 16);
+    --font-size: 10em;
+    --font-weight: 600;
+    --letter-spacing: calc(1em / 8);
+}
+
 h1 {
-    font-size: 10em;
-    font-weight: 500;
-    color: #E35333;
-
-    --x-offset: -0.0625em;
-    --y-offset: 0.0625em;
-    --stroke: 0.025em;
-    --background-color: #FEE287;
-    --stroke-color: #E35333;
-
-    text-shadow:
-
-            var(--x-offset)
-            var(--y-offset)
-            0
-            var(--background-color),
-
-            calc( var(--x-offset) - var(--stroke) )
-            calc( var(--y-offset) + var(--stroke) )
-            0px
-            var(--stroke-color);
+    background-clip: text;
+    background-image: linear-gradient(to right, #09f1b8, #00a2ff, #ff00d2, #fed90f);
+    color: var(--color-background);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    letter-spacing: var(--letter-spacing);
+    /*padding: calc(--stroke-width / 2);*/
+    -webkit-text-stroke-color: transparent;
+    -webkit-text-stroke-width: var(--stroke-width);
 }
 
-@supports ( text-shadow: 1px 1px 1px 1px black ) {
-    h1 {
-        text-shadow:
+/*h1 {*/
+/*    font-size: 10em;*/
+/*    font-weight: 500;*/
+/*    color: #FDB967;*/
 
-                var(--x-offset)
-                var(--y-offset)
-                0
-                0
-                var(--background-color),
+/*    --x-offset: -0.0625em;*/
+/*    --y-offset: 0.0625em;*/
+/*    --stroke: 0.025em;*/
+/*    --background-color: #55BF76;*/
+/*    --stroke-color: #FDB967;*/
 
-                var(--x-offset)
-                var(--y-offset)
-                var(--stroke)
-                0
-                var(--stroke-color);
-    }
-}
+/*    text-shadow:*/
+
+/*            var(--x-offset)*/
+/*            var(--y-offset)*/
+/*            0*/
+/*            var(--background-color),*/
+
+/*            calc( var(--x-offset) - var(--stroke) )*/
+/*            calc( var(--y-offset) + var(--stroke) )*/
+/*            0px*/
+/*            var(--stroke-color);*/
+/*}*/
+
+/*@supports ( text-shadow: 1px 1px 1px 1px black ) {*/
+/*    h1 {*/
+/*        text-shadow:*/
+
+/*                var(--x-offset)*/
+/*                var(--y-offset)*/
+/*                0*/
+/*                0*/
+/*                var(--background-color),*/
+
+/*                var(--x-offset)*/
+/*                var(--y-offset)*/
+/*                var(--stroke)*/
+/*                0*/
+/*                var(--stroke-color);*/
+/*    }*/
+/*}*/

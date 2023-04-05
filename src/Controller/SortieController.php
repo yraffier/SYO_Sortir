@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Etat;
+use App\Entity\SearchData;
 use App\Entity\Sortie;
 use App\Entity\Utilisateur;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
 use App\Form\AnnulerMaSortieType;
+use App\Form\SearchType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
@@ -25,7 +27,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
 // accès à la page des sorties uniquement lorsque le user est connectée
-//#[IsGranted( 'ROLE_USER')]
+#[IsGranted( 'ROLE_USER')]
 
 class SortieController extends AbstractController
 {

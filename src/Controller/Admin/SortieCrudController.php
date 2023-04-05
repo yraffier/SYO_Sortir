@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use Doctrine\DBAL\Types\TimeImmutableType;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -32,12 +34,20 @@ class SortieCrudController extends AbstractCrudController
             IntegerField::new('duree'),
             IntegerField::new('nbInscriptionMax'),
             TextField::new('infosSortie'),
-//            TextField::new("motifAnnulation"),
+            TextField::new("motifAnnulation"),
             AssociationField::new('lieu'),
             AssociationField::new('etat'),
             TextField::new('siteOrganisateur'),
             ];
 
+    }
+    public function deleteEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        $etatannulee=$entityManager->find(Etat::class,7);
+        $entityInstance->setEtat($etatannulee);
+        $entityInstance->setmotifAnnulation('annulé par l\'admin');
+        $entityManager->persist($entityInstance);
+        $entityManager->flush();
     }
 
 }

@@ -22,20 +22,20 @@
             {% endif %}
             <div class="user-box">
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
-                <label for="inputUsername">Username</label>
+                <label for="inputUsername">Pseudo</label>
             </div>
             <div class="user-box">
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                <label for="inputPassword">Password</label>
+                <label for="inputPassword">Mot de Passe</label>
             </div>
 
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
             >
+
             <div class="user-box">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
+                <input type="checkbox" id="_remember_me" name="_remember_me">
+                <label for="_remember_me">Souviens-toi ...</label>
             </div>
 
             <div class="user-box">

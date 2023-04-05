@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Annotation\Route;
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
 // accès à la page des sorties uniquement lorsque le user est connectée
-//#[IsGranted( 'ROLE_USER')]
+#[IsGranted( 'ROLE_USER')]
 
 class SortieController extends AbstractController
 {

@@ -158,7 +158,7 @@ class SortieController extends AbstractController
 
     ): Response
     {
-        $etat= $entityManager->getRepository(Etat::class)->find(310);
+        $etat= $entityManager->getRepository(Etat::class)->find(7);
         $campus= $entityManager->getRepository(Campus::class)->findAll();
 //
         $annulerForm = $this->createForm(AnnulerMaSortieType::class, $sortie);

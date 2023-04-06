@@ -14,6 +14,7 @@
             >
             {% for error in field_errors(searchForm)%}
             <div class="error">{{ error }}</div>
+            {% endfor %}
         </div>
 
         <div class="form-group-search">
@@ -24,6 +25,7 @@
                 {% endfor %}
                 {% for error in field_errors(searchForm)%}
                 <div class="error">{{ error }}</div>
+                {% endfor %}
             </select>
         </div>
 
@@ -35,6 +37,7 @@
             >
             {% for error in field_errors(searchForm)%}
             <div class="error">{{ error }}</div>
+            {% endfor %}
         </div>
 
         <div class="form-group-search">
@@ -45,6 +48,7 @@
             >
             {% for error in field_errors(searchForm)%}
             <div class="error">{{ error }}</div>
+            {% endfor %}
         </div>
 
         <div class="form-group-search">
@@ -52,26 +56,17 @@
             <input type="radio"
                    id="{{ field_name(searchForm.organisateur) }}"
                    class="form-control-search"
-            >
-        </div>
-
-        <div class="form-group-search">
+                    value='Je suis organisteur'>
             <label class="search-label" for="{{ field_name(searchForm.inscrit) }}"> </label>
             <input type="radio"
                    id="{{ field_name(searchForm.inscrit) }}"
                    class="form-control-search"
             >
-        </div>
-
-        <div class="form-group-search">
             <label class="search-label" for="{{ field_name(searchForm.NonInscrit) }}"> </label>
             <input type="radio"
                    id="{{ field_name(searchForm.NonInscrit) }}"
                    class="form-control-search"
             >
-        </div>
-
-        <div class="form-group-search">
             <label class="search-label" for="{{ field_name(searchForm.sortiePassee) }}"> </label>
             <input type="radio"
                    id="{{ field_name(searchForm.sortiePassee) }}"
@@ -115,10 +110,6 @@
 
     <button type="submit"><a href="{{ path('sortie_ajouter') }}">Créer une sortie</a></button>
 </div>
-
-{% endblock %}
-
-{% block title %}
 
 {% endblock %}
 

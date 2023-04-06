@@ -10,6 +10,7 @@
 
     <div class="login-box">
         <h2>Connection</h2>
+        <a href="{{ path('app_forgot_password_request') }}"> mot de passe oublié</a>
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

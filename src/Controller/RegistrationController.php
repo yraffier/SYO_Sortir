@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
@@ -35,6 +36,7 @@ class RegistrationController extends AbstractController
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $campus = $entityManager->getRepository(Campus::class)->findAll();
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -63,6 +65,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'campus' => $campus,
         ]);
     }
 

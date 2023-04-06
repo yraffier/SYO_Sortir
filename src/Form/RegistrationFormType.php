@@ -25,6 +25,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username', TextareaType::class, [
                 'required' => true,
+                'label' => 'Creation de votre Pseudo',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Hep Hep Hep ! Il te faut un nom de scéne ! (Je te vois trichez avec la barre d\'espace)'
@@ -36,6 +37,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('nom', TextType::class,[
                 'required' => true,
+                'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -47,6 +49,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('prenom', TextType::class,[
                 'required' => true,
+                'label' => 'Prénom',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -58,6 +61,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('telephone', TextType::class,[
                 'required' => true,
+                'label' => 'Téléphone',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -69,6 +73,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('mail', EmailType::class, [
                 'required' => true,
+                'label' => 'Mail',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Pas d\'espace déso mais pas déso'
@@ -87,6 +92,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => '',
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -95,6 +101,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'mapped' => false,
+                'label' => 'Mot de Passe',
                 'required' => true,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [

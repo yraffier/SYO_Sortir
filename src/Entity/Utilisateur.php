@@ -39,6 +39,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         message: 'Plus c\'est long plus c\'est bon ! Mais avec une minuscule, une majuscule, un caractère spéciale et un chiffre c\'est encore meilleur ! ',
     )]
     private ?string $password = null;
+    private ?string $plainPassword = null;
 
     #[ORM\Column(length: 100)]
     #[Assert\Regex(
@@ -63,7 +64,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 200)]
     #[Assert\Regex(
-        "#^[a-zA-Z0-9]{3,30}([-._])?[a-zA-Z0-9]{3,20}?@[a-zA-Z]{3,15}.[a-zA-Z]{2,6}$#",
+        "#^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$#",
         message: 'Pas besoin de caractères spéciales, tu l\'es déjà ! <3'
     )]
     private ?string $mail = null;
@@ -301,4 +302,23 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string|null $plainPassword
+     */
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+    public function eraseCredantials(){
+        $this->plainPassword = null;
+    }
 }

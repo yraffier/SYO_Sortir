@@ -18,14 +18,14 @@ class Lieu
 
     #[ORM\Column(length: 200)]
     #[Assert\Regex(
-        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü]){2,}$#",
+        "#^[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]([-]|[a-zA-Z0-9\é\è\ê\î\ô\û\ï\ë\ü\ ]){2,}$#",
         message: 'On reste simple pour le nom du lieu, pas de caractères spéciaux ! Merci !',
     )]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Regex(
-        "#^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-._ ]).{6,100}$#",
+        "#^\d+[\s\w,'-]*[\w]+[\s]+(rue|avenue|boulevard|impasse|allée|chemin|place|quai|route|passage|cours|voie|esplanade|square|sentier|pont|promenade|cul-de-sac)[\s\S]*$#",
         message: 'Un facteur a besoin d\'une rue et du numéro de la rue, ben nous aussi !' ,
     )]
     private ?string $rue = null;

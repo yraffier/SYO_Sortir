@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\SearchData;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
+use App\Form\AnnulerMaSortieType;
 use App\Form\SearchType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
@@ -24,7 +27,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 // préfixe des routes pour les differentes méthodes concernant les sorties
 #[Route ('/sortie', name : 'sortie')]
 // accès à la page des sorties uniquement lorsque le user est connectée
-//#[IsGranted( 'ROLE_USER')]
+#[IsGranted( 'ROLE_USER')]
 
 class SortieController extends AbstractController
 {
@@ -41,6 +44,7 @@ class SortieController extends AbstractController
         $data = new SearchData();
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
+
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $sorties = $sortieRepository->findSearch($data, $utilisateur);
         }
@@ -63,9 +67,10 @@ class SortieController extends AbstractController
     ): Response
        {
         $datedujour = new DateTime('today');
-        if(!$sortie){
-            throw $this->createNotFoundException('Cette sortie n\'existe pas');
-               }
+        //TODO VERIFIER CETTE CONDITION
+//        if(!$sortie){
+//            throw $this->createNotFoundException('Cette sortie n\'existe pas');
+//               }
         return $this->render('sortie/detail.html.twig', compact('sortie','datedujour'));
        }
 
@@ -80,6 +85,7 @@ class SortieController extends AbstractController
         $sortie= new Sortie();
         $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 
         try {
 
@@ -101,7 +107,7 @@ class SortieController extends AbstractController
                         $entityManager->persist($sortie);
                         $entityManager->flush();
                         $this->addFlash('succes','Sortie crée avec succés');
-                        return $this->redirectToRoute('sortie_lister');
+                        return $this->redirectToRoute('sortie_lister', compact('campus'));
                     } else {
                         $this->addFlash('echec', 'La date limite d\'inscription doit être inférieur a la date de début.');
                     }
@@ -118,9 +124,8 @@ class SortieController extends AbstractController
     }
     #[Route('/lieurecuperer/{ville}', name: '_ajouterLieurecuperer')]
     public function lieurecuperer(
-        Ville $ville,
-        VilleRepository $villeRepository)
-        : Response
+        Ville $ville
+    ): Response
     {
 
         $lieux = $ville->getLieux();
@@ -148,6 +153,7 @@ class SortieController extends AbstractController
     ): Response
     {
         $etat= $entityManager->getRepository(Etat::class)->find(310);
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 //
         $annulerForm = $this->createForm(AnnulerMaSortieType::class, $sortie);
         $annulerForm->handleRequest($request);
@@ -158,7 +164,7 @@ class SortieController extends AbstractController
                 $entityManager->persist($sortie);
                 $entityManager->flush();
                 $this->addFlash('succes','Votre sortie a bien été supprimée');
-                return $this->redirectToRoute('sortie_lister');
+                return $this->redirectToRoute('sortie_lister', compact('campus'));
                 } catch(Exception $exception){
                     $this->redirectToRoute('sortie_detail');
                 }

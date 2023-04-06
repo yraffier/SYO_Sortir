@@ -39,6 +39,27 @@ class LieuRepository extends ServiceEntityRepository
         }
     }
 
+    public function verificationDeDoublonLieu(Lieu $lieu){
+        return (boolean)$this->createQueryBuilder('l')
+
+            ->andWhere('l.nom = :nom AND l.rue = :rue AND l.latitude = :latitude AND l.longitude = :longitude')
+            ->setParameter('nom', $lieu->getNom())
+            ->setParameter('rue', $lieu->getRue())
+            ->setParameter('latitude', $lieu->getLatitude())
+            ->setParameter('longitude', $lieu->getLongitude())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+//    public function verificationDeDoublon(Lieu $lieu){
+//        return (boolean)$this->createQueryBuilder('l')
+//            ->andWhere('l.latitude = :latitude AND l.longitude = :longitude')
+//            ->setParameter('latitude', $lieu->getLatitude())
+//            ->setParameter('longitude', $lieu->getLongitude())
+//            ->getQuery()
+//            ->getOneOrNullResult();
+//    }
+
 //    /**
 //     * @return Lieu[] Returns an array of Lieu objects
 //     */

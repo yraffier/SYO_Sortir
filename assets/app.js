@@ -11,3 +11,6 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+//Requete API pour lieu et Autocompletion
+import './js/coord';

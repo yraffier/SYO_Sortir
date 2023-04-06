@@ -6,29 +6,65 @@
 
 {% block body %}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-6 adresse">
-                <form action="/ville" method="POST">
-                    <div class="form-row">
-                        <label>Lieu : </label>
-                        <input type="text" class="form-control" id="inputNom" name="inputNom" placeholder="Nom de la sortie" required>
-                        <input type="text" class="form-control" id="inputRue" name="inputRue" placeholder="Adresse" required>
-                        <input type="text" class="form-control" pattern="^[0-9]{1}[0-9a-bA-B]{1}[0-9]{3}$" id="inputCodePostal" name="inputCodePostal" minlength="5" maxlength="5" placeholder="Code Postal" required>
-                        <input type="text" class="form-control" id="inputVille" name="inputVille" placeholder="Ville" required>
-                        <input type="text" class="form-control" id="inputLat" name="inputLat" placeholder="Latitude" >
-                        <input type="text" class="form-control" id="inputLong" name="inputLong" placeholder="Longitude" >
-                    </div>
-                    <input type="submit" value="Ajouter une ville" />
-                </form>
-            </div>
+    <div class="titre_lieu" id="lieu_h2">
+        <h2>Ajouter un lieu</h2>
+    </div>
+
+
+<div id="formulaire_register" class="container card p-32 mt-64 mb-64">
+    <form action="/ville" method="POST">
+    <div class="card p-20 mb-20">
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="Nom de la sortie" name="inputNom" id="inputNom" required/>
+                 <label for="inputNom" class="form__label">Nom: </label>
+        </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" placeholder="Adresse" name="inputRue" id="inputRue" required/>
+            <label for="inputNom" class="form__label">Rue: </label>
+        </div>
+
+        <div class="form__group field">
+             <input type="text" class="form__field" pattern="^[0-9]{1}[0-9a-bA-B]{1}[0-9]{3}$" id="inputCodePostal" name="inputCodePostal" minlength="5" maxlength="5" placeholder="Code Postal" required/>
+            <label for="inputNom" class="form__label">Code Postal: </label>
+        </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" id="inputVille" name="inputVille" placeholder="Ville" required>
+           <label for="inputNom" class="form__label">Ville: </label>
+        </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" id="inputLat" name="inputLat" placeholder="Latitude">
+            <label for="inputNom" class="form__label">Latitude: </label>
+        </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" id="inputLong" name="inputLong" placeholder="Longitude">
+            <label for="inputNom" class="form__label">Longitude: </label>
+        </div>
+        <div class="submit_ajouterLieu" >
+            <button class="submit_ajouterLieu" type="submit" name="creecompte" value="Enregistrer">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Ajouter un ville
+            </button>
+        </div>
+    </div>
+    </form>
+
+</div>
+
             <div class="col-6 proposition">
                 <div class="adress-feedback">
-                    <ul></ul>
+                    <ul id="listeLieu"></ul>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <script src="{{asset('build/app.js')}}"></script>

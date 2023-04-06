@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block nav1 %}
+    {% if app.user %}
+
+    {% endif %}
+{% endblock %}
+
 {% block stylesheets %}
 {#    <link rel="stylesheet" href="{{ asset('CSS/StyleBase.css') }}">#}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">

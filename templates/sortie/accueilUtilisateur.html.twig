@@ -1,129 +1,143 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="ContainerAccueil" xmlns="http://www.w3.org/1999/html">
-    <div class=" filtre">
-        <div id="titrefiltre"><h3 id="titrefiltre"> Filtrer vos sorties</h3></div>
-        {{ form_start(searchForm)}}
-        <div class="form-group-search">
-            <label id="search" class="search-label" for="{{ field_name(searchForm.nom) }}"> </label>
-            <input type="search"
-                   id="{{ field_name(searchForm.nom) }}"
-                   placeholder="Votre recherche"
-                   class="form-control-search"
-            >
-            {% for error in field_errors(searchForm)%}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-        </div>
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.campus) }}"> </label>
-            <select id="{{ field_name(searchForm.campus) }}" class="form-control-search">
-                {% for chaquecampus in campus %}
-                    <option value="{{ chaquecampus.nom }}">{{ chaquecampus.nom }}</option>
-                {% endfor %}
-                {% for error in field_errors(searchForm)%}
-                <div class="error">{{ error }}</div>
-                {% endfor %}
-            </select>
-        </div>
+    <div class="AccueilUtilisateur">
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.dateDebut) }}"> </label>
-            <input type="date"
-                   id="{{ field_name(searchForm.dateDebut) }}"
-                   class="form-control-search"
-            >
-            {% for error in field_errors(searchForm)%}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-        </div>
+        <div class="ContainerAccueil" >
+            <div class=" filtre">
+                <div id="titrefiltre">
+                    <h3 id="titrefiltre"> Filtrer vos sorties</h3>
+                </div>
+                <div class="searchForm_container">
+                    {{ form_start(searchForm)}}
+                    <div class="form-group-search">
+                        <label id="search" class="search-label" for="{{ field_name(searchForm.nom) }}"> </label>
+                        <input type="search"
+                               id="{{ field_name(searchForm.nom) }}"
+                               placeholder="Votre recherche"
+                               class="form-control-search">
+                        {% for error in field_errors(searchForm)%}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.dateFin) }}"> </label>
-            <input type="date"
-                   id="{{ field_name(searchForm.dateFin) }}"
-                   class="form-control-search"
-            >
-            {% for error in field_errors(searchForm)%}
-            <div class="error">{{ error }}</div>
-            {% endfor %}
-        </div>
+                    <div class="form-group-search">
+                        <label class="search-label" for="{{ field_name(searchForm.campus) }}"> </label>
+                        <select id="{{ field_name(searchForm.campus) }}" class="form-control-search">
+                            {% for chaquecampus in campus %}
+                                <option value="{{ chaquecampus.nom }}">{{ chaquecampus.nom }}</option>
+                            {% endfor %}
+                            {% for error in field_errors(searchForm)%}
+                                <div class="error">{{ error }}</div>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.organisateur) }}"> </label>
-            <input type="radio"
-                   id="{{ field_name(searchForm.organisateur) }}"
-                   class="form-control-search"
-            >
-        </div>
+                    <div class="form-group-search">
+                        <label class="search-label" for="{{ field_name(searchForm.dateDebut) }}"> </label>
+                        <input type="date"
+                               id="{{ field_name(searchForm.dateDebut) }}"
+                               class="form-control-search">
+                        {% for error in field_errors(searchForm)%}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.inscrit) }}"> </label>
-            <input type="radio"
-                   id="{{ field_name(searchForm.inscrit) }}"
-                   class="form-control-search"
-            >
-        </div>
+                    <div class="form-group-search">
+                        <label class="search-label" for="{{ field_name(searchForm.dateFin) }}"> </label>
+                        <input type="date"
+                               id="{{ field_name(searchForm.dateFin) }}"
+                               class="form-control-search"
+                        >
+                        {% for error in field_errors(searchForm)%}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.NonInscrit) }}"> </label>
-            <input type="radio"
-                   id="{{ field_name(searchForm.NonInscrit) }}"
-                   class="form-control-search"
-            >
-        </div>
+                    <div class="form-group-search">
+                        <div class="searchradiobutton">
+                            <div>
+                                <input type="radio"
+                                       id="{{ field_name(searchForm.organisateur) }}"
+                                       class="form-control-search"
+                                       name="radio"
+                                       value='Je suis organisteur'>
+                                <label class="search-label" for="{{ field_name(searchForm.organisateur) }}"> je suis organisateur</label>
+                            </div>
+                            <div>
+                                <input type="radio"
+                                       id="{{ field_name(searchForm.inscrit) }}"
+                                       class="form-control-search"
+                                       name="radio"
+                                       value='Je suis inscrit'>
+                                <label class="search-label" for="{{ field_name(searchForm.inscrit) }}">Je suis inscrit</label>
+                            </div>
+                            <div>
+                                <input type="radio"
+                                       id="{{ field_name(searchForm.NonInscrit) }}"
+                                       class="form-control-search"
+                                       name="radio"
+                                       value="Je ne suis pas Inscrit">
+                                <label class="search-label" for="{{ field_name(searchForm.NonInscrit) }}">Je ne suis pas isncrit</label>
+                            </div>
+                            <div>
+                                <input type="radio"
+                                       id="{{ field_name(searchForm.sortiePassee) }}"
+                                       class="form-control-search"
+                                       name="radio"
+                                       value="Sorties Passés">
+                                <label class="search-label" for="{{ field_name(searchForm.sortiePassee) }}">Sorties passées</label>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-group-search">
-            <label class="search-label" for="{{ field_name(searchForm.sortiePassee) }}"> </label>
-            <input type="radio"
-                   id="{{ field_name(searchForm.sortiePassee) }}"
-                   class="form-control-search"
-            >
-        </div>
-
-        <div>
-            <label for="search">Rechercher</label>
-            <input id="search" type="submit" pattern=".*\S.*"/>
-            <span class="caret"></span>
-        </div>
-        {{ form_end(searchForm) }}
-    </div>
-
-
-    <div class="listesorties">
-        <h3>  Les sorties </h3>
-
-        {% for chaquesortie in sorties %}
-            <div>
-                <ul>
-                    <li><a href="{{path('sortie_detail',{'sortie':chaquesortie.id}) }}">{{ chaquesortie.nom}}</a></li>
-                    <li> {{ chaquesortie.lieu.nom}} </li>
-                    <li>{{ chaquesortie.infosSortie}}</li>
-                    <li>{{ chaquesortie.dateHeureDebut|date ('Y-m-d H:i:s') }}  </li>
-                    <li>{{ chaquesortie.dateLimiteInscription|date ('Y-m-d H:i:s') }}  </li>
-                    <li> {{ chaquesortie.participants.count()}} / {{ chaquesortie.nbInscriptionMax }}</li>
-                    <li>  {{chaquesortie.etat.libelle }} </li>
-                    <li><a href="{{ path('sortir_detailProfil', {'utilisateur': chaquesortie.organisateurs.id}) }}">{{ chaquesortie.organisateurs.username }}</a></li>
-                    {#                {{app.user.nom }}#}
-                    {% for chaqueparticipant in chaquesortie.participants %}
-                        {% if app.user == chaqueparticipant %}
-                            <li><a href="{{path('sortie_sedesinscrire',{'sortie':chaquesortie.id})}}" onclick="return confirm('Etes-vous sûre de vouloir vous désinscrire?')"> Se désincrire...</a></li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                    <div>
+                        <label for="search"></label>
+                        <input id="search" type="submit" value="Rechercher"/>
+                        <span class="caret"></span>
+                    </div>
+                    {{ form_end(searchForm) }}
+                </div>
             </div>
-        {% endfor %}
+
+
+
+
+            <div class="touteslesorties">
+                <div class="titrelessorties">
+                    <h3>  Les sorties </h3>
+                </div>
+                <div class="listesorties">
+                    {% for chaquesortie in sorties %}
+                        <div class="sortie">
+                            <ul>
+                                <li><a href="{{path('sortie_detail',{'sortie':chaquesortie.id}) }}">{{ chaquesortie.nom}}</a></li>
+                                <li> {{ chaquesortie.lieu.nom}} </li>
+                                <li>{{ chaquesortie.infosSortie}}</li>
+                                <li>{{ chaquesortie.dateHeureDebut|date ('Y-m-d H:i:s') }}  </li>
+                                <li>{{ chaquesortie.dateLimiteInscription|date ('Y-m-d H:i:s') }}  </li>
+                                <li> {{ chaquesortie.participants.count()}} / {{ chaquesortie.nbInscriptionMax }}</li>
+                                <li>  {{chaquesortie.etat.libelle }} </li>
+                                <li><a href="{{ path('sortir_detailProfil', {'utilisateur': chaquesortie.organisateurs.id}) }}">{{ chaquesortie.organisateurs.username }}</a></li>
+                                {#                {{app.user.nom }}#}
+                                {% for chaqueparticipant in chaquesortie.participants %}
+                                    {% if app.user == chaqueparticipant %}
+                                        <li><a href="{{path('sortie_sedesinscrire',{'sortie':chaquesortie.id})}}" onclick="return confirm('Etes-vous sûre de vouloir vous désinscrire?')"> Se désincrire...</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <button id="btncréersortie" type="submit"><a href="{{ path('sortie_ajouter') }}">Créer une sortie</a></button>
+        </div>
     </div>
-
-    <button type="submit"><a href="{{ path('sortie_ajouter') }}">Créer une sortie</a></button>
-</div>
-
 {% endblock %}
 
 {% block title %}
 
 {% endblock %}
-
-

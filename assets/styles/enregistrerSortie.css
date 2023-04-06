@@ -1,0 +1,32 @@
+.submit_sortie button{
+    padding: 25px 30px;
+    background-color: transparent;
+    color: var(--blanc);
+    font-weight: bold;
+    border: var(--sable);
+    border-radius: 5px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.submit_sortie button:hover {
+    background: linear-gradient(to right, var(--sable), var(--pink), var(--bleu), var(--roseviolet));
+    color: var(--blanc);
+    box-shadow: 0 0 5px var(--blanc),
+    0 0 25px var(--bleu),
+    0 0 50px var(--pink),
+    0 0 200px var(--sable);
+}
+
+#sortie_h2{
+    color: var(--blanc);
+    text-transform: uppercase;
+}
+#listeLieu li{
+    font-family: var(--font-family-Reg),sans-serif;
+    text-decoration: none;
+    color : var(--roseviolet);
+
+}

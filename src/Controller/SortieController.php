@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Campus;
 use App\Entity\Etat;
+use App\Entity\Lieu;
 use App\Entity\SearchData;
 use App\Entity\Sortie;
 use App\Entity\Ville;
@@ -89,6 +90,8 @@ class SortieController extends AbstractController
         $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
         $campus= $entityManager->getRepository(Campus::class)->findAll();
+        $ville= $entityManager->getRepository(Ville::class)->findAll();
+        $lieu= $entityManager->getRepository(Lieu::class)->findAll();
 
         try {
 
@@ -120,7 +123,7 @@ class SortieController extends AbstractController
             $this->addFlash('echec', 'La sortie n\'a  pas été insérée');
 //             return $this->redirectToRoute('sortie_ajouter');
         }
-        return $this->render('sortie/ajouter.html.twig', compact('sortieForm'));
+        return $this->render('sortie/ajouter.html.twig', compact('sortieForm','campus','ville','lieu'));
 
 
 

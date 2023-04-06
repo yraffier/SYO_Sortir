@@ -71,7 +71,7 @@
 }
 
 .glowing-btn:hover {
-    color: var(--pink), var(--dark);
+    color: var(--pink);
     text-shadow: none;
     animation: none;
 }

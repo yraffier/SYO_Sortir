@@ -1,4 +1,4 @@
-.login-box {
+.registerbox {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -10,7 +10,7 @@
     border-radius: 10px;
 }
 
-.login-box h2 {
+.registerbox h2 {
     margin: 0 0 30px;
     padding: 0;
     color: var(--bleu);
@@ -18,22 +18,22 @@
     text-transform: uppercase;
 }
 
-.login-box .user-box {
+.registerbox .user-boxregister {
     position: relative;
 }
 
-.login-box .user-box input {
+.registerbox .user-boxregister input {
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: var(--sable);
+    color: var(--bleu);
     margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid var(--pink);
     outline: none;
     background: transparent;
 }
-.login-box .user-box label {
+.registerbox .user-boxregister label {
     position: absolute;
     top:0;
     left: 0;
@@ -44,15 +44,15 @@
     transition: .5s;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.registerbox .user-boxregister input:focus ~ label,
+.registerbox .user-boxregister input:valid ~ label {
     top: -20px;
     left: 0;
     color: var(--bleu);
     font-size: 12px;
 }
 
-.login-box form button {
+.registerbox form button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -68,7 +68,7 @@
     border-radius: 7px;
 }
 
-.login-box button:hover {
+.registerbox button:hover {
     background:  transparent;
     color:  var(--dark);
     border-radius: 5px;
@@ -78,12 +78,12 @@
     0 0 100px var(--sable);
 }
 
-.login-box button span {
+.registerbox button span {
     position: absolute;
     display: block;
 }
 
-.login-box button span:nth-child(1) {
+.registerbox button span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -101,7 +101,7 @@
     }
 }
 
-.login-box button span:nth-child(2) {
+.registerbox button span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -120,7 +120,7 @@
     }
 }
 
-.login-box button span:nth-child(3) {
+.registerbox button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -139,7 +139,7 @@
     }
 }
 
-.login-box button span:nth-child(4) {
+.registerbox button span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;

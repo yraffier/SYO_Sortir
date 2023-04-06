@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Lieu;
 use App\Entity\Ville;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -38,6 +39,15 @@ class VilleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function verificationDeDoublonVille(Ville $ville):?Ville{
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.nom = :nom AND v.codePostal = :cp' )
+            ->setParameter('nom', $ville->getNom())
+            ->setParameter('cp', $ville->getCodePostal())
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
 //    /**
 //     * @return Ville[] Returns an array of Ville objects

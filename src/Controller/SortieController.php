@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\SearchData;
 use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\AjouterSortieType;
+use App\Form\SearchType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;

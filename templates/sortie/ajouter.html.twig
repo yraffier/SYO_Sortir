@@ -13,7 +13,9 @@
     <button type="submit" name="Enregistrer" value="Enregistrer"> Enregistrer </button>
     <button type="submit" name="Ajouter" value="Ajouter"> Ajouter </button>
 {{ form_end(sortieForm) }}
-    <button><a href="{{ path('sortie_lister') }}">Annuler</a></button>
+    <input type="button" onclick="location.href='{{ path('sortie_lister') }}';" value="Annuler" />
+    <input type="button" onclick="location.href='{{ path('ville_ajouter') }}';" value="Ajouter une ville" />
+
     <script>
         $('#ajouter_sortie_ville').change(function () {
 
@@ -25,9 +27,7 @@
                 dataType : "json",
                 success: function (lieux){
                     let lieuSelect = $("#ajouter_sortie_lieu");
-
                     lieuSelect.html('');
-
                     for(let i =0; i < lieux.length; i++){
                         let textelieu = "<option value=" + lieux[i]["id"] + ">" + lieux[i]["nom"] + "</option>";
 

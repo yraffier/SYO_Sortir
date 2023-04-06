@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 adresse">
+                <form action="/ville" method="POST">
+                    <div class="form-row">
+                        <label>Lieu : </label>
+                        <input type="text" class="form-control" id="inputNom" name="inputNom" placeholder="Nom de la sortie" required>
+                        <input type="text" class="form-control" id="inputRue" name="inputRue" placeholder="Adresse" required>
+                        <input type="text" class="form-control" pattern="^[0-9]{1}[0-9a-bA-B]{1}[0-9]{3}$" id="inputCodePostal" name="inputCodePostal" minlength="5" maxlength="5" placeholder="Code Postal" required>
+                        <input type="text" class="form-control" id="inputVille" name="inputVille" placeholder="Ville" required>
+                        <input type="text" class="form-control" id="inputLat" name="inputLat" placeholder="Latitude" >
+                        <input type="text" class="form-control" id="inputLong" name="inputLong" placeholder="Longitude" >
+                    </div>
+                    <input type="submit" value="Ajouter une ville" />
+                </form>
+            </div>
+            <div class="col-6 proposition">
+                <div class="adress-feedback">
+                    <ul></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{{asset('build/app.js')}}"></script>
+{#    <script src="{{ asset('assets/js/coord.js') }}"></script>#}
+
+{#        <script src="assets/js/coord.js"></script>#}
+
+{% endblock %}
+

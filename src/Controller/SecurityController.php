@@ -18,8 +18,8 @@ class SecurityController extends AbstractController
     ): Response
     {
         $campus = $entityManager->getRepository(Campus::class)->findAll();
-
         if ($this->getUser()) {
+
             return $this->redirectToRoute('sortie_lister', compact('campus'));
          }
 
@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error,'campus'=>$campus]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'campus' => $campus]);
     }
 
     #[Route(path: '/logout', name: 'logout_sortir')]

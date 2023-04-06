@@ -12,10 +12,12 @@ use App\Form\AnnulerMaSortieType;
 use App\Form\SearchType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -43,7 +45,7 @@ class SortieController extends AbstractController
         $data = new SearchData();
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
-        $campus = $entityManager->getRepository(Campus::class)->findAll();
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $sorties = $sortieRepository->findSearch($data, $utilisateur);
@@ -53,7 +55,8 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/accueilUtilisateur.html.twig', compact(
             'searchForm',
-            'sorties','campus'
+            'sorties',
+            'campus',
         ));
     }
 
@@ -67,7 +70,10 @@ class SortieController extends AbstractController
     ): Response
        {
         $datedujour = new DateTime('today');
-
+        //TODO VERIFIER CETTE CONDITION
+//        if(!$sortie){
+//            throw $this->createNotFoundException('Cette sortie n\'existe pas');
+//               }
         return $this->render('sortie/detail.html.twig', compact('sortie','datedujour'));
        }
 
@@ -84,7 +90,6 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
         $campus= $entityManager->getRepository(Campus::class)->findAll();
 
-//    dd($sortie);
         try {
 
                 if ($sortieForm->isSubmitted()&& $sortieForm-> isValid()) {

@@ -1,0 +1,85 @@
+@media (prefers-color-scheme: light){
+  :root{
+    --background-color: var(--vert);
+    --glow-color: var(--blanc);
+    --pink:#F4BEBE;
+    --sable:#FFDEC7;
+    --blanc:#faf8dc;
+    --vert:#C7E5DF;
+    --bleu:#B8B9E6;
+    --roseviolet:#EBC9F2;
+    --dark:#1e2128;
+    --stroke-width: calc(1em / 16);
+    //--font-size: 7em;
+    //--font-weight: 600;
+    //--letter-spacing: calc(1em / 8);
+    --font-family-Reg: "EASTMAN";
+    --font-family-Med: "EASTMAN_MEDIUM";
+    --font-family-DemiB: "EASTMAN_DEMIBOLD";
+    --font-family-Bold: "EASTMAN_Bold" ;
+  }
+
+  h1 {
+    font-family: var(--font-family-Reg), Roboto, sans-serif;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 5.6rem;
+    text-align: center;
+    line-height: 1;
+    color: var(--sable);
+    text-shadow: 0 0 5px var(--sable), 0 0 15px var(--sable), 0 0 20px var(--sable), 0 0 40px var(--sable), 0 0 60px var(--roseviolet), 0 0 10px var(--blanc), 0 0 98px var(--pink);
+    animation: blink 12s infinite;
+    -webkit-animation: blink 12s infinite;
+  }
+  @-webkit-keyframes blink {
+    20%,
+    24%,
+    55% {
+      color: #111;
+      text-shadow: none;
+    }
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      /*     color: #fccaff;
+          text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
+            0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092; */
+      text-shadow: 0 0 5px var(--sable), 0 0 15px var(--sable), 0 0 20px var(--sable), 0 0 40px var(--sable), 0 0 60px var(--roseviolet), 0 0 10px var(--sable), 0 0 98px var(--pink);
+      color: var(--blanc);
+    }
+  }
+
+  @keyframes blink {
+    20%,
+    24%,
+    55% {
+      color: var(--blanc);
+      text-shadow: none;
+    }
+
+    0%,
+    19%,
+    21%,
+    23%,
+    25%,
+    54%,
+    56%,
+    100% {
+      /*     color: #fccaff;
+          text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,
+            0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092; */
+      text-shadow: 0 0 5px var(--sable), 0 0 15px var(--sable), 0 0 20px var(--sable), 0 0 40px var(--sable), 0 0 60px var(--roseviolet), 0 0 10px var(--sable), 0 0 98px var(--pink);
+      color: var(--blanc);
+    }
+  }
+}

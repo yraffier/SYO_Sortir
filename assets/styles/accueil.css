@@ -4,8 +4,8 @@ html {
 body {
     margin:0;
     padding:0;
-    font-family: sans-serif;
-    background: #1e2128;
+    font-family: var(--font-family-Med), Roboto, sans-serif;
+    background: var(--background-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,4 +24,17 @@ body {
 
 #btnclignotant{
     margin: 0 10px 0 10px;
+}
+
+h2{
+    font-weight: 700;
+    font-size: 2.3rem;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: var(--bleu);
+    text-shadow: 2px 2px 0 var(--vert),
+    4px 4px 0 var(--roseviolet),
+    6px 6px 0 var(--pink),
+    8px 8px 0 var(--sable),
+    10px 10px 0 var(--blanc);
 }

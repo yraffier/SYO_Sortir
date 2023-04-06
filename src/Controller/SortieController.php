@@ -32,6 +32,7 @@ class SortieController extends AbstractController
     #[Route('/', name: '_lister')]
     public function lister(
         SortieRepository $sortieRepository,
+        EntityManagerInterface $entityManager,
         Request $request
     ): Response
     // Méthodes pour récupérer l'ensemble des sorties
@@ -42,6 +43,7 @@ class SortieController extends AbstractController
         $data = new SearchData();
         $searchForm = $this->createForm(SearchType::class, $data);
         $searchForm->handleRequest($request);
+        $campus= $entityManager->getRepository(Campus::class)->findAll();
 
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $sorties = $sortieRepository->findSearch($data, $utilisateur);
@@ -51,7 +53,8 @@ class SortieController extends AbstractController
 
         return $this->render('sortie/accueilUtilisateur.html.twig', compact(
             'searchForm',
-            'sorties'
+            'sorties',
+            'campus',
         ));
     }
 

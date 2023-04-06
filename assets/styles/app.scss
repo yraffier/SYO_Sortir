@@ -1,3 +1,6 @@
+@import url(FontFamily.css);
+@import url(LightMode.scss);
+@import url(DarkMode.css);;
 @import "accueil.css";
 @import "AcceuilUtilisateur.css";
 @import url(Base.css);
@@ -11,7 +14,7 @@
 
 @for $i from 0 through 8 {
   div:nth-child(9n + #{$i}) {
-    border-color: adjust-hue(#20c866, $i * 40);
+    border-color: adjust-hue(#B8B9E6, $i * 40);
   }
 }
 
@@ -83,15 +86,15 @@ $pxToRem: 10;
 .card {
   border: 1px solid;
   border-radius: 5px;
-  box-shadow: 0 0 20px 5px rgba(100, 100, 100, 0.2), inset 0 0 20px 5px rgba(100, 100, 100, 0.2);
+  box-shadow: 0 0 20px 5px var(--blanc), inset 0 0 20px 5px var(--sable);
 }
 
 //Input au sein du formulaire de création de compte :
 
-$primary: #FDDE74;
-$secondary: #FDB967;
-$white: #fff;
-$gray: #9b9b9b;
+$primary: var(--roseviolet);
+$secondary: var(--roseviolet);
+$white: var(--sable);
+$gray: var(--blanc);
 .form__group {
   position: relative;
   padding: 15px 0 0;
@@ -103,9 +106,9 @@ $gray: #9b9b9b;
   font-family: inherit;
   width: 100%;
   border: 0;
-  border-bottom: 2px solid #FDDE74;
+  border-bottom: 2px solid var(--bleu);
   outline: 0;
-  color: white;
+  color: var(--blanc);
   font-size: 1.5rem;
   padding: 7px 0;
   background: transparent;
@@ -124,7 +127,7 @@ $gray: #9b9b9b;
 
 @for $i from 0 through 8 {
   .form__field:nth-child(9n + #{$i}) {
-    color: adjust-hue(#20c866, $i * 40);
+    color: adjust-hue(#faf8dc, $i * 40);
   }
 }
 
@@ -134,7 +137,7 @@ $gray: #9b9b9b;
   display: block;
   transition: 0.2s;
   font-size: 1.2em;
-  color: #FDDE74;
+  color: var(--pink);
 }
 
 .form__field:focus {

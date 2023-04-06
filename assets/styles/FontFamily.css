@@ -14,19 +14,3 @@
     font-family: 'TOMMY_BOLD_OUTLINE';
     src: url("../Font/made_tommy/MADE TOMMY Bold Outline_PERSONAL USE.otf");
 }
-@font-face {
-    font-family: "EASTMAN";
-    src: url("../Font/eastman/EastmanRomanTrial-Regular.otf");
-}
-@font-face {
-    font-family: "EASTMAN_DEMIBOLD";
-    src: url("../Font/eastman/EastmanRomanTrial-DemiBold.otf");
-}
-@font-face {
-    font-family: "EASTMAN_Bold";
-    src: url("../Font/eastman/EastmanRomanTrial-Bold.otf");
-}
-@font-face {
-    font-family: "EASTMAN_MEDIUM";
-    src: url("../Font/eastman/EastmanRomanTrial-Medium.otf");
-}

@@ -1,0 +1,138 @@
+.filtre{
+    font-family: var(--font-family-Med), Roboto, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+#titrefiltre{
+color: var(--roseviolet);
+  text-transform: uppercase;
+}
+
+.searchForm_container form{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--bleu);
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+$primary-color: var(--pink);
+$text-color: mix(var(--blanc), $primary-color, 64%);
+
+.searchradiobutton {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    color: var(--bleu);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+    border: none;
+    width: 100%;
+input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+&:checked + span {
+     background-color: mix(var(--blanc), $primary-color, 84%);
+&:before {
+     box-shadow: inset 0 0 0 0.4375em $primary-color;
+ }
+}
+}
+.search-label {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+transition: 0.25s ease;
+&:hover {
+     background-color: mix(var(--blanc), $primary-color, 84%);
+ }
+&:before {
+     display: flex;
+     flex-shrink: 0;
+     content: "";
+     background-color: var(--blanc);
+     width: 1.5em;
+     height: 1.5em;
+     border-radius: 50%;
+     margin-right: 0.375em;
+     transition: 0.25s ease;
+     box-shadow: inset 0 0 0 0.125em $primary-color;
+ }
+}
+}
+
+.form-group-search {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.touteslesorties {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-flow: row wrap;
+  font-family: var(--font-family-Reg), sans-serif;
+}
+
+.titrelessorties{
+  color:var(--pink), var(--orange);
+  text-transform: uppercase;
+  text-shadow: 0 0 10px 10px var(--blanc);
+}
+
+.listesorties:hover .card {
+  opacity: .7;
+  cursor: pointer;
+  filter: grayscale(1);
+}
+.listesorties .sortie:hover {
+  box-shadow: 0 0 8px 3px rgba(0,0,0,.15);
+  transform: scale(1.025);
+  opacity: 1;
+  filter: grayscale(0);
+  transition: .35s all ease;
+}
+.listesorties .sortie .content {
+  padding: 15px 20px;
+}
+.listesorties .sortie li {
+  padding: 0;
+  margin: 0 0 10px;
+  letter-spacing: -.075rem
+}
+
+#btncréersortie {
+  padding: 25px 30px;
+  background-color: transparent;
+  color: var(--blanc);
+  font-weight: bold;
+  border: var(--sable);
+  border-radius: 5px;
+  letter-spacing: 4px;
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+a{
+  text-decoration: none;
+  color: var(--blanc);
+}

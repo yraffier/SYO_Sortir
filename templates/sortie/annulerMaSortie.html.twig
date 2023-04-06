@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block nav1 %}
+    <a href="{{ path('sortie_lister') }}"><li>Accueil</li></a>
+{% endblock %}
+
 {% block body %}
 <h3> Annuler Ma Sortie</h3>
     <ul>

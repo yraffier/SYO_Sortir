@@ -8,15 +8,15 @@
     --vert:#C7E5DF;
     --bleu:#B8B9E6;
     --roseviolet:#EBC9F2;
-    --dark:#1e2128;
+    --noir:#1e2128;
     --stroke-width: calc(1em / 16);
     //--font-size: 7em;
     //--font-weight: 600;
     //--letter-spacing: calc(1em / 8);
-    --font-family-Reg: "EASTMAN";
-    --font-family-Med: "EASTMAN_MEDIUM";
-    --font-family-DemiB: "EASTMAN_DEMIBOLD";
-    --font-family-Bold: "EASTMAN_Bold" ;
+    --font-family-Reg: "TOMMY";
+    --font-family-Med: "TOMMY_MEDIUM";
+    --font-family-DemiB: "TOMMY_BOLD_OUTLINE";
+    --font-family-Bold: "TOMMY_Bold" ;
   }
 
   h1 {
@@ -82,4 +82,32 @@
       color: var(--blanc);
     }
   }
+  .listesorties .sortie {
+    margin: 10px;
+    width: calc(100% / 3 - 20px);
+    float: left;
+    box-shadow: 0 0 5px 5px var(--blanc);
+    background: radial-gradient(var(--vert));
+    -webkit-transition: .3s all ease;
+    transition: .15s all ease;
+  }
+
+  #btncréersortie:hover {
+    background: linear-gradient(to right, var(--sable), var(--pink), var(--bleu), var(--roseviolet));
+    color: var(--blanc);
+    box-shadow: 0 0 5px var(--blanc),
+    0 0 25px var(--bleu),
+    0 0 50px var(--pink),
+    0 0 200px var(--sable);
+  }
+
+  .submit_register button:hover {
+    background: linear-gradient(to right, var(--sable), var(--pink), var(--bleu), var(--roseviolet));
+    color: var(--blanc);
+    box-shadow: 0 0 5px var(--blanc),
+    0 0 25px var(--bleu),
+    0 0 50px var(--pink),
+    0 0 200px var(--sable);
+  }
+
 }

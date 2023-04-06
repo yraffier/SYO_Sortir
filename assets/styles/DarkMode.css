@@ -1,0 +1,64 @@
+@media (prefers-color-scheme: dark){
+    :root{
+        --background-color: var(--dark);
+        --glow-color: var(--orange);
+        --stroke-width: calc(1em / 16);
+        --font-size: 7em;
+        --font-weight: 600;
+        --letter-spacing: calc(1em / 8);
+        --font-family-Reg: "TOMMY";
+        --font-family-Med: "TOMMY_MEDIUM";
+        --font-family-DemiB: "TOMMY_BOLD_OUTLINE";
+        --font-family-Bold: "TOMMY_Bold" ;
+        --orange:#FDB967;
+        --sable:#FDDE74;
+        --blanc:#faf8dc;
+        --vert:#55BF76;
+        --bleu:#6B82B8;
+        --roseviolet: #66428f;
+        --dark:#1e2128
+    }
+
+    h1 {
+        font-family: var(--font-family-Bold), Roboto, sans-serif;
+        -webkit-background-clip: text;
+        text-transform: uppercase;
+        background-image: linear-gradient(to right, #09f1b8, #00a2ff, #ff00d2, #fed90f);
+        color: var(--background-color);
+        font-size: var(--font-size);
+        font-weight: var(--font-weight);
+        letter-spacing: var(--letter-spacing);
+        padding: calc(var(--stroke-width) / 2);
+        -webkit-text-stroke-color: transparent;
+        -webkit-text-stroke-width: var(--stroke-width);
+    }
+
+    .listesorties .sortie {
+        margin: 10px;
+        width: calc(100% / 3 - 20px);
+        float: left;
+        box-shadow: 0 0 5px 5px var(--blanc);
+        background: var(--blanc);
+        -webkit-transition: .3s all ease;
+        transition: .15s all ease;
+    }
+
+    #btncréersortie:hover {
+        background: linear-gradient(to right, #fed90f, #ff00d2, #00a2ff, #09f1b8);
+        color: var(--blanc);
+        box-shadow: 0 0 5px var(--blanc),
+        0 0 25px var(--bleu),
+        0 0 50px var(--sable),
+        0 0 200px var(--orange);
+    }
+
+    .submit_register button:hover {
+        background: linear-gradient(to right, #fed90f, #ff00d2, #00a2ff, #09f1b8);
+        color: var(--blanc);
+        box-shadow: 0 0 5px var(--blanc),
+        0 0 25px var(--bleu),
+        0 0 50px var(--sable),
+        0 0 200px var(--orange);
+    }
+
+}

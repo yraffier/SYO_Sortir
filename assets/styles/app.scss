@@ -1,11 +1,12 @@
 @import url(FontFamily.css);
-/*@import url(LightMode.scss);*/
-/*@import url(DarkMode.scss);*/
-@import "accueil.css";
-@import "AcceuilUtilisateur.css";
+@import url(LightMode.scss);
+@import url(DarkMode.css);
+@import url(accueil.css);
+@import url(AcceuilUtilisateur.scss);
 @import url(Base.css);
 @import url(Login.css);
 @import url(Register.css);
+@import url(navbar.css);
 @import url(bouttontoogle.scss);
 @import "enregistrerSortie.css";
 @import "ajouterLieu.css";

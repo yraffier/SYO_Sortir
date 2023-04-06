@@ -11,15 +11,6 @@
     cursor: pointer;
 }
 
-.submit_register button:hover {
-    background: linear-gradient(to right, var(--sable), var(--pink), var(--bleu), var(--roseviolet));
-    color: var(--blanc);
-    box-shadow: 0 0 5px var(--blanc),
-    0 0 25px var(--bleu),
-    0 0 50px var(--pink),
-    0 0 200px var(--sable);
-}
-
 #register_h2{
     color: var(--blanc);
     text-transform: uppercase;

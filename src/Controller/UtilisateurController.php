@@ -52,7 +52,7 @@ class UtilisateurController extends AbstractController
         }
         return $this->render(
             'utilisateur/profil.html.twig',
-            compact('utilisateur', 'userForm')
+            compact('utilisateur', 'userForm', 'campus')
         );
     }
 

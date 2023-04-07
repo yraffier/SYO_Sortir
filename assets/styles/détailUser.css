@@ -8,13 +8,39 @@
     margin-bottom: 40em;
 
 }
-#fromu1{
+
+.liste_sortie_participation{
+    list-style: none;
+    color: var(--pink), var(--orange);
+}
+
+.afficherdetailprofil{
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 30em;
-
+    width: 50%;
+    height: 70%;
 }
+
 .fromu1{
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: center;
+    height: 25em;
+    width: 75%;
+}
+
+.fromu1 h4{
+    text-transform: uppercase;
+    color: var(--bleu);
+}
+
+.listeparticipation li{
+    list-style: none;
+    color: var(--blanc);
+}
+
+.listeorga li{
+    list-style: none;
+    color: var(--blanc);
 }

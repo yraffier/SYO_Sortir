@@ -83,7 +83,8 @@ transition: 0.25s ease;
 }
 .sortie{
   width: 33%;
-  height: 50vh;
+  height: 20em;
+  border-radius: 10px;
 }
 .touteslesorties {
   max-width: 1280px;
@@ -95,13 +96,37 @@ transition: 0.25s ease;
   font-family: var(--font-family-Reg), sans-serif;
 }
 
+.sortieliste{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: flex-start;
+}
+
+.sortieliste li{
+  list-style: none;
+  color: var(--bleu);
+}
+
+.sortieliste li:nth-child(1){
+  text-transform: uppercase;
+  font-size: 1.5em;
+  align-self: flex-end ;
+  margin-right: 100px;
+}
+
+.sortieliste li:nth-child(8){
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
 .titrelessorties{
-  color:var(--pink), var(--orange);
+  color:var(--bleu);
   text-transform: uppercase;
   text-shadow: 0 0 10px 10px var(--blanc);
 }
 
-.listesorties:hover .card {
+.listesorties:hover{
   opacity: .7;
   cursor: pointer;
   filter: grayscale(1);
@@ -112,6 +137,7 @@ transition: 0.25s ease;
   opacity: 1;
   filter: grayscale(0);
   transition: .35s all ease;
+  border-radius: 25% 10%;
 }
 .listesorties .sortie .content {
   padding: 15px 20px;

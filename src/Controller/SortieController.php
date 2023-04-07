@@ -172,7 +172,7 @@ class SortieController extends AbstractController
                 $this->addFlash('succes','Votre sortie a bien été supprimée');
                 return $this->redirectToRoute('sortie_lister', compact('campus'));
                 } catch(Exception $exception){
-                    $this->redirectToRoute('sortie_detail');
+                    $this->redirectToRoute('sortie_detail', compact('sortie'));
                 }
             }
 

@@ -10,9 +10,6 @@
     --roseviolet:#EBC9F2;
     --noir:#1e2128;
     --stroke-width: calc(1em / 16);
-    //--font-size: 7em;
-    //--font-weight: 600;
-    //--letter-spacing: calc(1em / 8);
     --font-family-Reg: "TOMMY";
     --font-family-Med: "TOMMY_MEDIUM";
     --font-family-DemiB: "TOMMY_BOLD_OUTLINE";
@@ -90,6 +87,7 @@
     background: radial-gradient(var(--vert));
     -webkit-transition: .3s all ease;
     transition: .15s all ease;
+    border-radius: 25% 10%;
   }
 
   #btncréersortie:hover {

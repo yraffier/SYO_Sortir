@@ -10,7 +10,6 @@
 
     <div class="registerbox">
         <h2>Connection</h2>
-        <a href="{{ path('app_forgot_password_request') }}"> mot de passe oublié</a>
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -30,6 +29,7 @@
                 <label for="inputPassword">Mot de Passe</label>
             </div>
 
+
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
             >
@@ -38,6 +38,9 @@
                 <input type="checkbox" id="_remember_me" name="_remember_me">
                 <label for="_remember_me">Souviens-toi ...</label>
             </div>
+
+
+            <a href="{{ path('app_forgot_password_request') }}"> mot de passe oublié</a>
 
             <div class="user-boxregister">
                     <button type="submit" >

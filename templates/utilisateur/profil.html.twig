@@ -10,7 +10,7 @@
         {{ form_start(userForm) }}
             <div class="card p-20 mb-20">
                 <div class="form__group field">
-                    <input type="text" class="form__field" placeholder="{{ field_label(userForm.username) }}" name="{{ field_name(userForm.username) }}" id='{{ field_name(userForm.username) }}' required />
+                    <input type="text" class="form__field" value="{{ app.user.username }}" placeholder="{{ field_label(userForm.username) }}" name="{{ field_name(userForm.username) }}" id='{{ field_name(userForm.username) }}' required />
                     <label for="{{ field_name(userForm.username) }}" class="form__label">Pseudo...</label>
                     {% for error in field_errors(userForm.username) %}
                         <div class="error">{{ error }}</div>
@@ -21,7 +21,7 @@
 
             <div class="card p-20 mb-16">
                 <div class="form__group field">
-                    <input type="text" class="form__field" placeholder="{{ field_label(userForm.nom) }}" name="{{ field_name(userForm.nom) }}" id='{{ field_name(userForm.nom) }}' required />
+                    <input type="text" class="form__field" value="{{ app.user.nom }}" placeholder="{{ field_label(userForm.nom) }}" name="{{ field_name(userForm.nom) }}" id='{{ field_name(userForm.nom) }}' required />
                     <label for="{{ field_name(userForm.nom) }}" class="form__label">Nom...</label>
                     {% for error in field_errors(userForm.nom) %}
                         <div class="error">{{ error }}</div>
@@ -32,7 +32,7 @@
 
             <div class="card p-20 mb-12">
                 <div class="form__group field">
-                    <input type="text" class="form__field" placeholder="{{ field_label(userForm.prenom) }}" name="{{ field_name(userForm.prenom) }}" id='{{ field_name(userForm.prenom) }}' required />
+                    <input type="text" class="form__field" value="{{ app.user.prenom }}" placeholder="{{ field_label(userForm.prenom) }}" name="{{ field_name(userForm.prenom) }}" id='{{ field_name(userForm.prenom) }}' required />
                     <label for="{{ field_name(userForm.prenom) }}" class="form__label">Prenom...</label>
                     {% for error in field_errors(userForm.prenom) %}
                         <div class="error">{{ error }}</div>
@@ -43,7 +43,7 @@
 
             <div class="card p-20 mb-6">
                 <div class="form__group field">
-                    <input type="text" class="form__field" placeholder="{{ field_label(userForm.telephone) }}" name="{{ field_name(userForm.telephone) }}" id='{{ field_name(userForm.telephone) }}' required />
+                    <input type="text" class="form__field" value="{{ app.user.telephone }}" placeholder="{{ field_label(userForm.telephone) }}" name="{{ field_name(userForm.telephone) }}" id='{{ field_name(userForm.telephone) }}' required />
                     <label for="{{ field_name(userForm.telephone) }}" class="form__label">Téléphone...</label>
                     {% for error in field_errors(userForm.telephone) %}
                         <div class="error">{{ error }}</div>
@@ -54,7 +54,7 @@
 
             <div class="card p-20 mb-8">
                 <div class="form__group field">
-                    <input type="email" class="form__field" placeholder="{{ field_label(userForm.mail) }}" name="{{ field_name(userForm.mail) }}" id='{{ field_name(userForm.mail) }}' required />
+                    <input type="email" class="form__field" value="{{ app.user.mail }}" placeholder="{{ field_label(userForm.mail) }}" name="{{ field_name(userForm.mail) }}" id='{{ field_name(userForm.mail) }}' required />
                     <label for="{{ field_name(userForm.mail) }}" class="form__label">Email...</label>
                     {% for error in field_errors(userForm.mail) %}
                         <div class="error">{{ error }}</div>
@@ -66,7 +66,7 @@
 
             <div class="card p-20 mb-4">
                 <div class="form__group field">
-                    <select class="form__field" name="{{ field_name(userForm.campus) }}" id="{{ field_name(userForm.campus) }}" required>
+                    <select class="form__field" value="{{ app.user.campus }}" name="{{ field_name(userForm.campus) }}" id="{{ field_name(userForm.campus) }}" required>
                         {% for choix in campus %}
                             <option value="{{ choix.nom }}">{{ choix.nom }}</option>
                         {% endfor %}
@@ -83,7 +83,7 @@
 
             <div class="card p-20 mb-2">
                 <div class="form__group field">
-                    <input type="password" class="form__field" placeholder="{{ field_label(userForm.password) }}" name="{{ field_name(userForm.password) }}" id='{{ field_name(userForm.password) }}' required />
+                    <input type="password" class="form__field" value="{{ app.user.password }}" placeholder="{{ field_label(userForm.password) }}" name="{{ field_name(userForm.password) }}" id='{{ field_name(userForm.password) }}' required />
                     <label for="{{ field_name(userForm.password) }}" class="form__label">Mot de passe...</label>
                     {% for error in field_errors(userForm.password) %}
                         <div class="error">{{ error }}</div>
@@ -102,7 +102,7 @@
         {{ form_end(userForm) }}
     </div>
         <div>
-            <div id="btnRetour">
+            <div id="btnclignotant">
                 <a href="{{ path('sortie_lister') }}"><button>Annuler</button></a>
             </div>
         </div>

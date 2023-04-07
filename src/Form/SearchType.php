@@ -50,7 +50,6 @@ class SearchType extends AbstractType
                 'label' => 'Sorties dont je suis l\'organisateur/trice',
                 'data' => true,
                 'required' => false,
-
             ])
             ->add('inscrit', CheckboxType::class, [
                 'label' => 'Sorties auxquelles je suis incrit/e',

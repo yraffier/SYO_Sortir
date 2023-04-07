@@ -97,7 +97,7 @@ class SortieRepository extends ServiceEntityRepository
 
         if (!empty($search->getDateFin())) {
             $query = $query
-                ->andWhere('s.debutSortie <= :finSortie')
+                ->andWhere( 's.debutSortie <= :finSortie')
                 ->setParameter('finSortie', $search->getDateFin());
         }
 

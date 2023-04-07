@@ -5,38 +5,71 @@
 {% endblock %}
 
 {% block body %}
-    <div class="sortie">
-        <h3> Détail complet de la sortie </h3>
-        <h3> {{ sortie.nom }} </h3>
-        <div class="infosortie">
-            <ul class="detailsortie">
+   <div class="titreDetails" id="detail_h2">
+        <h2> Détail complet de la sortie : </h2>
+        <h2> {{ sortie.nom }} </h2>
+   </div>
+<div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1" >
+        <div class="form__group field ">
+            <ul >
                 <li>Débute à {{ sortie.dateHeureDebut | date('d-m-Y H:i') }}</li>
+                </br>
                 <li>Point de rencontre {{ sortie.lieu.nom | upper }} - {{ sortie.lieu.ville.codePostal}} - {{ sortie.lieu.ville.nom | upper}}</li>
+               </br>
                 <li>Durée : {{ sortie.duree | date('H:i') }} minutes</li>
+                </br>
                 <li>{{ sortie.infosSortie }}</li>
+                </br>
                 <li>Organisé par <a href="{{ path('sortir_detailProfil', {'utilisateur': sortie.organisateurs.id}) }}">{{ sortie.organisateurs.username }}</a> - CAMPUS {{ sortie.siteOrganisateur.nom | upper }}</li>
             </ul>
-        </div>
-        <div class="listeparticpants">
+         </div>
+            <div class="form__group field">
             <h5>Participants à la sortie ( date limite d'inscription {{ sortie.dateLimiteInscription | date('d-m-Y H:i') }})</h5>
             {% for participant in sortie.participants %}
                 <li><a href="{{ path('sortir_detailProfil', {'utilisateur': participant.id}) }}">{{ participant.username }}</a></li>
             {% endfor %}
-        </div>
-    </div>
+            </div>
 
-
-    {% if sortie.dateHeureDebut >= datedujour or sortie.dateLimiteInscription >= datedujour %}
+    {% if sortie.dateHeureDebut >= date() or sortie.dateLimiteInscription >= date() %}
         {% if app.user is same as sortie.organisateurs %}
             {#        <button> <a href="path{{ 'sortie_annuler',{'sortie': sortie.id} }}"> Annuler la sortie </a> </button>#}
         {% else %}
             {% if sortie.participants is empty %}
-                <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>
+                <div class="submit_ajouterLieu">
+                    <button type="submit" name="ajouterLieu" value="nouveau lieu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a>
+                    </button>
+                </div>
+{#                <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>#}
             {% else %}
                 {% if app.user in sortie.participants %}
-                    <button><a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}"> Se desister </a></button>
+                    <div class="submit_ajouterLieu">
+                        <button type="submit" name="ajouterLieu" value="nouveau lieu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}">Se désister</a>
+                        </button>
+                    </div>
+
+{#                    <button><a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}"> Se desister </a></button>#}
                 {% else %}
-                    <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>
+                    <div class="submit_ajouterLieu">
+                        <button type="submit" name="ajouterLieu" value="nouveau lieu">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a>
+                        </button>
+                    </div>
+
+{#                    <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>#}
                 {% endif %}
             {% endif %}
         {% endif %}

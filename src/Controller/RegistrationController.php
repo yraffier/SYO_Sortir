@@ -42,6 +42,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         $campus = $entityManager->getRepository(Campus::class)->findAll();
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -66,7 +67,6 @@ class RegistrationController extends AbstractController
 
             return $this->redirectToRoute('login_sortir');
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'campus' => $campus,

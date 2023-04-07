@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {#    <link rel="stylesheet" href="{{ asset('CSS/StyleBase.css') }}"> #}
+{#    <link rel="stylesheet" href="{{ asset('CSS/StyleBase.css') }}">#}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
 {% endblock %}
 
@@ -18,26 +18,26 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    {#    <div id="formulaire"> #}
-    {#        {{ form_start(registrationForm) }} #}
-    {#                {{ form_row(registrationForm.username) }} #}
-    {#                {{ form_row(registrationForm.nom) }} #}
-    {#                {{ form_row(registrationForm.prenom) }} #}
-    {#                {{ form_row(registrationForm.mail) }} #}
-    {#                {{ form_row(registrationForm.telephone) }} #}
-    {#                {{ form_row(registrationForm.campus) }} #}
-    {#                {{ form_row(registrationForm.password, { #}
-    {#                    label: 'Password' #}
-    {#                }) }} #}
-    {#                {{ form_row(registrationForm.agreeTerms) }} #}
-    {#        <button type="submit" name="creecompte" value="Enregistrer"> Enregistrer </button> #}
+{#    <div id="formulaire">#}
+{#        {{ form_start(registrationForm) }}#}
+{#                {{ form_row(registrationForm.username) }}#}
+{#                {{ form_row(registrationForm.nom) }}#}
+{#                {{ form_row(registrationForm.prenom) }}#}
+{#                {{ form_row(registrationForm.mail) }}#}
+{#                {{ form_row(registrationForm.telephone) }}#}
+{#                {{ form_row(registrationForm.campus) }}#}
+{#                {{ form_row(registrationForm.password, {#}
+{#                    label: 'Password'#}
+{#                }) }}#}
+{#                {{ form_row(registrationForm.agreeTerms) }}#}
+{#        <button type="submit" name="creecompte" value="Enregistrer"> Enregistrer </button>#}
 
-    {#        {{ form_end(registrationForm) }} #}
+{#        {{ form_end(registrationForm) }}#}
 
 
-    {#    <div id="annuler"> #}
-    {#        <a href="{{ path('sortir_accueil') }}"><button>Annuler</button></a> #}
-    {#    </div> #}
+{#    <div id="annuler">#}
+{#        <a href="{{ path('sortir_accueil') }}"><button>Annuler</button></a>#}
+{#    </div>#}
     <div class="titre_register" id="register_h2">
         <h2>Créer un compte</h2>
     </div>
@@ -46,108 +46,92 @@
         {{ form_start(registrationForm) }}
         <div class="card p-20 mb-20">
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.username) }}"
-                       name="{{ field_name(registrationForm.username) }}"
-                       id='{{ field_name(registrationForm.username) }}' required/>
+                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.username) }}" name="{{ field_name(registrationForm.username) }}" id='{{ field_name(registrationForm.username) }}' required />
                 <label for="{{ field_name(registrationForm.username) }}" class="form__label">Pseudo...</label>
                 {% for error in field_errors(registrationForm.username) %}
-                    <div class="error">{{ error }}</div>
+                <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.username, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.username, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="card p-20 mb-16">
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.nom) }}"
-                       name="{{ field_name(registrationForm.nom) }}" id='{{ field_name(registrationForm.nom) }}'
-                       required/>
+                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.nom) }}" name="{{ field_name(registrationForm.nom) }}" id='{{ field_name(registrationForm.nom) }}' required />
                 <label for="{{ field_name(registrationForm.nom) }}" class="form__label">Nom...</label>
                 {% for error in field_errors(registrationForm.nom) %}
                     <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.nom, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.nom, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="card p-20 mb-12">
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.prenom) }}"
-                       name="{{ field_name(registrationForm.prenom) }}" id='{{ field_name(registrationForm.prenom) }}'
-                       required/>
+                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.prenom) }}" name="{{ field_name(registrationForm.prenom) }}" id='{{ field_name(registrationForm.prenom) }}' required />
                 <label for="{{ field_name(registrationForm.prenom) }}" class="form__label">Prenom...</label>
                 {% for error in field_errors(registrationForm.prenom) %}
                     <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.prenom, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.prenom, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="card p-20 mb-8">
             <div class="form__group field">
-                <input type="email" class="form__field" placeholder="{{ field_label(registrationForm.mail) }}"
-                       name="{{ field_name(registrationForm.mail) }}" id='{{ field_name(registrationForm.mail) }}'
-                       required/>
+                <input type="email" class="form__field" placeholder="{{ field_label(registrationForm.mail) }}" name="{{ field_name(registrationForm.mail) }}" id='{{ field_name(registrationForm.mail) }}' required />
                 <label for="{{ field_name(registrationForm.mail) }}" class="form__label">Email...</label>
                 {% for error in field_errors(registrationForm.mail) %}
                     <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.mail, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.mail, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="card p-20 mb-6">
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.telephone) }}"
-                       name="{{ field_name(registrationForm.telephone) }}"
-                       id='{{ field_name(registrationForm.telephone) }}' required/>
+                <input type="text" class="form__field" placeholder="{{ field_label(registrationForm.telephone) }}" name="{{ field_name(registrationForm.telephone) }}" id='{{ field_name(registrationForm.telephone) }}' required />
                 <label for="{{ field_name(registrationForm.telephone) }}" class="form__label">Téléphone...</label>
                 {% for error in field_errors(registrationForm.telephone) %}
                     <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.telephone, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.telephone, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="card p-20 mb-4">
             <div class="form__group field">
-                <select class="form__field" name="{{ field_name(registrationForm.campus) }}"
-                        id="{{ field_name(registrationForm.campus) }}" required>
-                    {% for choix in campus %}
-                        <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                <select class="form__field" name="{{ field_name(registrationForm.campus) }}" id="{{ field_name(registrationForm.campus) }}" required>
+                    {% for choix in field_choices(registrationForm.campus) %}
+                        <option value="{{ field_value(registrationForm.campus) }}">{{ choix }}</option>
                     {% endfor %}
                 </select>
                 <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Campus</label>
-                {#                <input type="" class="form__field" placeholder="{{ field_label(registrationForm.campus) }}" name="{{ field_name(registrationForm.campus) }}" id='{{ field_name(registrationForm.campus) }}' required /> #}
-                {#                <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Prenom...</label> #}
-                {#                {% for error in field_errors(registrationForm.campus) %} #}
-                {#                    <div class="error">{{ error }}</div> #}
-                {#                {% endfor %} #}
+{#                <input type="" class="form__field" placeholder="{{ field_label(registrationForm.campus) }}" name="{{ field_name(registrationForm.campus) }}" id='{{ field_name(registrationForm.campus) }}' required />#}
+{#                <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Prenom...</label>#}
+                {% for error in field_errors(registrationForm.campus) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.campus, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.campus, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="card p-20 mb-2">
             <div class="form__group field">
-                <input type="password" class="form__field" placeholder="{{ field_label(registrationForm.password) }}"
-                       name="{{ field_name(registrationForm.password) }}"
-                       id='{{ field_name(registrationForm.password) }}' required/>
+                <input type="password" class="form__field" placeholder="{{ field_label(registrationForm.password) }}" name="{{ field_name(registrationForm.password) }}" id='{{ field_name(registrationForm.password) }}' required />
                 <label for="{{ field_name(registrationForm.password) }}" class="form__label">Mot de passe...</label>
                 {% for error in field_errors(registrationForm.password) %}
                     <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.password, { #}
-            {#                label: 'Password', #}
-            {#                'attr': {'class': 'registerForm'} #}
-            {#            }) }} #}
+{#            {{ form_row(registrationForm.password, {#}
+{#                label: 'Password',#}
+{#                'attr': {'class': 'registerForm'}#}
+{#            }) }}#}
         </div>
         <div class="card p-20 mb-2">
             <div class="form__group field" id="inputagree">
-                <input type="checkbox" class="form__field" placeholder="{{ field_label(registrationForm.agreeTerms) }}"
-                       name="{{ field_name(registrationForm.agreeTerms) }}"
-                       id='{{ field_name(registrationForm.agreeTerms) }}' required/>
-                <label for="{{ field_name(registrationForm.agreeTerms) }}" class="form__label">Accepter les
-                    conditions </label>
+                <input type="checkbox" class="form__field" placeholder="{{ field_label(registrationForm.agreeTerms) }}" name="{{ field_name(registrationForm.agreeTerms) }}" id='{{ field_name(registrationForm.agreeTerms) }}' required />
+                <label for="{{ field_name(registrationForm.agreeTerms) }}" class="form__label">Accepter les conditions </label>
                 {% for error in field_errors(registrationForm.agreeTerms) %}
                     <div class="error">{{ error }}</div>
                 {% endfor %}
             </div>
-            {#            {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'registerForm'}}) }} #}
+{#            {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'registerForm'}}) }}#}
         </div>
         <div class="submit_register">
             <button type="submit" name="creecompte" value="Enregistrer">
@@ -158,42 +142,42 @@
                 Enregistrer
             </button>
         </div>
-        {#        <div class="btnsubmit"> #}
-        {#            <button type="submit" name="creecompte" value="Enregistrer"> Enregistrer </button> #}
-        {#        </div> #}
+{#        <div class="btnsubmit">#}
+{#            <button type="submit" name="creecompte" value="Enregistrer"> Enregistrer </button>#}
+{#        </div>#}
         {{ form_end(registrationForm) }}
     </div>
 
-    {#        <div class="card p-20"> #}
-    {#            <div class="card p-8 ml-64"></div> #}
-    {#            <div class="card p-8 ml-48"></div> #}
-    {#            <div class="card p-8 ml-32"></div> #}
-    {#            <div class="card p-8 ml-24"></div> #}
-    {#            <div class="card p-8 ml-20"></div> #}
-    {#            <div class="card p-8 ml-16"></div> #}
-    {#            <div class="card p-8 ml-12"></div> #}
-    {#            <div class="card p-8 ml-8"></div> #}
-    {#            <div class="card p-8 ml-6 mb-20"></div> #}
+{#        <div class="card p-20">#}
+{#            <div class="card p-8 ml-64"></div>#}
+{#            <div class="card p-8 ml-48"></div>#}
+{#            <div class="card p-8 ml-32"></div>#}
+{#            <div class="card p-8 ml-24"></div>#}
+{#            <div class="card p-8 ml-20"></div>#}
+{#            <div class="card p-8 ml-16"></div>#}
+{#            <div class="card p-8 ml-12"></div>#}
+{#            <div class="card p-8 ml-8"></div>#}
+{#            <div class="card p-8 ml-6 mb-20"></div>#}
 
-    {#            <div class="card p-8 mr-64"></div> #}
-    {#            <div class="card p-8 mr-48"></div> #}
-    {#            <div class="card p-8 mr-32"></div> #}
-    {#            <div class="card p-8 mr-24"></div> #}
-    {#            <div class="card p-8 mr-20"></div> #}
-    {#            <div class="card p-8 mr-16"></div> #}
-    {#            <div class="card p-8 mr-12"></div> #}
-    {#            <div class="card p-8 mr-8"></div> #}
-    {#            <div class="card p-8 mr-6 mb-20"></div> #}
+{#            <div class="card p-8 mr-64"></div>#}
+{#            <div class="card p-8 mr-48"></div>#}
+{#            <div class="card p-8 mr-32"></div>#}
+{#            <div class="card p-8 mr-24"></div>#}
+{#            <div class="card p-8 mr-20"></div>#}
+{#            <div class="card p-8 mr-16"></div>#}
+{#            <div class="card p-8 mr-12"></div>#}
+{#            <div class="card p-8 mr-8"></div>#}
+{#            <div class="card p-8 mr-6 mb-20"></div>#}
 
-    {#            <div class="card p-8 ml-6 mr-64"></div> #}
-    {#            <div class="card p-8 ml-8 mr-48"></div> #}
-    {#            <div class="card p-8 ml-12 mr-32"></div> #}
-    {#            <div class="card p-8 ml-16 mr-24"></div> #}
-    {#            <div class="card p-8 ml-20 mr-20"></div> #}
-    {#            <div class="card p-8 ml-24 mr-16"></div> #}
-    {#            <div class="card p-8 ml-32 mr-12"></div> #}
-    {#            <div class="card p-8 ml-48 mr-8"></div> #}
-    {#            <div class="card p-8 ml-64 mr-6"></div> #}
-    {#        </div> #}
+{#            <div class="card p-8 ml-6 mr-64"></div>#}
+{#            <div class="card p-8 ml-8 mr-48"></div>#}
+{#            <div class="card p-8 ml-12 mr-32"></div>#}
+{#            <div class="card p-8 ml-16 mr-24"></div>#}
+{#            <div class="card p-8 ml-20 mr-20"></div>#}
+{#            <div class="card p-8 ml-24 mr-16"></div>#}
+{#            <div class="card p-8 ml-32 mr-12"></div>#}
+{#            <div class="card p-8 ml-48 mr-8"></div>#}
+{#            <div class="card p-8 ml-64 mr-6"></div>#}
+{#        </div>#}
 
 {% endblock %}

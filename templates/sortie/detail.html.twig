@@ -36,7 +36,7 @@
 
     {% if sortie.dateHeureDebut >= date() or sortie.dateLimiteInscription >= date() %}
         {% if app.user is same as sortie.organisateurs %}
-            <button><a href="path{{ path('sortie_annulerMaSortie', {'sortie': sortie.id}) }}"> Annuler la sortie </a></button>
+            <button><a href="{{ path('sortie_annulerMaSortie', {'sortie': sortie.id}) }}"> Annuler la sortie </a></button>
         {% else %}
             {% if sortie.participants is empty %}
                 <div class="submit_ajouterLieu">
@@ -50,6 +50,7 @@
                 </div>
 {#                <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>#}
             {% else %}
+
                 {% if app.user in sortie.participants %}
                     <div class="submit_ajouterLieu">
                         <button type="submit" name="ajouterLieu" value="nouveau lieu">
@@ -63,7 +64,7 @@
 
 {#                    <button><a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}"> Se desister </a></button>#}
                 {% else %}
-                    {% if sortie.participants < sortie.nbInscriptionMax %}
+{#                    {% if sortie.participants < sortie.nbInscriptionMax %}#}
                         <div class="submit_ajouterLieu">
                         <button type="submit" name="ajouterLieu" value="nouveau lieu">
                             <span></span>
@@ -73,7 +74,7 @@
                             <a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a>
                         </button>
                         </div>
-                    {% endif %}
+{#                    {% endif %}#}
 {#                    <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>#}
                 {% endif %}
             {% endif %}

@@ -1,0 +1,5 @@
+footer p{
+    color: var(--blanc);
+    position: absolute;
+    bottom: 1%;
+}

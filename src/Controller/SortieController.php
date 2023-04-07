@@ -90,8 +90,8 @@ class SortieController extends AbstractController
         $sortieForm =$this->createForm(AjouterSortieType::class, $sortie);
         $sortieForm->handleRequest($request);
         $campus= $entityManager->getRepository(Campus::class)->findAll();
-        $ville= $entityManager->getRepository(Ville::class)->findAll();
-        $lieu= $entityManager->getRepository(Lieu::class)->findAll();
+//        $ville= $entityManager->getRepository(Ville::class)->findAll();
+//        $lieu= $entityManager->getRepository(Lieu::class)->findAll();
 
         try {
 
@@ -113,7 +113,7 @@ class SortieController extends AbstractController
                         $entityManager->persist($sortie);
                         $entityManager->flush();
                         $this->addFlash('succes','Sortie crée avec succés');
-                        return $this->redirectToRoute('sortie_lister', compact('campus'));
+                        return $this->redirectToRoute('sortie_lister');
                     } else {
                         $this->addFlash('echec', 'La date limite d\'inscription doit être inférieur a la date de début.');
                     }
@@ -123,7 +123,7 @@ class SortieController extends AbstractController
             $this->addFlash('echec', 'La sortie n\'a  pas été insérée');
 //             return $this->redirectToRoute('sortie_ajouter');
         }
-        return $this->render('sortie/ajouter.html.twig', compact('sortieForm','campus','ville','lieu'));
+        return $this->render('sortie/ajouter.html.twig', compact('sortieForm','campus'));
 
 
 

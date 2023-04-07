@@ -58,7 +58,7 @@
                     <div class="form-group-search">
                         <div class="searchradiobutton">
                             <div>
-                                <input type="radio"
+                                <input type="checkbox"
                                        id="{{ field_name(searchForm.organisateur) }}"
                                        class="form-control-search"
                                        name="radio"
@@ -66,7 +66,7 @@
                                 <label class="search-label" for="{{ field_name(searchForm.organisateur) }}"> je suis organisateur</label>
                             </div>
                             <div>
-                                <input type="radio"
+                                <input type="checkbox"
                                        id="{{ field_name(searchForm.inscrit) }}"
                                        class="form-control-search"
                                        name="radio"
@@ -74,7 +74,7 @@
                                 <label class="search-label" for="{{ field_name(searchForm.inscrit) }}">Je suis inscrit</label>
                             </div>
                             <div>
-                                <input type="radio"
+                                <input type="checkbox"
                                        id="{{ field_name(searchForm.NonInscrit) }}"
                                        class="form-control-search"
                                        name="radio"
@@ -82,7 +82,7 @@
                                 <label class="search-label" for="{{ field_name(searchForm.NonInscrit) }}">Je ne suis pas isncrit</label>
                             </div>
                             <div>
-                                <input type="radio"
+                                <input type="checkbox"
                                        id="{{ field_name(searchForm.sortiePassee) }}"
                                        class="form-control-search"
                                        name="radio"
@@ -112,12 +112,12 @@
                     {% for chaquesortie in sorties %}
                         <div class="sortie">
                             <ul class="sortieliste">
-                                <li><a href="{{path('sortie_detail',{'sortie':chaquesortie.id}) }}">{{ chaquesortie.nom}}</a></li>
+                                <li><a href="{{path('sortie_detail',{'sortie':chaquesortie.id}) }}">- {{ chaquesortie.nom}} -</a></li>
                                 <li> {{ chaquesortie.lieu.nom}} </li>
                                 <li>{{ chaquesortie.infosSortie}}</li>
-                                <li>{{ chaquesortie.dateHeureDebut|date ('Y-m-d H:i:s') }}  </li>
-                                <li>{{ chaquesortie.dateLimiteInscription|date ('Y-m-d H:i:s') }}  </li>
-                                <li> {{ chaquesortie.participants.count()}} / {{ chaquesortie.nbInscriptionMax }}</li>
+                                <li>Débute le {{ chaquesortie.dateHeureDebut|date ('Y-m-d H:i:s') }}  </li>
+                                <li>Cloture inscritpion :{{ chaquesortie.dateLimiteInscription|date ('Y-m-d H:i:s') }}  </li>
+                                <li> Nombre d'inscrit : {{ chaquesortie.participants.count()}} / {{ chaquesortie.nbInscriptionMax }}</li>
                                 <li>  {{chaquesortie.etat.libelle }} </li>
                                 <li><a href="{{ path('sortir_detailProfil', {'utilisateur': chaquesortie.organisateurs.id}) }}">{{ chaquesortie.organisateurs.username }}</a></li>
                                 {#                {{app.user.nom }}#}

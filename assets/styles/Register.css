@@ -15,3 +15,11 @@
     color: var(--blanc);
     text-transform: uppercase;
 }
+
+.alert{
+    color: var(--dark), var(--noir);
+}
+
+.error{
+    color: var(--dark), var(--noir);
+}

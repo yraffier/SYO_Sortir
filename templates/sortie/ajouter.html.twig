@@ -6,127 +6,131 @@
 {% endblock %}
 
 {% block body %}
-    <div class="titre_creer_Sortie"id="sortie_h2">
+    <div class="titre_creer_Sortie" id="sortie_h2">
         <h2> Créer une Sortie</h2>
     </div>
 
     <div id="formulaire_creer_sortie" class="container card p-32 mt-64 mb-64">
         {{ form_start(sortieForm)}}
-        <div class="card p-20 mb-20">
-            <div class="form__group field">
-                <input type="text" class="form__field" placeholder="{{ field_label(sortieForm.nom) }}"
-                       name="{{ field_name(sortieForm.nom) }}"
-                       id='{{ field_name(sortieForm.nom) }}' required/>
-                <label for="{{ field_name(sortieForm.nom) }}" class="form__label">Nom de la sortie</label>
-                {% for error in field_errors(sortieForm.nom) %}
-                    <div class="error">{{ error }}</div>
-                {% endfor %}
-            </div>
-{#            date de debut sortie #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <input type="datetime-local" class="form__field" placeholder="{{ field_label(sortieForm.dateHeureDebut) }}"
-                           name="{{ field_name(sortieForm.dateHeureDebut) }}"
-                           id='{{ field_name(sortieForm.dateHeureDebut) }}' required/>
-                    <label for="{{ field_name(sortieForm.dateHeureDebut) }}" class="form__label">Date de la sortie : </label>
-                    {% for error in field_errors(sortieForm.dateHeureDebut) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {#            date limite d'inscription  #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <input type="datetime-local" class="form__field" placeholder="{{ field_label(sortieForm.dateLimiteInscription) }}"
-                           name="{{ field_name(sortieForm.dateLimiteInscription) }}"
-                           id='{{ field_name(sortieForm.dateLimiteInscription) }}' required/>
-                    <label for="{{ field_name(sortieForm.dateLimiteInscription) }}" class="form__label">Date limite d'inscription : </label>
-                    {% for error in field_errors(sortieForm.dateLimiteInscription) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {#            durée de la sortie  #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <input type="time" class="form__field" placeholder="{{ field_label(sortieForm.duree) }}"
-                           name="{{ field_name(sortieForm.duree) }}"
-                           id='{{ field_name(sortieForm.duree) }}' required/>
-                    <label for="{{ field_name(sortieForm.duree) }}" class="form__label">Durée : </label>
-                    {% for error in field_errors(sortieForm.duree) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {#            description de la sortie  #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <input type="text" class="form__field" placeholder="{{ field_label(sortieForm.infosSortie) }}"
-                           name="{{ field_name(sortieForm.infosSortie) }}"
-                           id='{{ field_name(sortieForm.infosSortie) }}' required/>
-                    <label for="{{ field_name(sortieForm.infosSortie) }}" class="form__label">Description : </label>
-                    {% for error in field_errors(sortieForm.infosSortie) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {#            nombre de place  de la sortie  #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <input type="number" class="form__field" placeholder="{{ field_label(sortieForm.nbInscriptionMax) }}"
-                           name="{{ field_name(sortieForm.nbInscriptionMax) }}"
-                           id='{{ field_name(sortieForm.nbInscriptionMax) }}' required/>
-                    <label for="{{ field_name(sortieForm.nbInscriptionMax) }}" class="form__label">Nombre de places : </label>
-                    {% for error in field_errors(sortieForm.nbInscriptionMax) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {#           Campus de la sortie #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <select class="form__field" name="{{ field_name(sortieForm.siteOrganisateur) }}" id="{{ field_name(sortieForm.siteOrganisateur) }}" required>
-                        {% for choix in campus %}
-                            <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <input type="text" class="form__field" placeholder="{{ field_label(sortieForm.nom) }}"
+                               name="{{ field_name(sortieForm.nom) }}"
+                               id='{{ field_name(sortieForm.nom) }}' required/>
+                        <label for="{{ field_name(sortieForm.nom) }}" class="form__label">Nom de la sortie</label>
+                        {% for error in field_errors(sortieForm.nom) %}
+                            <div class="error">{{ error }}</div>
                         {% endfor %}
-                    </select>
-
-                    <label for="{{ field_name(sortieForm.siteOrganisateur) }}" class="form__label">Site organisateur : </label>
-                    {% for error in field_errors(sortieForm.siteOrganisateur) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
+                    </div>
                 </div>
-            </div>
-            {#           Ville de la sortie  #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <select class="form__field" name="{{ field_name(sortieForm.ville) }}" id="{{ field_name(sortieForm.ville)}}" required >
-                        {% for choix in ville %}
-                            <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                {#            date de debut sortie #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <input type="datetime-local" class="form__field" placeholder="{{ field_label(sortieForm.dateHeureDebut) }}"
+                               name="{{ field_name(sortieForm.dateHeureDebut) }}"
+                               id='{{ field_name(sortieForm.dateHeureDebut) }}' required/>
+                        <label for="{{ field_name(sortieForm.dateHeureDebut) }}" class="form__label">Date de la sortie : </label>
+                        {% for error in field_errors(sortieForm.dateHeureDebut) %}
+                            <div class="error">{{ error }}</div>
                         {% endfor %}
-                    </select>
-                    <label for="{{ field_name(sortieForm.ville) }}" class="form__label">Ville  : </label>
-                    {% for error in field_errors(sortieForm.ville) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
+                    </div>
                 </div>
-            </div>
-
-            {#           Lieu de la sortie  #}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <select class="form__field" name="{{ field_name(sortieForm.lieu) }}" id="{{ field_name(sortieForm.lieu)}}" required >
-                        {% for choix in lieu %}
-                            <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                {#            date limite d'inscription  #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <input type="datetime-local" class="form__field" placeholder="{{ field_label(sortieForm.dateLimiteInscription) }}"
+                               name="{{ field_name(sortieForm.dateLimiteInscription) }}"
+                               id='{{ field_name(sortieForm.dateLimiteInscription) }}' required/>
+                        <label for="{{ field_name(sortieForm.dateLimiteInscription) }}" class="form__label">Date limite d'inscription : </label>
+                        {% for error in field_errors(sortieForm.dateLimiteInscription) %}
+                            <div class="error">{{ error }}</div>
                         {% endfor %}
-                    </select>
-                    <label for="{{ field_name(sortieForm.ville) }}" class="form__label">Lieu  : </label>
-
-                    {% for error in field_errors(sortieForm.ville) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
+                    </div>
                 </div>
-            </div>
+                {#            durée de la sortie  #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <input type="time" class="form__field" placeholder="{{ field_label(sortieForm.duree) }}"
+                               name="{{ field_name(sortieForm.duree) }}"
+                               id='{{ field_name(sortieForm.duree) }}' required/>
+                        <label for="{{ field_name(sortieForm.duree) }}" class="form__label">Durée : </label>
+                        {% for error in field_errors(sortieForm.duree) %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#            description de la sortie  #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <input type="text" class="form__field" placeholder="{{ field_label(sortieForm.infosSortie) }}"
+                               name="{{ field_name(sortieForm.infosSortie) }}"
+                               id='{{ field_name(sortieForm.infosSortie) }}' required/>
+                        <label for="{{ field_name(sortieForm.infosSortie) }}" class="form__label">Description : </label>
+                        {% for error in field_errors(sortieForm.infosSortie) %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#            nombre de place  de la sortie  #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <input type="number" class="form__field" placeholder="{{ field_label(sortieForm.nbInscriptionMax) }}"
+                               name="{{ field_name(sortieForm.nbInscriptionMax) }}"
+                               id='{{ field_name(sortieForm.nbInscriptionMax) }}' required/>
+                        <label for="{{ field_name(sortieForm.nbInscriptionMax) }}" class="form__label">Nombre de places : </label>
+                        {% for error in field_errors(sortieForm.nbInscriptionMax) %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#           Campus de la sortie #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <select class="form__field" name="{{ field_name(sortieForm.siteOrganisateur) }}" id="{{ field_name(sortieForm.siteOrganisateur) }}" required>
+                            {% for choix in campus %}
+                                <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="{{ field_name(sortieForm.siteOrganisateur) }}" class="form__label">Site organisateur : </label>
+                        {% for error in field_errors(sortieForm.siteOrganisateur) %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#           Ville de la sortie  #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <select class="form__field" name="{{ field_name(sortieForm.ville) }}" id="{{ field_name(sortieForm.ville)}}" required >
+                            {% for choix in ville %}
+                                <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="{{ field_name(sortieForm.ville) }}" class="form__label">Ville  : </label>
+                        {% for error in field_errors(sortieForm.ville) %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {#           Lieu de la sortie  #}
+                <div class="card p-20 mb-20">
+                    <div class="form__group field">
+                        <select class="form__field" name="{{ field_name(sortieForm.lieu) }}" id="{{ field_name(sortieForm.lieu)}}" required >
+                            {% for choix in lieu %}
+                                <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                            {% endfor %}
+                        </select>
+                        <label for="{{ field_name(sortieForm.lieu) }}" class="form__label">Lieu  : </label>
+
+                        {% for error in field_errors(sortieForm.lieu) %}
+                            <div class="error">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+
             {# mise en place du bouton ajouter une sortie #}
 
 
@@ -151,11 +155,8 @@
             </div>
 
 
-{{ form_end(sortieForm) }}
-            <div id="btnclignotant">
-{#                <a href="#" onclick="history.back(); return false;">Revenir à la page précédente</a>#}
-                <a href="#" onclick="history.back(); return false;"><button class='glowing-btn'><span class='glowing-txt'>A<span class='faulty-letter'>nn</span>uler</span></button></a>
-            </div>
+        {{ form_end(sortieForm) }}
+
 
             <div class="submit_ajouterLieu">
                 <button type="submit" name="ajouterLieu" value="nouveau lieu">
@@ -166,8 +167,13 @@
                     <a href="{{ path('ville_ajouter') }}">Nouveau Lieu</a>
                 </button>
             </div>
-        </div>
+            <div id="btnclignotant">
+                {#                <a href="#" onclick="history.back(); return false;">Revenir à la page précédente</a>#}
+                <a href="#" onclick="history.back(); return false;"><button class='glowing-btn'><span class='glowing-txt'>A<span class='faulty-letter'>nn</span>uler</span></button></a>
+            </div>
+
     </div>
+
 
 
 

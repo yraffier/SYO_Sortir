@@ -106,7 +106,7 @@
                                 <option value="{{ choix.nom }}">{{ choix.nom }}</option>
                             {% endfor %}
                         </select>
-                        <label for="{{ field_name(sortieForm.ville) }}" class="form__label">Ville  : </label>
+                        <label for="{{ field_name(sortieForm.ville)}}" class="form__label">Ville  : </label>
                         {% for error in field_errors(sortieForm.ville) %}
                             <div class="error">{{ error }}</div>
                         {% endfor %}
@@ -117,17 +117,27 @@
                 <div class="card p-20 mb-20">
                     <div class="form__group field">
                         <select class="form__field" name="{{ field_name(sortieForm.lieu) }}" id="{{ field_name(sortieForm.lieu)}}" required >
-                            {% for choix in lieu %}
-                                <option value="{{ choix.nom }}">{{ choix.nom }}</option>
-                            {% endfor %}
+{#                            {% for choix in lieu %}#}
+{#                                <option value="{{ choix.nom }}">{{ choix.nom }}</option>#}
+{#                            {% endfor %}#}
                         </select>
-                        <label for="{{ field_name(sortieForm.lieu) }}" class="form__label">Lieu  : </label>
+                        <label for="{{ field_name(sortieForm.lieu)}}" class="form__label">Lieu  : </label>
 
                         {% for error in field_errors(sortieForm.lieu) %}
                             <div class="error">{{ error }}</div>
                         {% endfor %}
                     </div>
                 </div>
+
+
+{#        <h2> Créer une Sortie</h2>#}
+{#        {{ form_start(sortieForm)}}#}
+{#        {{ form_widget(sortieForm) }}#}
+{#        <button type="submit" name="Enregistrer" value="Enregistrer"> Enregistrer </button>#}
+{#        <button type="submit" name="Ajouter" value="Ajouter"> Ajouter </button>#}
+{#        {{ form_end(sortieForm) }}#}
+{#        <input type="button" onclick="location.href='{{ path('sortie_lister') }}';" value="Annuler" />#}
+{#        <input type="button" onclick="location.href='{{ path('ville_ajouter') }}';" value="Ajouter une ville" />#}
 
 
 

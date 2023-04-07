@@ -111,7 +111,7 @@
                 <div class="listesorties">
                     {% for chaquesortie in sorties %}
                         <div class="sortie">
-                            <ul>
+                            <ul class="sortieliste">
                                 <li><a href="{{path('sortie_detail',{'sortie':chaquesortie.id}) }}">{{ chaquesortie.nom}}</a></li>
                                 <li> {{ chaquesortie.lieu.nom}} </li>
                                 <li>{{ chaquesortie.infosSortie}}</li>

@@ -7,14 +7,10 @@
 @import url(Login.css);
 @import url(Register.css);
 @import url(navbar.css);
-@import url(bouttontoogle.scss);
 @import "enregistrerSortie.css";
 @import "ajouterLieu.css";
 
-// Creation des bloc lumineux en
-// ---------------------------
-// Card
-// ---------------------------
+
 
 @for $i from 0 through 8 {
   div:nth-child(9n + #{$i}) {
@@ -22,12 +18,6 @@
   }
 }
 
-// ---------------------------
-// Spaces
-// ---------------------------
-// Normalized spaces :
-// 2, 4, 6, 8, 12, 16, 20, 24, 32, 64, 96, 128, ...
-// 10px = 1rem
 
 $normalizedSpaces: 2, 4, 6, 8, 12, 16, 20, 24, 32, 48, 64;
 $pxToRem: 10;
@@ -77,9 +67,6 @@ $pxToRem: 10;
   }
 }
 
-// ---------------------------
-// Others
-// ---------------------------
 
 .container {
   max-width: 500px;
@@ -93,7 +80,7 @@ $pxToRem: 10;
   box-shadow: 0 0 20px 5px var(--blanc), inset 0 0 20px 5px var(--sable);
 }
 
-//Input au sein du formulaire de création de compte :
+/*Input au sein du formulaire de création de compte :*/
 
 $primary: var(--roseviolet);
 $secondary: var(--roseviolet);
@@ -158,7 +145,6 @@ $gray: var(--blanc);
   font-weight: 700;
   border-width: 3px;
   border-image: linear-gradient(to right, $primary,$secondary) 1;
-  //border-image-slice: 1;
 }
 /* reset input */
 .form__field{

@@ -17,13 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+/*
+ * Controller qui permet de l'inscription d'un utilisateur
+ */
+
 class RegistrationController extends AbstractController
 {
     //private EmailVerifier $emailVerifier;
 
     public function __construct(EmailVerifier $emailVerifier)
     {
-       // $this->emailVerifier = $emailVerifier;
+        // $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('/inscription', name: 'inscription_sortir')]

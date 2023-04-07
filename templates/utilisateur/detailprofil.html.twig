@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block nav1 %}
-    <a href="{{ path('sortie_lister') }}"><li>Accueil</li></a>
+    <a href="{{ path('sortie_lister') }}">
+        <li>Accueil</li>
+    </a>
 {% endblock %}
 
 {% block body %}
@@ -9,35 +11,36 @@
         <h2> {{ utilisateur.username }}</h2>
     </div>
 
-<div id="details">
+    <div id="details">
 
-    <div id="fromu1" class="afficherdetailprofil">
-        <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1" >
+        <div id="fromu1" class="afficherdetailprofil">
+            <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1">
 
-            <div class="form__group field">
-                <input type="text" class="form__field" value="{{ utilisateur.nom }} - {{ utilisateur.prenom }}" id="nompre" readonly>
-                <label for="nompre" class="form__label"></label>
-             </div>
+                <div class="form__group field">
+                    <input type="text" class="form__field" value="{{ utilisateur.nom }} - {{ utilisateur.prenom }}"
+                           id="nompre" readonly>
+                    <label for="nompre" class="form__label"></label>
+                </div>
 
-            <div class="form__group field">
-                <input type="text" class="form__field" value="{{ utilisateur.campus.nom }}" id="campusnom" readonly>
-                <label for="campusnom" class="form__label"></label>
+                <div class="form__group field">
+                    <input type="text" class="form__field" value="{{ utilisateur.campus.nom }}" id="campusnom" readonly>
+                    <label for="campusnom" class="form__label"></label>
+                </div>
+
+                <div class="form__group field">
+                    <input type="text" class="form__field" value="{{ utilisateur.mail }}" id="mailuser" readonly>
+                    <label for="mailuser" class="form__label"></label>
+                </div>
+                <div class="form__group field">
+                    <input type="text" class="form__field" value="{{ utilisateur.telephone }}" id="tel" readonly>
+                    <label for="tel" class="form__label"></label>
+                </div>
+
             </div>
-
-            <div class="form__group field">
-                <input type="text" class="form__field" value="{{ utilisateur.mail }}" id="mailuser" readonly>
-                <label for="mailuser" class="form__label"></label>
-            </div>
-            <div class="form__group field">
-                <input type="text" class="form__field" value="{{ utilisateur.telephone }}" id="tel" readonly>
-                <label for="tel" class="form__label"></label>
-            </div>
-
         </div>
-    </div>
 
-    <div id="fromu2" class="afficherdetailprofil">
-        <div id="affichage_sortie" class="container card p-32 mt-64 mb-64 fromu1">
+        <div id="fromu2" class="afficherdetailprofil">
+            <div id="affichage_sortie" class="container card p-32 mt-64 mb-64 fromu1">
 
                 <h4 id="participantSortie"> Participe à :</h4>
                 <div class="form__group field-array liste_sortie_participation">
@@ -49,26 +52,28 @@
                 </div>
 
 
+            </div>
         </div>
-    </div>
 
-    <div id="fromu3" class="afficherdetailprofil">
-        <div id="affichage_sortie" class="container card p-32 mt-64 mb-64 fromu1">
+        <div id="fromu3" class="afficherdetailprofil">
+            <div id="affichage_sortie" class="container card p-32 mt-64 mb-64 fromu1">
 
-                <h4 > Organise :</h4>
+                <h4> Organise :</h4>
                 <div id="sortiesorganise" class="form__group field">
                     {% for sortieorganisee in utilisateur.sortiesorganisees %}
                         <ul class="listeorga">
-                           <li> <a href="{{ path('sortie_detail', {'sortie' : sortieorganisee.id}) }}">- {{ sortieorganisee.nom }}</a></li>
+                            <li>
+                                <a href="{{ path('sortie_detail', {'sortie' : sortieorganisee.id}) }}">- {{ sortieorganisee.nom }}</a>
+                            </li>
                         </ul>
                     {% endfor %}
                 </div>
 
 
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 
 

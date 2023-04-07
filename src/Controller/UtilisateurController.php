@@ -27,26 +27,26 @@ class UtilisateurController extends AbstractController
         name: '_profil'
     )]
     public function affichermonprofil(
-        Request                 $request,
-        EntityManagerInterface  $entityManager
+        Request                $request,
+        EntityManagerInterface $entityManager
     ): Response
     {
         $utilisateur = $this->getUser();
-        if(!$utilisateur){
+        if (!$utilisateur) {
             throw $this->createNotFoundException('L\'utilisateur n\'existe pas');
         }
         $userForm = $this->createForm(ProfilUtilisateurType::class, $utilisateur);
         $userForm->handleRequest($request);
-        $campus= $entityManager->getRepository(Campus::class)->findAll();
+        $campus = $entityManager->getRepository(Campus::class)->findAll();
 
 
-        if($userForm->isSubmitted() && $userForm->isValid()){
-            try{
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            try {
                 $entityManager->persist($utilisateur);
                 $entityManager->flush();
                 return $this->redirectToRoute('sortie_lister', compact('campus'));
-            }catch(\Exception $exception){
-                $this->addFlash('danger','Erreur lors de la modification de votre profil !');
+            } catch (\Exception $exception) {
+                $this->addFlash('danger', 'Erreur lors de la modification de votre profil !');
                 return $this->redirectToRoute('sortir_profil');
             }
         }
@@ -71,7 +71,6 @@ class UtilisateurController extends AbstractController
 
         return $this->render('utilisateur/detailprofil.html.twig', compact("utilisateur"));
     }
-
 
 
 }

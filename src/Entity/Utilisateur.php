@@ -63,10 +63,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $telephone = null;
 
     #[ORM\Column(length: 200)]
-    #[Assert\Regex(
-        "#^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$#",
-        message: 'Pas besoin de caractères spéciales, tu l\'es déjà ! <3'
-    )]
+//    #[Assert\Regex(
+//        "#^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$#",
+//        message: 'Pas besoin de caractères spéciales, tu l\'es déjà ! <3'
+//    )]
     private ?string $mail = null;
 
     #[ORM\Column]

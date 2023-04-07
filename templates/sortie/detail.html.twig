@@ -1,32 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block nav1 %}
-    <a href="{{ path('sortie_lister') }}"><li>Accueil</li></a>
+    <a href="{{ path('sortie_lister') }}">
+        <li>Accueil</li>
+    </a>
 {% endblock %}
 
 {% block body %}
-   <div class="titreDetails" id="detail_h2">
+    <div class="titreDetails" id="detail_h2">
         <h2> Détail complet de la sortie : </h2>
         <h2> {{ sortie.nom }} </h2>
-   </div>
+    </div>
     <div class="sortiedetailaffichage">
-        <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1" >
+        <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1">
             <div class="form__group field ">
                 <ul id="listedetailsortie">
                     <li>Débute le {{ sortie.dateHeureDebut | date('d-m-Y H:i') }}</li>
-                    <li>Point de rencontre : {{ sortie.lieu.nom | upper }} - {{ sortie.lieu.ville.codePostal}} - {{ sortie.lieu.ville.nom | upper}}</li>
+                    <li>Point de rencontre : {{ sortie.lieu.nom | upper }} - {{ sortie.lieu.ville.codePostal }}
+                        - {{ sortie.lieu.ville.nom | upper }}</li>
                     <li>Durée : {{ sortie.duree | date('H:i') }} minutes</li>
                     <li>{{ sortie.infosSortie }}</li>
-                    <li id="orga">Organisé par <a href="{{ path('sortir_detailProfil', {'utilisateur': sortie.organisateurs.id}) }}">{{ sortie.organisateurs.username }}</a> - CAMPUS {{ sortie.siteOrganisateur.nom | upper }}</li>
+                    <li id="orga">Organisé par <a
+                                href="{{ path('sortir_detailProfil', {'utilisateur': sortie.organisateurs.id}) }}">{{ sortie.organisateurs.username }}</a>
+                        - CAMPUS {{ sortie.siteOrganisateur.nom | upper }}</li>
                 </ul>
             </div>
         </div>
-        <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1" >
+        <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1">
             <div class="form__group field" id="detailsortieparticipant">
-                <h5>Participants à la sortie ( date limite d'inscription {{ sortie.dateLimiteInscription | date('d-m-Y H:i') }})</h5>
+                <h5>Participants à la sortie ( date limite
+                    d'inscription {{ sortie.dateLimiteInscription | date('d-m-Y H:i') }})</h5>
                 <ul class="listeinscrit">
                     {% for participant in sortie.participants %}
-                        <li><a href="{{ path('sortir_detailProfil', {'utilisateur': participant.id}) }}">{{ participant.username }}</a></li>
+                        <li>
+                            <a href="{{ path('sortir_detailProfil', {'utilisateur': participant.id}) }}">{{ participant.username }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -36,7 +44,8 @@
 
     {% if sortie.dateHeureDebut >= date() or sortie.dateLimiteInscription >= date() %}
         {% if app.user is same as sortie.organisateurs %}
-            <button><a href="path{{ path('sortie_annulerMaSortie', {'sortie': sortie.id}) }}"> Annuler la sortie </a></button>
+            <button><a href="{{ path('sortie_annulerMaSortie', {'sortie': sortie.id}) }}"> Annuler la sortie </a>
+            </button>
         {% else %}
             {% if sortie.participants is empty %}
                 <div class="submit_ajouterLieu">
@@ -48,7 +57,7 @@
                         <a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a>
                     </button>
                 </div>
-{#                <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>#}
+                {#                <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button> #}
             {% else %}
                 {% if app.user in sortie.participants %}
                     <div class="submit_ajouterLieu">
@@ -61,10 +70,10 @@
                         </button>
                     </div>
 
-{#                    <button><a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}"> Se desister </a></button>#}
+                    {#                    <button><a href="{{ path('sortie_sedesinscrire', {'sortie': sortie.id}) }}"> Se desister </a></button> #}
                 {% else %}
-                    {% if sortie.participants < sortie.nbInscriptionMax %}
-                        <div class="submit_ajouterLieu">
+                    {#                    {% if (count(sortie.participants) < sortie.nbInscriptionMax) %} #}
+                    <div class="submit_ajouterLieu">
                         <button type="submit" name="ajouterLieu" value="nouveau lieu">
                             <span></span>
                             <span></span>
@@ -72,9 +81,9 @@
                             <span></span>
                             <a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a>
                         </button>
-                        </div>
-                    {% endif %}
-{#                    <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button>#}
+                    </div>
+                    {#                    {% endif %} #}
+                    {#                    <button><a href="{{ path('sortie_inscription', {'sortie': sortie.id}) }}">S'inscrire</a></button> #}
                 {% endif %}
             {% endif %}
         {% endif %}

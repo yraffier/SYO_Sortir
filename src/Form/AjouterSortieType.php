@@ -27,7 +27,7 @@ class AjouterSortieType extends AbstractType
 
     public function __construct(EntityManagerInterface $em)
     {
-        $this->em= $em;
+        $this->em = $em;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -52,8 +52,8 @@ class AjouterSortieType extends AbstractType
                     'label' => "Durée : ",
                     'input' => 'timestamp',
                     'placeholder' => [
-                     'hour' => 'Heures', 'minute' => 'Minutes',
-                ]
+                        'hour' => 'Heures', 'minute' => 'Minutes',
+                    ]
                 ])
             ->add('infosSortie', TextareaType::class,
                 [
@@ -75,31 +75,34 @@ class AjouterSortieType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
         $builder->addEventListener(FormEvents::PRE_SUBMIT, array($this, 'onPreSubmit'));
     }
-        protected function addElements(FormInterface $form, Ville $ville= null){
-        $form->add('ville',EntityType::class, array(
-            'required'=> true,
+
+    protected function addElements(FormInterface $form, Ville $ville = null)
+    {
+        $form->add('ville', EntityType::class, array(
+            'required' => true,
             'data' => $ville,
-            'class'=> Ville::class,
-            'placeholder'=> 'Veuilliez choisr une ville...',
-            'choice_label'=>'nom'
+            'class' => Ville::class,
+            'placeholder' => 'Veuilliez choisr une ville...',
+            'choice_label' => 'nom'
         ));
 
         $lieux = array();
-            if($ville){
-                $lieuRepo=$this->em->getRepository(Lieu::class);
-                $lieux = $lieuRepo->createQueryBuilder("q")
-                    ->where("q.ville = :villeid")
-                    ->setParameter("villeid", $ville->getId())
-                    ->getQuery()
-                    ->getResult();
-            }
-            $form->add('lieu',EntityType::class, array(
-                'required'=> true,
-                'placeholder'=> 'Veuilliez choisir un lieu...',
-                'class'=> Lieu::class,
-                'choices'=> $lieux
-            ));
+        if ($ville) {
+            $lieuRepo = $this->em->getRepository(Lieu::class);
+            $lieux = $lieuRepo->createQueryBuilder("q")
+                ->where("q.ville = :villeid")
+                ->setParameter("villeid", $ville->getId())
+                ->getQuery()
+                ->getResult();
+        }
+        $form->add('lieu', EntityType::class, array(
+            'required' => true,
+            'placeholder' => 'Veuilliez choisir un lieu...',
+            'class' => Lieu::class,
+            'choices' => $lieux
+        ));
     }
+
     function onPreSubmit(FormEvent $event)
     {
         $form = $event->getForm();
@@ -107,7 +110,9 @@ class AjouterSortieType extends AbstractType
         $ville = $this->em->getRepository(Ville::class)->find($data['ville']);
         $this->addElements($form, $ville);
     }
-    function onPreSetData(FormEvent $event) {
+
+    function onPreSetData(FormEvent $event)
+    {
         $sortie = $event->getData();
         $form = $event->getForm();
 
@@ -148,12 +153,12 @@ class AjouterSortieType extends AbstractType
 //        $form->add($builder->getForm());
 //    }
 //
-       public function configureOptions(OptionsResolver $resolver): void
-        {
-            $resolver->setDefaults([
-                'data_class' => Sortie::class,
-            ]);
-        }
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Sortie::class,
+        ]);
+    }
 }
 //function (Lieu $lieu) {
 // return $lieu->getNom() . '-' . $lieu->getRue() . '-' . $lieu->getVille()->getCodePostal();

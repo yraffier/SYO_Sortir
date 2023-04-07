@@ -20,13 +20,12 @@ class ProfilUtilisateurType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('mail')
-            ->add('campus',EntityType::class,
+            ->add('campus', EntityType::class,
                 [
                     'class' => Campus::class,
                     'choice_label' => 'nom',
                 ]
-            )
-        ;
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

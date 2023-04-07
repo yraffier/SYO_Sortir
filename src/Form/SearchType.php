@@ -35,7 +35,7 @@ class SearchType extends AbstractType
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                     'hour' => 'Heures', 'minute' => 'Minutes', 'second' => 'Secondes',
                 ],
-                'html5'=>true,
+                'html5' => true,
                 'required' => false,
             ])
             ->add('dateFin', DateTimeType::class, [
@@ -43,7 +43,7 @@ class SearchType extends AbstractType
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                     'hour' => 'Heures', 'minute' => 'Minutes', 'second' => 'Secondes',
                 ],
-                'html5'=>true,
+                'html5' => true,
                 'required' => false,
             ])
             ->add('organisateur', CheckboxType::class, [
@@ -64,8 +64,7 @@ class SearchType extends AbstractType
             ->add('sortiePassee', CheckboxType::class, [
                 'label' => 'Sorties passées',
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

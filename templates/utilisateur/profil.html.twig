@@ -1,109 +1,126 @@
 {% extends 'base.html.twig' %}
 
 {% block nav1 %}
-    <a href="{{ path('sortie_lister') }}"><li>Accueil</li></a>
+    <a href="{{ path('sortie_lister') }}">
+        <li>Accueil</li>
+    </a>
 {% endblock %}
 
 {% block body %}
     <div class="profil">
-        <div id="formulaire_modification_profil" class="container card p-32 mt-64 mb-64">
+    <div id="formulaire_modification_profil" class="container card p-32 mt-64 mb-64">
         {{ form_start(userForm) }}
-            <div class="card p-20 mb-20">
-                <div class="form__group field">
-                    <input type="text" class="form__field" value="{{ app.user.username }}" placeholder="{{ field_label(userForm.username) }}" name="{{ field_name(userForm.username) }}" id='{{ field_name(userForm.username) }}' required />
-                    <label for="{{ field_name(userForm.username) }}" class="form__label">Pseudo...</label>
-                    {% for error in field_errors(userForm.username) %}
-                        <div class="error">{{ error }}</div>
+        <div class="card p-20 mb-20">
+            <div class="form__group field">
+                <input type="text" class="form__field" value="{{ app.user.username }}"
+                       placeholder="{{ field_label(userForm.username) }}" name="{{ field_name(userForm.username) }}"
+                       id='{{ field_name(userForm.username) }}' required/>
+                <label for="{{ field_name(userForm.username) }}" class="form__label">Pseudo...</label>
+                {% for error in field_errors(userForm.username) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {#        {{ form_row(userForm.username) }} #}
+        </div>
+
+        <div class="card p-20 mb-16">
+            <div class="form__group field">
+                <input type="text" class="form__field" value="{{ app.user.nom }}"
+                       placeholder="{{ field_label(userForm.nom) }}" name="{{ field_name(userForm.nom) }}"
+                       id='{{ field_name(userForm.nom) }}' required/>
+                <label for="{{ field_name(userForm.nom) }}" class="form__label">Nom...</label>
+                {% for error in field_errors(userForm.nom) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {#                {{ form_row(userForm.nom) }} #}
+        </div>
+
+        <div class="card p-20 mb-12">
+            <div class="form__group field">
+                <input type="text" class="form__field" value="{{ app.user.prenom }}"
+                       placeholder="{{ field_label(userForm.prenom) }}" name="{{ field_name(userForm.prenom) }}"
+                       id='{{ field_name(userForm.prenom) }}' required/>
+                <label for="{{ field_name(userForm.prenom) }}" class="form__label">Prenom...</label>
+                {% for error in field_errors(userForm.prenom) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {#                {{ form_row(userForm.prenom) }} #}
+        </div>
+
+        <div class="card p-20 mb-6">
+            <div class="form__group field">
+                <input type="text" class="form__field" value="{{ app.user.telephone }}"
+                       placeholder="{{ field_label(userForm.telephone) }}" name="{{ field_name(userForm.telephone) }}"
+                       id='{{ field_name(userForm.telephone) }}' required/>
+                <label for="{{ field_name(userForm.telephone) }}" class="form__label">Téléphone...</label>
+                {% for error in field_errors(userForm.telephone) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {#                {{ form_row(userForm.telephone) }} #}
+        </div>
+
+        <div class="card p-20 mb-8">
+            <div class="form__group field">
+                <input type="email" class="form__field" value="{{ app.user.mail }}"
+                       placeholder="{{ field_label(userForm.mail) }}" name="{{ field_name(userForm.mail) }}"
+                       id='{{ field_name(userForm.mail) }}' required/>
+                <label for="{{ field_name(userForm.mail) }}" class="form__label">Email...</label>
+                {% for error in field_errors(userForm.mail) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {#                {{ form_row(userForm.mail) }} #}
+        </div>
+
+
+        <div class="card p-20 mb-4">
+            <div class="form__group field">
+                <select class="form__field" value="{{ app.user.campus }}" name="{{ field_name(userForm.campus) }}"
+                        id="{{ field_name(userForm.campus) }}" required>
+                    {% for choix in campus %}
+                        <option value="{{ choix.nom }}">{{ choix.nom }}</option>
                     {% endfor %}
-                </div>
-                {#        {{ form_row(userForm.username) }}#}
+                </select>
+                <label for="{{ field_name(userForm.campus) }}" class="form__label">Campus</label>
+                {#                <input type="" class="form__field" placeholder="{{ field_label(registrationForm.campus) }}" name="{{ field_name(registrationForm.campus) }}" id='{{ field_name(registrationForm.campus) }}' required /> #}
+                {#                <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Prenom...</label> #}
+                {#                {% for error in field_errors(registrationForm.campus) %} #}
+                {#                    <div class="error">{{ error }}</div> #}
+                {#                {% endfor %} #}
             </div>
+            {#            {{ form_row(registrationForm.campus, {'attr': {'class': 'registerForm'}}) }} #}
+        </div>
 
-            <div class="card p-20 mb-16">
-                <div class="form__group field">
-                    <input type="text" class="form__field" value="{{ app.user.nom }}" placeholder="{{ field_label(userForm.nom) }}" name="{{ field_name(userForm.nom) }}" id='{{ field_name(userForm.nom) }}' required />
-                    <label for="{{ field_name(userForm.nom) }}" class="form__label">Nom...</label>
-                    {% for error in field_errors(userForm.nom) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-{#                {{ form_row(userForm.nom) }}#}
+        <div class="card p-20 mb-2">
+            <div class="form__group field">
+                <input type="password" class="form__field" value="{{ app.user.password }}"
+                       placeholder="{{ field_label(userForm.password) }}" name="{{ field_name(userForm.password) }}"
+                       id='{{ field_name(userForm.password) }}' required/>
+                <label for="{{ field_name(userForm.password) }}" class="form__label">Mot de passe...</label>
+                {% for error in field_errors(userForm.password) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
+            {#                {{ form_row(userForm.password, { #}
+            {#                    label: 'Password' #}
+            {#                }) }} #}
+        </div>
 
-            <div class="card p-20 mb-12">
-                <div class="form__group field">
-                    <input type="text" class="form__field" value="{{ app.user.prenom }}" placeholder="{{ field_label(userForm.prenom) }}" name="{{ field_name(userForm.prenom) }}" id='{{ field_name(userForm.prenom) }}' required />
-                    <label for="{{ field_name(userForm.prenom) }}" class="form__label">Prenom...</label>
-                    {% for error in field_errors(userForm.prenom) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-{#                {{ form_row(userForm.prenom) }}#}
-            </div>
-
-            <div class="card p-20 mb-6">
-                <div class="form__group field">
-                    <input type="text" class="form__field" value="{{ app.user.telephone }}" placeholder="{{ field_label(userForm.telephone) }}" name="{{ field_name(userForm.telephone) }}" id='{{ field_name(userForm.telephone) }}' required />
-                    <label for="{{ field_name(userForm.telephone) }}" class="form__label">Téléphone...</label>
-                    {% for error in field_errors(userForm.telephone) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-{#                {{ form_row(userForm.telephone) }}#}
-            </div>
-
-            <div class="card p-20 mb-8">
-                <div class="form__group field">
-                    <input type="email" class="form__field" value="{{ app.user.mail }}" placeholder="{{ field_label(userForm.mail) }}" name="{{ field_name(userForm.mail) }}" id='{{ field_name(userForm.mail) }}' required />
-                    <label for="{{ field_name(userForm.mail) }}" class="form__label">Email...</label>
-                    {% for error in field_errors(userForm.mail) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-{#                {{ form_row(userForm.mail) }}#}
-            </div>
-
-
-            <div class="card p-20 mb-4">
-                <div class="form__group field">
-                    <select class="form__field" value="{{ app.user.campus }}" name="{{ field_name(userForm.campus) }}" id="{{ field_name(userForm.campus) }}" required>
-                        {% for choix in campus %}
-                            <option value="{{ choix.nom }}">{{ choix.nom }}</option>
-                        {% endfor %}
-                    </select>
-                    <label for="{{ field_name(userForm.campus) }}" class="form__label">Campus</label>
-                    {#                <input type="" class="form__field" placeholder="{{ field_label(registrationForm.campus) }}" name="{{ field_name(registrationForm.campus) }}" id='{{ field_name(registrationForm.campus) }}' required />#}
-                    {#                <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Prenom...</label>#}
-                    {#                {% for error in field_errors(registrationForm.campus) %}#}
-                    {#                    <div class="error">{{ error }}</div>#}
-                    {#                {% endfor %}#}
-                </div>
-                {#            {{ form_row(registrationForm.campus, {'attr': {'class': 'registerForm'}}) }}#}
-            </div>
-
-            <div class="card p-20 mb-2">
-                <div class="form__group field">
-                    <input type="password" class="form__field" value="{{ app.user.password }}" placeholder="{{ field_label(userForm.password) }}" name="{{ field_name(userForm.password) }}" id='{{ field_name(userForm.password) }}' required />
-                    <label for="{{ field_name(userForm.password) }}" class="form__label">Mot de passe...</label>
-                    {% for error in field_errors(userForm.password) %}
-                        <div class="error">{{ error }}</div>
-                    {% endfor %}
-                </div>
-{#                {{ form_row(userForm.password, {#}
-{#                    label: 'Password'#}
-{#                }) }}#}
-            </div>
-
-            <div class="submit_register">
-                <button type="submit" class="btn-modifier">Modifier</button>
-            </div>
+        <div class="submit_register">
+            <button type="submit" class="btn-modifier">Modifier</button>
+        </div>
 
 
         {{ form_end(userForm) }}
     </div>
-        <div>
-            <div id="btnclignotant">
-                <a href="{{ path('sortie_lister') }}"><button>Annuler</button></a>
-            </div>
+    <div>
+        <div id="btnclignotant">
+            <a href="{{ path('sortie_lister') }}">
+                <button>Annuler</button>
+            </a>
         </div>
+    </div>
 {% endblock %}

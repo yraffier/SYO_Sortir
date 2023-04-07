@@ -18,10 +18,9 @@ class AnnulerMaSortieType extends AbstractType
 //            ->add('lieu')
 //            ->add('ville')
             ->add('motifAnnulation', TextareaType::class,
-            [
-                'label'=>'Motif d\'annulation :'
-            ])
-        ;
+                [
+                    'label' => 'Motif d\'annulation :'
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

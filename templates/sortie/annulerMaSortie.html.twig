@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block nav1 %}
-    <a href="{{ path('sortie_lister') }}"><li>Accueil</li></a>
+    <a href="{{ path('sortie_lister') }}">
+        <li>Accueil</li>
+    </a>
 {% endblock %}
 
 {% block body %}
@@ -9,26 +11,29 @@
         <h2>Annuler Ma Sortie</h2>
     </div>
     <ul>
-            <li> Nom : {{ sortie.nom}}   </li>
-            <li> Date de la sortie : {{ sortie.dateHeureDebut | date('d-m-Y H:i')  }}</li>
-            <li> Campus : {{ sortie.siteOrganisateur}} </li>
-            <li> Lieu : {{ sortie.lieu.rue }}-{{sortie.lieu.ville }}</li>
+        <li> Nom : {{ sortie.nom }}   </li>
+        <li> Date de la sortie : {{ sortie.dateHeureDebut | date('d-m-Y H:i') }}</li>
+        <li> Campus : {{ sortie.siteOrganisateur }} </li>
+        <li> Lieu : {{ sortie.lieu.rue }}-{{ sortie.lieu.ville }}</li>
 
         <div id="formulaire_register" class="container card p-32 mt-64 mb-64">
             {{ form_start(annulerForm) }}
             <div class="card p-20 mb-20">
                 <div class="form__group field">
-                    <input type="text" class="form__field" placeholder="{{ field_label(annulerForm.motifAnnulation) }}" name="{{ field_name(annulerForm.motifAnnulation) }}" id='{{ field_name(annulerForm.motifAnnulation) }}' required />
-                    <label for="{{ field_name(annulerForm.motifAnnulation) }}" class="form__label">Motif d'annulation...</label>
+                    <input type="text" class="form__field" placeholder="{{ field_label(annulerForm.motifAnnulation) }}"
+                           name="{{ field_name(annulerForm.motifAnnulation) }}"
+                           id='{{ field_name(annulerForm.motifAnnulation) }}' required/>
+                    <label for="{{ field_name(annulerForm.motifAnnulation) }}" class="form__label">Motif
+                        d'annulation...</label>
                     {% for error in field_errors(annulerForm.motifAnnulation) %}
                         <div class="error">{{ error }}</div>
                     {% endfor %}
                 </div>
 
-{#        {{ form_row(annulerForm.motifAnnulation) }}#}
+                {#        {{ form_row(annulerForm.motifAnnulation) }} #}
 
                 <div class="submit_register">
-                    {#        <button type="submit" name="Enregistrer" value="Enregistrer"> Enregistrer </button>#}
+                    {#        <button type="submit" name="Enregistrer" value="Enregistrer"> Enregistrer </button> #}
                     <button type="submit" name="Enregistrer" value="Enregistrer">
                         <span></span>
                         <span></span>
@@ -40,8 +45,11 @@
 
 
                 <div id="btnclignotant">
-                    {#        <button onclick="history.back();"> Annuler </button>#}
-                    <a href="#" onclick="history.back(); return false;"><button class='glowing-btn'><span class='glowing-txt'>A<span class='faulty-letter'>nn</span>uler</span></button></a>
+                    {#        <button onclick="history.back();"> Annuler </button> #}
+                    <a href="#" onclick="history.back(); return false;">
+                        <button class='glowing-btn'><span class='glowing-txt'>A<span class='faulty-letter'>nn</span>uler</span>
+                        </button>
+                    </a>
                 </div>
 
 

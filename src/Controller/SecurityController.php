@@ -13,7 +13,7 @@ class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'login_sortir')]
     public function login(
-        AuthenticationUtils $authenticationUtils,
+        AuthenticationUtils    $authenticationUtils,
         EntityManagerInterface $entityManager
     ): Response
     {
@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
         if ($this->getUser()) {
 
             return $this->redirectToRoute('sortie_lister', compact('campus'));
-         }
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

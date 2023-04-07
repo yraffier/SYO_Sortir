@@ -39,9 +39,11 @@ class VilleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function verificationDeDoublonVille(Ville $ville):?Ville{
+
+    public function verificationDeDoublonVille(Ville $ville): ?Ville
+    {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.nom = :nom AND v.codePostal = :cp' )
+            ->andWhere('v.nom = :nom AND v.codePostal = :cp')
             ->setParameter('nom', $ville->getNom())
             ->setParameter('cp', $ville->getCodePostal())
             ->getQuery()

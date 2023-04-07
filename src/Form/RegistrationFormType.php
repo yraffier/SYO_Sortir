@@ -35,7 +35,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ]
             ])
-            ->add('nom', TextType::class,[
+            ->add('nom', TextType::class, [
                 'required' => true,
                 'label' => 'Nom',
                 'constraints' => [
@@ -47,7 +47,7 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('prenom', TextType::class,[
+            ->add('prenom', TextType::class, [
                 'required' => true,
                 'label' => 'Prénom',
                 'constraints' => [
@@ -59,7 +59,7 @@ class RegistrationFormType extends AbstractType
                     ])
                 ]
             ])
-            ->add('telephone', TextType::class,[
+            ->add('telephone', TextType::class, [
                 'required' => true,
                 'label' => 'Téléphone',
                 'constraints' => [
@@ -84,11 +84,11 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('campus', EntityType::class,
-                        [
-                            'required' => true,
-                            'class' => Campus::class,
-                            'choice_label' => 'nom',
-                        ]
+                [
+                    'required' => true,
+                    'class' => Campus::class,
+                    'choice_label' => 'nom',
+                ]
             )
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -113,13 +113,11 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => '{{ limit }} caractères, c\'est à peu près tout ce que je demande !' ,
+                        'minMessage' => '{{ limit }} caractères, c\'est à peu près tout ce que je demande !',
                         'max' => 100,
                     ]),
                 ],
-            ])
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

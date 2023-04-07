@@ -15,13 +15,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class VilleController extends AbstractController
 {
-    #[IsGranted( 'ROLE_USER')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/ville', name: 'ville_ajouter')]
     public function ajouter(
-        LieuRepository $lieuRepository,
-        VilleRepository $villeRepository,
+        LieuRepository         $lieuRepository,
+        VilleRepository        $villeRepository,
         EntityManagerInterface $entityManager,
-        Request $request
+        Request                $request
     ): Response
     {
         $nomRecuperee = $request->request->get("inputNom");
@@ -32,8 +32,7 @@ class VilleController extends AbstractController
         $longRecupere = $request->request->get("inputLong");
 
 
-        if (!empty($rueRecuperee))
-        {
+        if (!empty($rueRecuperee)) {
             //creer une nouvelle ville
             $ville = new Ville();
             //initialisation du la ville
@@ -50,10 +49,9 @@ class VilleController extends AbstractController
             $villebd = $villeRepository->verificationDeDoublonVille($ville);
 
 
-
 //            check si le lieu est présent dans la bd
             if ($lieuRepository->verificationDeDoublonLieu($lieu)) {
-                if ($villebd){
+                if ($villebd) {
                     $this->addFlash('echec', 'Le lieu que vous essayez d\'inserer existe déjà');
 
                 } else {
@@ -65,6 +63,7 @@ class VilleController extends AbstractController
                     $lieu->setVille($ville);
                     $entityManager->persist($lieu);
                     $entityManager->flush();
+                    $this->redirectToRoute('sortie_ajouter');
                 }
             } else {
                 if ($villebd) {
@@ -76,8 +75,9 @@ class VilleController extends AbstractController
 
                     $lieu->setVille($ville);
                 }
-                    $entityManager->persist($lieu);
-                    $entityManager->flush();
+                $entityManager->persist($lieu);
+                $entityManager->flush();
+                $this->redirectToRoute('sortie_ajouter');
 
             }
 

@@ -97,16 +97,16 @@
         <div class="card p-20 mb-4">
             <div class="form__group field">
                 <select class="form__field" name="{{ field_name(registrationForm.campus) }}" id="{{ field_name(registrationForm.campus) }}" required>
-                    {% for choix in campus %}
-                        <option value="{{ choix.nom }}">{{ choix.nom }}</option>
+                    {% for choix in field_choices(registrationForm.campus) %}
+                        <option value="{{ field_value(registrationForm.campus) }}">{{ choix }}</option>
                     {% endfor %}
                 </select>
                 <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Campus</label>
 {#                <input type="" class="form__field" placeholder="{{ field_label(registrationForm.campus) }}" name="{{ field_name(registrationForm.campus) }}" id='{{ field_name(registrationForm.campus) }}' required />#}
 {#                <label for="{{ field_name(registrationForm.campus) }}" class="form__label">Prenom...</label>#}
-{#                {% for error in field_errors(registrationForm.campus) %}#}
-{#                    <div class="error">{{ error }}</div>#}
-{#                {% endfor %}#}
+                {% for error in field_errors(registrationForm.campus) %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
             </div>
 {#            {{ form_row(registrationForm.campus, {'attr': {'class': 'registerForm'}}) }}#}
         </div>

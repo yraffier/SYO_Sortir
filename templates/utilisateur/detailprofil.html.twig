@@ -5,30 +5,72 @@
 {% endblock %}
 
 {% block body %}
-    <h3>{{ utilisateur.username }}</h3>
-    <div class="informations"></div>
-        <p>{{ utilisateur.nom }} - {{ utilisateur.prenom }}</p>
-        <p>{{ utilisateur.campus.nom }}</p>
-        <p>{{ utilisateur.mail }}</p>
-        <p>{{ utilisateur.telephone }}</p>
-        <div id="sorties">
-            <div id="sortiesparticipant">
-                {% for sortie in utilisateur.sorties %}
-                    <h6>{{ utilisateur.username }} participe à :</h6>
-                    <ul>
-                        <li>{{ sortie.nom }}</li>
-                    </ul>
-                {% endfor %}
-            </div>
-            <div id="sortiesorganise">
-                {% for sortieorganisee in utilisateur.sortiesorganisees %}
-                    <h6>{{ utilisateur.username }} participe à :</h6>
-                    <ul>
-                        <li><a href="{{ path('sortie_detail', {'sortie' : sortieorganisee.id}) }}">{{ sortieorganisee.nom }}</a></li>
-                    </ul>
-                {% endfor %}
+    <div class="titre_creer_Sortie" id="sortie_h2">
+        <h2> {{ utilisateur.username }}</h2>
+    </div>
+
+<div id="details">
+
+    <div id="fromu1">
+    <div id="formulaire_register" class="container card p-32 mt-64 mb-64 fromu1" >
+        <div class="card p-20 mb-20">
+            <div class="form__group field">
+              <input type="text" class="form__field" value="{{ utilisateur.nom }} - {{ utilisateur.prenom }}" id="nompre">
+            <label for="nompre" class="form__label"></label>
+             </div>
+
+        <div class="form__group field">
+            <input type="text" class="form__field" value="{{ utilisateur.campus.nom }}" id="campusnom">
+            <label for="campusnom" class="form__label"></label>
+        </div>
+
+    <div class="form__group field">
+        <input type="text" class="form__field" value="{{ utilisateur.mail }}" id="mailuser">
+        <label for="mailuser" class="form__label"></label>
+    </div>
+    <div class="form__group field">
+        <input type="text" class="form__field" value="{{ utilisateur.telephone }}" id="tel">
+        <label for="tel" class="form__label"></label>
+    </div>
+        </div>
+    </div>
+    </div>
+
+    <div id="fromu1">
+        <div id="affichage_sortie" class="container card p-32 mt-64 mb-64 fromu1">
+            <div class="card p-20 mb-20">
+                <h6 id="participantSortie"> Participe à :</h6>
+                <div class="form__group field-array">
+                    {% for sortie in utilisateur.sorties %}
+                        <ul>
+                            <li>{{ sortie.nom }}</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
             </div>
         </div>
+    </div>
+
+    <div id="fromu1">
+        <div id="affichage_sortie" class="container card p-32 mt-64 mb-64 fromu1">
+            <div class="card p-20 mb-20">
+                <h6 > Organise :</h6>
+                <div id="sortiesorganise" class="form__group field">
+                    {% for sortieorganisee in utilisateur.sortiesorganisees %}
+                        <ul>
+                           <li> <a href="{{ path('sortie_detail', {'sortie' : sortieorganisee.id}) }}">{{ sortieorganisee.nom }}</a></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 
 
 {% endblock %}

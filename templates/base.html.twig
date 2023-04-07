@@ -45,9 +45,11 @@
             {% endfor %}
         </div>
 
-        {% block body %}
+        {% block body %}{% endblock %}
 
-        {% endblock %}
+        <footer>
+            &copy; {{ 'now' | date('Y') }} SYO Sortir
+        </footer>
 
     </body>
 </html>

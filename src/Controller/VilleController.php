@@ -15,6 +15,19 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class VilleController extends AbstractController
 {
+
+    /**
+     *
+     * Fonction qui ajout un lieu et une ville
+     *
+     *
+     * @param LieuRepository $lieuRepository
+     * @param VilleRepository $villeRepository
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     *
+     * @return Response
+     */
     #[IsGranted('ROLE_USER')]
     #[Route('/ville', name: 'ville_ajouter')]
     public function ajouter(
@@ -24,6 +37,8 @@ class VilleController extends AbstractController
         Request                $request
     ): Response
     {
+
+        //Récupération des valeurs du lieu et de la ville
         $nomRecuperee = $request->request->get("inputNom");
         $rueRecuperee = $request->request->get("inputRue");
         $villeRecuperee = $request->request->get("inputVille");
@@ -33,6 +48,7 @@ class VilleController extends AbstractController
 
 
         if (!empty($rueRecuperee)) {
+
             //creer une nouvelle ville
             $ville = new Ville();
             //initialisation du la ville
@@ -49,13 +65,14 @@ class VilleController extends AbstractController
             $villebd = $villeRepository->verificationDeDoublonVille($ville);
 
 
-//            check si le lieu est présent dans la bd
+            //Verification si le lieu est présent dans la base de donnée
             if ($lieuRepository->verificationDeDoublonLieu($lieu)) {
+
+                //Verification si la ville est en base de donnée
                 if ($villebd) {
                     $this->addFlash('echec', 'Le lieu que vous essayez d\'inserer existe déjà');
 
                 } else {
-                    //set id de ville
                     $ville = new Ville();
                     $ville->setNom($villeRecuperee);
                     $ville->setCodePostal($cpRecupere);
@@ -66,6 +83,8 @@ class VilleController extends AbstractController
                     $this->redirectToRoute('sortie_ajouter');
                 }
             } else {
+
+                //Verification si la ville est en base de donnée
                 if ($villebd) {
                     $lieu->setVille($villebd);
                 } else {

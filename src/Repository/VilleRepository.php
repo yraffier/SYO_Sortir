@@ -40,6 +40,13 @@ class VilleRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Verifie si la ville existe en base de donnée
+     *
+     * @param Ville $ville
+     * @return Ville|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function verificationDeDoublonVille(Ville $ville): ?Ville
     {
         return $this->createQueryBuilder('v')

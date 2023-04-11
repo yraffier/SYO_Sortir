@@ -39,6 +39,13 @@ class LieuRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Verifie si le lieu existe en base de donnée
+     *
+     * @param Lieu $lieu
+     * @return bool
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function verificationDeDoublonLieu(Lieu $lieu){
         return (boolean)$this->createQueryBuilder('l')
 

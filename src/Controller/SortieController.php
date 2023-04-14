@@ -40,7 +40,7 @@ class SortieController extends AbstractController
         // Méthodes pour récupérer l'ensemble des sorties
     {
         $utilisateur = $this->getUser();
-//        $sorties= $sortieRepository->findAll();
+//      Recherche toutes les sorties sauf celles archivées
         $sorties = $sortieRepository->RechercherToutesLesSorties();
         $data = new SearchData();
         $searchForm = $this->createForm(SearchType::class, $data);
